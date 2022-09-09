@@ -1,0 +1,40 @@
+@import "./variable";
+
+.toolbar {
+    height: $toolbar-height;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 4px 5px gray;
+    z-index: 999;
+
+    &__btn {
+      height: 25px;
+      width: 25px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background-size: cover;
+      margin-left: 10px;
+    }
+    .brush {
+      background: url('../assets/img/brush.svg') no-repeat center center;
+    }
+  
+  
+}
+  
+  
+  .setting-bar {
+    height: $toolbar-height;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 4px 5px gray;
+    top:$toolbar-height;
+  }
+  
