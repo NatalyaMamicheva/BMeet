@@ -4,12 +4,13 @@ import canvasState from "../store/canvasState";
 import toolState from "../store/toolState";
 import Brush from '../tools/Brush';
 
-const Toolbar = () => {
+const Toolbar = (board_id) => {
+   console.log(board_id.board_id)
 
     return (
 
         <div className='toolbar'>
-            <button id='MyButton' className='toolbar__btn brush' onClick={() => toolState.setTool(new Brush(canvasState.canvas))} />
+            <button id='MyButton' className='toolbar__btn brush' onClick={() => toolState.setTool(new Brush(canvasState.canvas, 2))} />
         </div>
 
     );
