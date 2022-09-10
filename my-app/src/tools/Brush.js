@@ -14,40 +14,7 @@ let coords = { /*Отсюда вызываются данные переданн
 
 /* ОБРАЩЕНИЕ К СЕРВЕРУ ДЛЯ ПОЛУЧЕНИЯ ДАННЫХ ЧЕРЕЗ СОКЕТ */
 
-let socket = new WebSocket("ws://localhost:8000/board/1/");
-socket.onmessage = function(e){ 
-
-if (e.type === "ADD_OBJECT") {
-    let nums = (e.data.object.points).match(/\d+/g);
-    let len = nums.length;
-    coords.coord.push([]);
-    for (let quant = 0; quant < len; quant += 2) {
-        coords.coord[0].push(nums.slice(parseInt(quant), quant + 2));
-    }
-
-    console.log(coords.coord);
-}
-
-if (e.type === "INITIAL_DATA") {
-    let data_obj = e.data.objects;
-    let res = [];
-    for (let point of data_obj) {
-        res.push((point.points).match(/\d+/g));
-    }
-
-    for (let quantity = 0; quantity < res.length; quantity++) {
-        coords.coord.push([]);
-        for (let qt = 0; qt < res[quantity].length; qt += 2) {
-            coords.coord[quantity].push(res[quantity].slice(parseInt(qt), qt + 2));
-        }
-    }
-    
-    console.log(coords.coord);
-}
-
-};
-
-
+let socket = new WebSocket("ws://localhost:8000/board/2/");
 
 /* ТЕСТОВЫЕ ДАННЫЕ */
 
@@ -86,14 +53,44 @@ export default class Brush extends Tool {
         super(canvas);
         this.listen();
         this.count = 0; //Кол-во кликов для определения количества объектов создынных на холсте
+//        this.socket.onmessage = function(e){
+//            var data = JSON.parse(e.data)
+//            for (let object of data.data.objects) {
+//                    coords.coord.push(object.coord);
+//                    drawLine()
+//            }
+//        }
+
     };
-    
+
 
     listen() {
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
+        socket.onmessage = (e) => {
+            var data = JSON.parse(e.data)
+            for (let object of data.data.objects) {
+                    coords.coord.push(object.coord);
+                    this.drawLine()
+            }
+        }
     };
+
+
+     drawLine() {
+        for (let coord_array of coords.coord) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(coord_array[0][0],coord_array[0][1]);
+                for (let arr in coord_array) {
+                    this.ctx.lineTo(`${coord_array[arr][0]}`,`${coord_array[arr][1]}`);
+                    this.ctx.stroke();
+                }
+            }
+        this.count++
+        coords.coord = [];
+
+     };
 
     mouseUpHandler(e) {
         
@@ -131,11 +128,8 @@ export default class Brush extends Tool {
             
 
             /* ПЕРЕДАЧА ДАННЫХ СЕРВЕРУ ОТ КЛИЕНТА ЧЕРЕЗ СОКЕТЫ */
-
-            socket.onopen = function (e) {
-                console.log("Отправка данных....");
-                socket.send(JSON.stringify(coords));
-            };
+            console.log(coords.coord)
+            socket.send(JSON.stringify(coords));
 
             socket.onclose = function (e) {
                 if (e.wasClean) {
@@ -149,7 +143,7 @@ export default class Brush extends Tool {
                 console.log(`[error] ${error.message}`);
             };
 
-            console.log(JSON.stringify(coords)); //То, что клиент отправит серверу(тестовый вывод в консоль, пока нет url)
+      //То, что клиент отправит серверу(тестовый вывод в консоль, пока нет url)
             coords.coord = []; 
 
         }
@@ -188,5 +182,4 @@ export default class Brush extends Tool {
         }
 
     };
-
 }
