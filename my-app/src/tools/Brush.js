@@ -14,11 +14,12 @@ let coords = { /*Отсюда вызываются данные переданн
 
 /* ОБРАЩЕНИЕ К СЕРВЕРУ ДЛЯ ПОЛУЧЕНИЯ ДАННЫХ ЧЕРЕЗ СОКЕТ */
 
-let socket = new WebSocket("ws://localhost:8000/board/1/");
-socket.onmessage = function(e){ 
-
-if (e.type === "ADD_OBJECT") {
-    let nums = (e.data.object.points).match(/\d+/g);
+let socket = new WebSocket("ws://localhost:8000/board/5/");
+socket.onmessage = function(e){
+var data = JSON.parse(e.data)
+if (data.type === "ADD_OBJECT") {
+    let nums = (data.object.points).match(/\d+/g);
+    console.log(data.type, nums)
     let len = nums.length;
     coords.coord.push([]);
     for (let quant = 0; quant < len; quant += 2) {
@@ -28,11 +29,12 @@ if (e.type === "ADD_OBJECT") {
     console.log(coords.coord);
 }
 
-if (e.type === "INITIAL_DATA") {
-    let data_obj = e.data.objects;
+if (data.type === "INITIAL_DATA") {
+    let data_obj = data.data.objects;
+    console.log(data_obj)
     let res = [];
     for (let point of data_obj) {
-        res.push((point.points).match(/\d+/g));
+        res.push((point.coord).match(/\d+/g));
     }
 
     for (let quantity = 0; quantity < res.length; quantity++) {
@@ -132,10 +134,9 @@ export default class Brush extends Tool {
 
             /* ПЕРЕДАЧА ДАННЫХ СЕРВЕРУ ОТ КЛИЕНТА ЧЕРЕЗ СОКЕТЫ */
 
-            socket.onopen = function (e) {
                 console.log("Отправка данных....");
                 socket.send(JSON.stringify(coords));
-            };
+
 
             socket.onclose = function (e) {
                 if (e.wasClean) {
