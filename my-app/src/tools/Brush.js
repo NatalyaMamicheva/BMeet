@@ -5,7 +5,6 @@ import Tool from "./Tool";
 let socket = new WebSocket("ws://localhost:8000/board/1/");
 
 export default class Brush extends Tool {
-    object;
     objects;
 
     constructor(canvas) {
