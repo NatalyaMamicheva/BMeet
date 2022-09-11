@@ -32,8 +32,8 @@ export default class Brush extends Tool {
             for (let object of data_objects) {
                 this.coords.coord.push(object.coord);
                 this.drawLine(this.coords.coord)
+                this.coords.coord = []
             }
-            this.coords.coord = []
         }
     };
 
@@ -54,7 +54,6 @@ export default class Brush extends Tool {
 
         if (!this.mouseDown) {
             this.drawLine(this.coords.coord)
-            this.count++
 
             if (this.coords.coord.length > 0) {
                 /* ПЕРЕДАЧА ДАННЫХ СЕРВЕРУ ОТ КЛИЕНТА ЧЕРЕЗ СОКЕТЫ */
