@@ -2,7 +2,7 @@ import Tool from "./Tool";
 
 /* ОБРАЩЕНИЕ К СЕРВЕРУ ДЛЯ ПОЛУЧЕНИЯ ДАННЫХ ЧЕРЕЗ СОКЕТ */
 
-let socket = new WebSocket("ws://localhost:8000/board/1/");
+let socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_HOST}/board/1/`);
 
 export default class Brush extends Tool {
     objects;
