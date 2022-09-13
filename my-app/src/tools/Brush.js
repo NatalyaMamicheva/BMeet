@@ -1,6 +1,5 @@
 import Tool from "./Tool";
 
-/* ОБРАЩЕНИЕ К СЕРВЕРУ ДЛЯ ПОЛУЧЕНИЯ ДАННЫХ ЧЕРЕЗ СОКЕТ */
 
 let socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_HOST}/board/1/`);
 
@@ -19,6 +18,7 @@ export default class Brush extends Tool {
             "other_data": null
         };
     };
+    
 
     listen() {
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
@@ -49,7 +49,7 @@ export default class Brush extends Tool {
     };
 
     mouseUpHandler() {
-        this.mouseDown = false;
+this.mouseDown = false;
 
         if (!this.mouseDown) {
             this.drawLine(this.coords.coord)
@@ -102,4 +102,5 @@ export default class Brush extends Tool {
         }
 
     };
+
 }
