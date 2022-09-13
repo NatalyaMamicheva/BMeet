@@ -5,7 +5,6 @@ import toolState from "../store/toolState";
 import Brush from '../tools/Brush';
 
 const Toolbar = (board_id) => {
-   console.log(board_id.board_id)
 
     return (
 
