@@ -49,7 +49,7 @@ export default class Brush extends Tool {
     };
 
     mouseUpHandler() {
-        this.mouseDown = false;
+this.mouseDown = false;
 
         if (!this.mouseDown) {
             this.drawLine(this.coords.coord)
