@@ -1,13 +1,12 @@
 import Tool from "./Tool";
 
 
-let socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_HOST}/board/1/`);
-
 export default class Brush extends Tool {
     objects;
 
     constructor(canvas) {
         super(canvas);
+        this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_HOST}${window.location.pathname}`)
         this.listen();
         this.count = 0;
         this.coords = {
@@ -18,13 +17,13 @@ export default class Brush extends Tool {
             "other_data": null
         };
     };
-    
+
 
     listen() {
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
-        socket.onmessage = (e) => {
+        this.socket.onmessage = (e) => {
             let data = JSON.parse(e.data)
             let data_objects = data.data.objects;
 
@@ -49,16 +48,16 @@ export default class Brush extends Tool {
     };
 
     mouseUpHandler() {
-this.mouseDown = false;
+        this.mouseDown = false;
 
         if (!this.mouseDown) {
             this.drawLine(this.coords.coord)
 
             if (this.coords.coord.length > 0) {
                 /* ПЕРЕДАЧА ДАННЫХ СЕРВЕРУ ОТ КЛИЕНТА ЧЕРЕЗ СОКЕТЫ */
-                socket.send(JSON.stringify(this.coords));
+                this.socket.send(JSON.stringify(this.coords));
 
-                socket.onclose = function (e) {
+                this.socket.onclose = function (e) {
                     if (e.wasClean) {
                         console.log(`[close] Соединение закрыто чисто, код=${e.code} причина=${e.reason}`);
                     } else {
@@ -66,7 +65,7 @@ this.mouseDown = false;
                     }
                 };
 
-                socket.onerror = function (error) {
+                this.socket.onerror = function (error) {
                     console.log(`[error] ${error.message}`);
                 };
 
