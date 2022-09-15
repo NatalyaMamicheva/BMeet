@@ -3,7 +3,9 @@ import "./styles/app.scss"
 import Board from './components/Board.js'
 import Login from './components/Login.js'
 import RegisterForm from './components/Register.js'
-import {BrowserRouter, Route, Routes, Link, useLocation, Navigate} from 'react-router-dom'
+import FromVerifyEmail from './components/FromVerifyEmail.jsx';
+import BoardManagement from './components/BoardManagement.jsx';
+import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom'
 import axios from 'axios'
 
 
@@ -19,36 +21,23 @@ const NotFound = () => {
 class App extends React.Component {
     constructor(props) {
        super(props)
+       this.errorRef = React.createRef();
        this.state = {
            'token': '',
-           'username': '',
-           'email': ''
        }
     }
-//
-//     register(username, email, password) {
-//         axios
-//             .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/`,
-//                     {'username': username, 'email': email, 'password': password}
-//                   )
-//             .then(response => {
-//                 const username = response.data.username
-//                 const email = response.data.email
-//                 this.setState({
-//                     'username': username,
-//                     'email': email
-//                 })
-//             })
-//             .catch(error => console.log(error))
-//     }
+
 
   render () {
         return (
             <div className="app">
+              <p ref={this.errorRef} >{this.state.error_message}</p>
               <BrowserRouter>
                 <Routes>
                     <Route exact path='/' element = {<Login />} />
+                    <Route path='/board_management' element = {<BoardManagement />} />
                     <Route path='/board/:id' element = {<Board />} />
+                    <Route path='/api/users/verify/:email/:key'  element = {<FromVerifyEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route path="*" element = {<NotFound />} />
                 </Routes>
