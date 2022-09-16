@@ -1,4 +1,3 @@
-
 import {Link} from 'react-router-dom';
 import "../styles/login.scss";
 import {useParams} from 'react-router-dom'
