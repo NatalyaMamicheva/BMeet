@@ -1,7 +1,9 @@
 import {Link} from 'react-router-dom';
 import "../styles/password.scss";
 
-function Password() {
+
+function Password() {    
+  
     return(
         <div className='password'>
             <div className='password_form'>
