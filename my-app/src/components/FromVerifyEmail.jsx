@@ -1,9 +1,11 @@
 import React from 'react'
+
 import {useParams, Link} from 'react-router-dom'
 import { Navigate  } from 'react-router-dom';
 import axios from 'axios'
 
 import "../styles/verify.scss";
+
 
 
 class FromVerifyEmail extends React.Component {
@@ -77,6 +79,7 @@ class FromVerifyEmail extends React.Component {
                     <div className='head_mailll'>Не пришло письмо?</div>
                     <Link className='again' to='#'>Отправить снова</Link>
                  </div>
+
              </div>
         )
     }
