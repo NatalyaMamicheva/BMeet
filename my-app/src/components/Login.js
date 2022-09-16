@@ -6,10 +6,13 @@ import axios from 'axios'
 class Login extends React.Component {
     constructor(props) {
         super(props)
+        this.errorRef = React.createRef();
         this.state = {
             'email': '',
             'password': '',
-            'token': ''
+            'token': '',
+            'error_message_user': '',
+            'error_message':''
         }
     }
 
@@ -25,7 +28,18 @@ class Login extends React.Component {
                     'token': token,
                 })
             })
-            .catch(error => console.log(error))
+           .catch(error => {
+                this.setState({'error_message_user': '',
+                               'error_message': ''
+                               });
+                if (!error.response.data)
+                    this.setState({error_message: error.message});
+                else{
+                     this.setState({error_message_user: "Неверный Email или пароль"});
+                }
+                this.errorRef.current.focus();
+            })
+
     }
 
     handleSubmit(event) {
@@ -71,6 +85,8 @@ class Login extends React.Component {
                         <input className='input_class_pass' type="password" name="password" required
                             onChange={(event) => this.handleChange(event)} value={this.state.password}></input>
                         <button type='submit' className='entr'><p className='en'>Войти</p></button>
+                        <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
+                        <p className='error_p' ref={this.errorRef} >{this.state.error_message_user}</p>
                     </form>
                     <div className='head_reg'>Впервые на платформе?</div>
                     <Link className='reg' to='/register'>Создать аккаунт</Link>
