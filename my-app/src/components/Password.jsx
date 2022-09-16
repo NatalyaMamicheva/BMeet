@@ -3,6 +3,7 @@ import "../styles/password.scss";
 
 
 function Password() {    
+  
     return(
         <div className='password'>
             <div className='password_form'>

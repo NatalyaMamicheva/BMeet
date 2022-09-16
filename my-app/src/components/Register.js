@@ -63,7 +63,6 @@ class RegisterForm extends React.Component {
         })
     }
 
-
     render() {
         if (this.state.success){
             return(
@@ -111,6 +110,7 @@ class RegisterForm extends React.Component {
                         <Link className='entra' to='/'>Войти в аккаунт</Link>
                     </div>
                 </div>
+
             )
         }
     }
