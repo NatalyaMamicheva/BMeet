@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
@@ -67,6 +67,7 @@ class RegisterForm extends React.Component {
     }
 
     render() {
+        if (localStorage.getItem('token')) return <Navigate  to="/board_management" />
         if (this.state.success){
             return(
                 <VerifyEmail email={this.email} id={this.id} username={this.username} password={this.password}/>

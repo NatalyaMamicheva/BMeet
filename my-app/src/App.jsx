@@ -22,21 +22,46 @@ const NotFound = () => {
 class App extends React.Component {
     constructor(props) {
        super(props)
-       this.errorRef = React.createRef();
-       this.state = {
-           'token': '',
-       }
     }
 
 
-  render () {
+
+
+    getHeader() {
+        let token = localStorage.getItem('token')
+        if (token) {
+            return {
+                'Authorization': token,
+                'Accept': 'application/json; version=2.0'
+            }
+        }
+        return {
+            'Accept': 'application/json; version=2.0'
+        }
+    }
+
+    logout() {
+        let headers = this.getHeader()
+        axios
+            .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/logout/`, {headers})
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
+        localStorage.setItem('token', '')
+        this.setState({
+            'token': ''
+        })
+    }
+
+
+    render () {
         return (
             <div className="app">
-              <p ref={this.errorRef} >{this.state.error_message}</p>
               <BrowserRouter>
                 <Routes>
                     <Route exact path='/' element = {<Login />} />
-                    <Route path='/board_management' element = {<BoardManagement />} />
+                    <Route path='/board_management' element = {<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
                     <Route path='/api/users/verify/:email/:key'  element = {<FromVerifyEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
@@ -47,7 +72,7 @@ class App extends React.Component {
             </div>
         );
     };
-};
+    };
 
 export default App;
 
