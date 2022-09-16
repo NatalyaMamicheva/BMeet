@@ -20,6 +20,7 @@ class Login extends React.Component {
                 const token = response.data.token
                 localStorage.setItem('token', token)
                 localStorage.setItem('email', this.state.email)
+                localStorage.setItem('username', response.data.username)
                 this.setState({
                     'token': token,
                 })
