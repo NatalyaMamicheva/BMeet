@@ -6,7 +6,7 @@ export default class Brush extends Tool {
 
     constructor(canvas) {
         super(canvas);
-        this.socket = new WebSocket(`ws://${process.env.REACT_APP_BACKEND_HOST}${window.location.pathname}`)
+        this.socket = this.connect_websocket();
         this.listen();
         this.count = 0;
         this.coords = {
@@ -17,6 +17,17 @@ export default class Brush extends Tool {
             "other_data": null
         };
     };
+
+    connect_websocket () {
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}${window.location.pathname}`;
+        if (url.toString().slice(-1) !== '/') {
+            url += '/'
+        }
+        let connect = new WebSocket(url);
+        return (
+            connect
+        )
+    }
 
 
     listen() {
