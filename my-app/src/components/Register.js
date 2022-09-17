@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
@@ -10,6 +10,8 @@ class RegisterForm extends React.Component {
         this.errorRef = React.createRef();
         this.email = '';
         this.id = null;
+        this.username = '';
+        this.password = '';
         this.state = {
             'username': '',
             'email': '',
@@ -30,6 +32,8 @@ class RegisterForm extends React.Component {
             .then(response => {
                 this.email = response.data.email
                 this.id = response.data.id
+                this.username = response.data.username
+                this.password = response.data.password
                 console.log(response.data)
                 this.setState({'username': '',
                                'email':'',
@@ -64,9 +68,10 @@ class RegisterForm extends React.Component {
     }
 
     render() {
+        if (localStorage.getItem('token')) return <Navigate  to="/board_management" />
         if (this.state.success){
             return(
-                <VerifyEmail email={this.email} id={this.id}/>
+                <VerifyEmail email={this.email} id={this.id} username={this.username} password={this.password}/>
             )
         }
         else {

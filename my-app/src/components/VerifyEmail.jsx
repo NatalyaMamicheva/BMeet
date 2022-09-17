@@ -13,7 +13,9 @@ class VerifyEmail extends React.Component {
     handleClick(event) {
         event.preventDefault();
         axios
-            .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/${this.props.id}/`)
+            .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/${this.props.id}/`,
+             {'username': this.props.username, 'email': this.props.email, 'password': this.props.password, 'id': this.props.id}
+            )
             .then(response => {
                 console.log(response)
             })
