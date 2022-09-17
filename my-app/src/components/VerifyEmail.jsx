@@ -53,8 +53,6 @@ class VerifyEmail extends React.Component {
 
     render() {
         return (
-
-             
             <div className='verify'>
                 <div className='verify_form'>
                     <div className='logo'>
@@ -70,7 +68,7 @@ class VerifyEmail extends React.Component {
                     <div className='in_eemail'>
                         Мы отправили письмо на ваш email -
                     </div>
-                    <div className='send'> {this.props.email} ЗДЕСЬ БУДЕТ ПОЧТА</div>
+                    <div className='send'> {this.props.email}</div>
                     <div className='head_mailll'>Не пришло письмо?</div>
                     <a href="#" id='again'  onClick={(event) => {this.handleClick(event); this.startTimer();}}> Отправить снова </a>
                     <p className='timerr'>{this.state.info_timer}</p>

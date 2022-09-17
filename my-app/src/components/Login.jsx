@@ -77,13 +77,15 @@ class Login extends React.Component {
                             Email
                         </div>
                         <input className='input_class_email' type="email" placeholder="bmeet@gmail.com" name="email"
-                             required onChange={(event) => this.handleChange(event)} value={this.state.email}></input>
+                             required onChange={(event) => this.handleChange(event)} value={this.state.email}>
+                        </input>
                         <div className='head_password'>
                             Пароль
                         </div>
                         <Link className='pass' to='/recpassword'>Забыли пароль?</Link>
                         <input className='input_class_pass' type="password" name="password" required
-                            onChange={(event) => this.handleChange(event)} value={this.state.password}></input>
+                            onChange={(event) => this.handleChange(event)} value={this.state.password}>
+                        </input>
                         <button type='submit' className='entr'><p className='en'>Войти</p></button>
                         <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
                         <p className='error_p' ref={this.errorRef} >{this.state.error_message_user}</p>

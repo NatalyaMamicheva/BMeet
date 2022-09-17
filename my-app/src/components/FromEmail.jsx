@@ -4,12 +4,13 @@ import { Navigate  } from 'react-router-dom';
 import axios from 'axios'
 
 
-class FromVerifyEmail extends React.Component {
+class FromEmail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             'email': this.props.params.email,
             'key': this.props.params.key,
+            'action': this.props.params.action,
             'token': '',
             'error_message': ''
         }
@@ -18,14 +19,16 @@ class FromVerifyEmail extends React.Component {
 
      componentDidMount() {
          axios
-             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/verify/${this.state.email}/${this.state.key}/`)
+             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/${this.state.action}/${this.state.email}/${this.state.key}/`)
              .then(response => {
                  this.setState({'token': response.data.token});
                  localStorage.setItem('token', response.data.token);
+                 localStorage.setItem('username', response.data.username);
+                 localStorage.setItem('email', response.data.email);
              })
              .catch(error => {
                  if (error.code=='ERR_BAD_REQUEST')
-                     this.setState({'error_message': 'Неверная ссылка. Запросите повторную отправку верификационного письма'});
+                     this.setState({'error_message': 'Неверная ссылка. Запросите повторную отправку письма'});
                  else
                      this.setState({'error_message': error.message});
                  this.errorRef.current.focus();
@@ -44,7 +47,7 @@ class FromVerifyEmail extends React.Component {
 
 
 export default (props) => (
-    <FromVerifyEmail
+    <FromEmail
         {...props}
         params={useParams()}
     />

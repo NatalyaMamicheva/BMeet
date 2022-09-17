@@ -1,9 +1,9 @@
 import React from 'react';
 import "./styles/app.scss"
 import Board from './components/Board.js'
-import Login from './components/Login.js'
-import RegisterForm from './components/Register.js'
-import FromVerifyEmail from './components/FromVerifyEmail.jsx';
+import Login from './components/Login.jsx'
+import RegisterForm from './components/Register.jsx'
+import FromEmail from './components/FromEmail.jsx';
 import BoardManagement from './components/BoardManagement.jsx';
 import Password from './components/Password.jsx'
 
@@ -52,6 +52,8 @@ class App extends React.Component {
             })
             .catch(error => console.log(error))
         localStorage.setItem('token', '')
+        localStorage.setItem('username', '')
+        localStorage.setItem('email', '')
         this.setState({
             'token': ''
         })
@@ -66,7 +68,7 @@ class App extends React.Component {
                     <Route exact path='/' element = {<Login />} />
                     <Route path='/board_management' element = {<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
-                    <Route path='/api/users/verify/:email/:key'  element = {<FromVerifyEmail />} />
+                    <Route path='/api/users/:action/:email/:key'  element = {<FromEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
                     <Route exact path='/verify' element = {<VerifyEmail />}/>
