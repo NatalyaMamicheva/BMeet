@@ -53,6 +53,7 @@ class VerifyEmail extends React.Component {
 
     render() {
         return (
+
              
             <div className='verify'>
                 <div className='verify_form'>
@@ -76,8 +77,11 @@ class VerifyEmail extends React.Component {
                     
                 </div>
             </div>
+
         )
     }
 }
 
+
 export default VerifyEmail;
+

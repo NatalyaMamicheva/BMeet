@@ -6,7 +6,9 @@ import RegisterForm from './components/Register.js'
 import FromVerifyEmail from './components/FromVerifyEmail.jsx';
 import BoardManagement from './components/BoardManagement.jsx';
 import Password from './components/Password.jsx'
+
 import VerifyEmail from './components/VerifyEmail';
+
 import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom'
 import axios from 'axios'
 
@@ -68,6 +70,7 @@ class App extends React.Component {
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
                     <Route exact path='/verify' element = {<VerifyEmail />}/>
+
                     <Route path="*" element = {<NotFound />} />
                 </Routes>
               </BrowserRouter>
