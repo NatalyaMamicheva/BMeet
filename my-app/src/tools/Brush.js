@@ -19,7 +19,7 @@ export default class Brush extends Tool {
     };
 
     connect_websocket () {
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}`;
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}${window.location.pathname}`;
         if (url.toString().slice(-1) !== '/') {
             url += '/'
         }
