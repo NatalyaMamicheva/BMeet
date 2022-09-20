@@ -51,7 +51,7 @@ class Password extends React.Component {
                 console.log(response)
             })
             .catch(error => {
-                this.setState({'error_message': error.message});
+                this.setState({'error_message': error.response.data["Invalid"]});
                 this.errorRef.current.focus();
             })
         event.preventDefault();

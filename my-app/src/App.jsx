@@ -68,7 +68,7 @@ class App extends React.Component {
                     <Route exact path='/' element = {<Login />} />
                     <Route path='/board_management' element = {<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
-                    <Route path='/api/users/:action/:email/:key'  element = {<FromEmail />} />
+                    <Route path='/users/:action/:email/:key'  element = {<FromEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
                     <Route exact path='/verify' element = {<VerifyEmail />}/>
