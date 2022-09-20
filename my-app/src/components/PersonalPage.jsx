@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from 'axios'
-import Header from './Header.jsx'
 import {Navigate, Link} from 'react-router-dom'
+import Header from './Header.jsx'
 
 
-class BoardManagement extends React.Component {
+class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
 
@@ -14,10 +14,10 @@ class BoardManagement extends React.Component {
         return (
              <div>
                   <Header logout={() => this.props.logout()}/>
-                  <h1> Доски {localStorage.getItem('username')}</h1>
+                   <h1> Личный кабинет {localStorage.getItem('username') }</h1>
              </div>
         )
     }
 }
 
-export default BoardManagement
+export default PersonalPage
