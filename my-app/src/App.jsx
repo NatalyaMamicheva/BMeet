@@ -5,8 +5,8 @@ import Login from './components/Login.jsx'
 import RegisterForm from './components/Register.jsx'
 import FromEmail from './components/FromEmail.jsx';
 import BoardManagement from './components/BoardManagement.jsx';
-import Password from './components/Password.jsx'
-
+import PersonalPage from './components/PersonalPage.jsx'
+import  Password from './components/Password.jsx'
 import VerifyEmail from './components/VerifyEmail';
 
 import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom'
@@ -67,6 +67,7 @@ class App extends React.Component {
                 <Routes>
                     <Route exact path='/' element = {<Login />} />
                     <Route path='/board_management' element = {<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
+                    <Route path='/cabinet' element = {<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
                     <Route path='/users/:action/:email/:key'  element = {<FromEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
