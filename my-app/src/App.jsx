@@ -1,6 +1,8 @@
 import React from 'react';
 import "./styles/app.scss"
-import Board from './components/Board.js'
+
+import Board from './components/Board.jsx'
+
 import Login from './components/Login.jsx'
 import RegisterForm from './components/Register.jsx'
 import FromEmail from './components/FromEmail.jsx';
