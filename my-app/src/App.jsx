@@ -8,8 +8,9 @@ import RegisterForm from './components/Register.jsx'
 import FromEmail from './components/FromEmail.jsx';
 import BoardManagement from './components/BoardManagement.jsx';
 import PersonalPage from './components/PersonalPage.jsx'
-import  Password from './components/Password.jsx'
-import VerifyEmail from './components/VerifyEmail';
+import Password from './components/Password.jsx'
+import VerifyEmail from './components/VerifyEmail.jsx';
+import ChangeEmail from './components/ChangeEmail.jsx';
 
 import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom'
 import axios from 'axios'
@@ -72,6 +73,7 @@ class App extends React.Component {
                     <Route path='/cabinet' element = {<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
                     <Route path='/users/:action/:email/:key'  element = {<FromEmail />} />
+                    <Route path='/profile/:new_email/:old_email/:key'  element = {<ChangeEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
                     <Route exact path='/verify' element = {<VerifyEmail />}/>
