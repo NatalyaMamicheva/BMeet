@@ -74,9 +74,9 @@ class Login extends React.Component {
                     </div>
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <div className='head_email'>
-                            Email
+                            Email / Username
                         </div>
-                        <input className='input_class_email' type="email" placeholder="bmeet@gmail.com" name="email"
+                        <input className='input_class_email' type="text" name="email"
                              required onChange={(event) => this.handleChange(event)} value={this.state.email}>
                         </input>
                         <div className='head_password'>
