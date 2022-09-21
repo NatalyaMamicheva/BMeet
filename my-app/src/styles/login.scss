@@ -1,0 +1,297 @@
+@import "./variable";
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+.login {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: #F8F8F8;
+
+}
+
+.login_form {
+
+
+    position: absolute;
+    left: 35%;
+    right: 0%;
+    top: 20%;
+    bottom: 0%;
+    width: 407px;
+    height: 462px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(179, 179, 179, 0.445);
+
+}
+
+.logo {
+
+    position: absolute;
+    left: 34%;
+    right: 34%;
+    top: 4.33%;
+    bottom: 85.71%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 46px;
+    letter-spacing: -0.43px;
+
+    .yellow{
+        color: #E7B460;
+    }
+
+    .blue{
+        color:#B9B9C3;
+    }
+
+}
+
+
+.welcome {
+
+    position: absolute;
+    left: 8.6%;
+    right: 8.6%;
+    top: 21.43%;
+    bottom: 69.48%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #6E6B7B;
+
+}
+
+.in{
+
+    position: absolute;
+    left: 8.6%;
+    right: 8.6%;
+    top: 26.43%;
+    bottom: 69.48%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #6E6B7B;
+
+}
+
+.head_email{
+
+    position: absolute;
+    height: 18px;
+    right: 340px;
+    top: 167px;
+    left: 35px;
+    bottom: 277px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    width: 50px;
+    color: #6E6B7B;
+
+}
+
+
+.input_class_email {
+
+
+    position: absolute;
+    left: 35px;
+    right: 35px;
+    top: 187px;
+    bottom: 237px;
+    height: 38px;
+    width: 337px;
+    border-color: #B9B9C3;
+    border-style: solid;
+    border-width: 1.5px;
+    background: #FFFFFF;
+    border-radius: 5px;
+
+}
+
+::placeholder { 
+
+    position: absolute;
+    left: 15px;
+    right: 10px;
+    top: 10px;
+    bottom: 8px;
+    left: 15px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+    color: #B9B9C3;
+
+}
+
+
+.head_password {
+
+
+    position: absolute;
+    height: 18px;
+    right: 340px;
+    top: 245px;
+    left: 35px;
+    bottom: 199px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    width: 50px;
+    color: #6E6B7B;
+
+}
+
+
+.input_class_pass {
+
+
+    position: absolute;
+    left: 35px;
+    right: 35px;
+    top: 265px;
+    bottom: 159px;
+    height: 38px;
+    width: 337px;
+    border-color: #B9B9C3;
+    border-style: solid;
+    border-width: 1.5px;
+    background: #FFFFFF;
+    border-radius: 5px;
+
+}
+
+
+.pass {
+
+
+    position: absolute;
+    height: 18px;
+    right: 35px;
+    top: 245px;
+    bottom: 199px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    width: 105px;
+    margin-right: 3px;
+    text-align: right;
+    color: #E7B460;
+    text-decoration: none;
+
+}
+
+.entr {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 22px;
+    gap: 8px;
+    position: absolute;
+    left: 35px;
+    right: 35px;
+    top: 351px;
+    bottom: 72px;
+    background: #E7B460;
+    border-radius: 5px;
+    border-style: none;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.4px;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    // pointer-events: none; /* делаем ссылку некликабельной */
+
+}
+
+.entr:hover {
+
+    background: #B9B9C3;
+}
+
+
+.en {
+
+
+    width: 42px;
+    height: 19px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    width: 200px;
+    text-align: center;
+    letter-spacing: 0.4px;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+
+.head_reg {
+
+    position: absolute;
+    height: 21px;
+    left: 48px;
+    right: 170px;
+    top: 410px;
+    bottom: 31px;
+    width: 182px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+
+}
+
+
+.reg {
+
+
+    position: absolute;
+    height: 21px;
+    left: 235px;
+    right: 85px;
+    top: 410px;
+    bottom: 31px;
+    width: 182px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #E7B460;
+    text-decoration: none;
+
+}
+
