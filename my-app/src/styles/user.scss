@@ -79,24 +79,24 @@
     border: 1px solid #D8D6DE;
     padding-left: 15px;
     outline: 0 !important;
-    
-}
-
-::placeholder { 
-
-    position: absolute;
-    left: 15px;
-    right: 9.87px;
-    top: 8px;
-    bottom: 8.07px;
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 24px;
-    color: #5E5873;
 
 }
+
+//::placeholder {
+//
+//    position: absolute;
+//    left: 15px;
+//    right: 9.87px;
+//    top: 8px;
+//    bottom: 8.07px;
+//    font-family: 'Nunito';
+//    font-style: normal;
+//    font-weight: 400;
+//    font-size: 12px;
+//    line-height: 24px;
+//    color: #5E5873;
+//
+//}
 
 .mail_e {
 
@@ -153,7 +153,7 @@
     width: 643.87px;
     height: 38.07px;
     left: 29.55px;
-    top: 406.05px;    
+    top: 406.05px;
     background: #FFFFFF;
     border-radius: 5px;
     border: 1px solid #D8D6DE;
@@ -172,7 +172,7 @@
     left: 635px;
     top: 406.05px;
     border-style: none;
-    
+
 }
 
 
@@ -201,7 +201,7 @@
     font-size: 12px;
     line-height: 16px;
     color: #6E6B7B;
-    
+
 
 }
 
