@@ -1,12 +1,16 @@
 import React from 'react'
 import axios from 'axios'
+
 import Header from './Header.jsx'
 import '../styles/user.scss'
+
 
 
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
+
+
 
         this.errorRef = React.createRef();
         this.state = {
@@ -29,7 +33,7 @@ class PersonalPage extends React.Component {
     }    
 
     componentDidMount() {
-        
+      
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
@@ -44,9 +48,9 @@ class PersonalPage extends React.Component {
                                'last_name': response.data.last_name,
                                'start_last_name':response.data.last_name,
                                
-
                                });
                                
+
             })
             .catch(error => {
                this.setState({'error_message': error.message });
@@ -91,6 +95,7 @@ class PersonalPage extends React.Component {
             [event.target.name]: event.target.value
         })
     }
+
     
     state_close(event){
         event.preventDefault()

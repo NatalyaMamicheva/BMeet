@@ -16,6 +16,7 @@ class BoardManagement extends React.Component {
                   <Header logout={() => this.props.logout()}/>
                   <h1> Доски {localStorage.getItem('username')}</h1>
                   
+
              </div>
         )
     }
