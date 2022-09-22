@@ -33,9 +33,9 @@ class VerifyEmail extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.timer);
+    // }
 
     handleClick(event) {
         event.preventDefault();
@@ -76,8 +76,9 @@ class VerifyEmail extends React.Component {
                                 <span>Мы отправили письмо на ваш email -</span>
                             </div>
                             <div className='auth_input'>
-                                <div className='auth_title_verify auth_title_input'>
-                                    <span>{this.props.email}user@example.com</span>
+                                <div
+                                    className='auth_title_verify auth_title_input'>
+                                    <span>{this.props.email}</span>
                                 </div>
                             </div>
                             <p className='auth_timer'>{this.state.info_timer}</p>

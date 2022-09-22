@@ -37,9 +37,9 @@ class Password extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.timer);
+    // }
 
 
     handleSubmit(event) {
@@ -96,7 +96,7 @@ class Password extends React.Component {
                                                 <input
                                                     className='auth_input_text'
                                                     type="email"
-                                                    placeholder="bmeet@gmail.com"
+                                                    placeholder="bmeet@example.com"
                                                     name="email" required
                                                     onChange={(event) => this.handleChange(event)}
                                                     value={this.state.email}>
