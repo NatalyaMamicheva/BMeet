@@ -24,11 +24,8 @@ class PersonalPage extends React.Component {
             'start_last_name': '',
             'error_message': '',
             'readOnly': true,
-            'class_open': 'close_pass',
-            
+            'class_open': 'close_pass'
         };
-        
-
     }    
 
     componentDidMount() {
@@ -44,11 +41,12 @@ class PersonalPage extends React.Component {
                                'first_name': response.data.first_name,
                                'start_first_name':response.data.first_name,
                                'last_name': response.data.last_name,
-                               'start_last_name':response.data.last_name,
+                               'start_last_name':response.data.last_name
+                              })
                                
             })
             .catch(error => {
-               this.setState({'error_message': error.message });
+               this.setState({'error_message': error.message })
             })
     }
 
