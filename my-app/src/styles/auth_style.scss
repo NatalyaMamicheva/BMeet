@@ -23,16 +23,17 @@
   font-style: normal;
   font-weight: 700;
   font-size: 34px;
-
-  .auth_yellow {
-    color: #E7B460;
-  }
-
-  .auth_blue {
-    color: #B9B9C3;
-  }
-
+  line-height: 46px;
 }
+
+.auth_yellow {
+  color: #E7B460;
+}
+
+.auth_blue {
+  color: #B9B9C3;
+}
+
 
 .auth_content {
   margin-left: 35px;
@@ -41,7 +42,7 @@
 
 
 .auth_title {
-  margin-top: 35px;
+  margin-top: 33px;
 }
 
 .auth_title p {
@@ -56,7 +57,7 @@
 }
 
 .auth_form {
-  margin-top: 38px;
+  margin-top: 28px;
 }
 
 .auth_input {
@@ -120,7 +121,7 @@ label input[type="email"] {
 }
 
 .auth_input_button {
-  margin-top: 35px;
+  margin-top: 48px;
 }
 
 .auth_button_form {
@@ -142,9 +143,9 @@ label input[type="email"] {
 
 .auth_header {
   display: flex;
-  justify-content: space-evenly;
-  margin-top: 35px;
-  margin-bottom: 24px;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 31px;
 }
 
 
@@ -152,6 +153,7 @@ label input[type="email"] {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
+  margin-right: 2.5px;
 }
 
 
@@ -161,6 +163,7 @@ label input[type="email"] {
   line-height: 21px;
   color: #E7B460;
   text-decoration: none;
+  margin-left: 2.5px;
 }
 
 .auth_header_a:hover {
