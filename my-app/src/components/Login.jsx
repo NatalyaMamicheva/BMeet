@@ -136,7 +136,7 @@ class Login extends React.Component {
                                 </div>
 
                                 <div className='auth_header'>
-                                    <p className='auth_header_p'>Впервые на
+                                        <p className='auth_header_p'>Впервые на
                                         платформе?
                                     </p>
                                     <Link className='auth_header_a'
