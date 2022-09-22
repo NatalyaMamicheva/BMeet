@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
 import "../styles/auth_style.scss";
+import Footer from "./Footer";
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -85,7 +86,6 @@ class RegisterForm extends React.Component {
             )
         } else {
             return (
-                <div className='content'>
                     <div className='auth'>
                         <div className='auth_form_table'>
                             <div className='auth_logo'>
@@ -175,14 +175,8 @@ class RegisterForm extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <Footer/>
                     </div>
-                    <div className='footer'>
-                        <p>COPYRIGHT © 2022</p>
-                        <p className='footer_bmeet'>BMeet</p>
-                    </div>
-                </div>
-
-
             )
         }
     }

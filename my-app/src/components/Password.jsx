@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "../styles/auth_style.scss";
+import Footer from "./Footer";
 
 
 class Password extends React.Component {
@@ -66,7 +67,6 @@ class Password extends React.Component {
 
     render() {
         return (
-            <div className='content'>
                 <div className='auth'>
                     <div className='auth_form_table'>
                         <div className='auth_logo'>
@@ -125,13 +125,8 @@ class Password extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
-
-                <div className='footer'>
-                    <p>COPYRIGHT © 2022</p>
-                    <p className='footer_bmeet'>BMeet</p>
-                </div>
-            </div>
         )
     }
 }
