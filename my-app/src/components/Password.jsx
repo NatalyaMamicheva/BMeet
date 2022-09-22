@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
+import "../styles/auth_style.scss";
 
 
 class Password extends React.Component {
@@ -75,7 +76,7 @@ class Password extends React.Component {
                             <span className='auth_blue'>t</span>
                         </div>
                         <div className='auth_content'>
-                            <p className='err_p' ref={this.errorRef} >{this.state.error_message}</p>
+                            {/*<p className='err_p' ref={this.errorRef} >{this.state.error_message}</p>*/}
                             <div className='auth_title'>
                                 <p>Забыли пароль?</p>
                                 <span>Пожалуйста, введите ваш email и следуйте инструкции в письме</span>
@@ -113,13 +114,13 @@ class Password extends React.Component {
                                 </form>
                             </div>
                             <div className='auth_header'>
-                                <p className='timerr'>{this.state.info_timer}
-                                </p>
-                                <Link className='auth_header_a'
-                                      to='/'> &lt; Авторизоваться </Link>
-                            </div>
+                                <p></p>
+                                <Link className='auth_header_a' to='/'> &lt; Авторизоваться </Link>
+                                <p className='auth_header_p'>{this.state.info_timer}
+                                    </p>
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <div className='footer'>
@@ -127,6 +128,9 @@ class Password extends React.Component {
                     <p className='footer_bmeet'>BMeet</p>
                 </div>
             </div>
+
+            // <p className='timerr'>{this.state.info_timer}</p>
+            // <Link className='log_in' to='/'> &lt; Авторизоваться </Link>
         )
     }
 }
