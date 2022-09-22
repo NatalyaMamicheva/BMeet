@@ -4,9 +4,12 @@ import Header from './Header.jsx'
 import '../styles/user.scss'
 
 
+
+
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
+
 
         this.errorRef = React.createRef();
         this.state = {
@@ -29,7 +32,6 @@ class PersonalPage extends React.Component {
     }    
 
     componentDidMount() {
-        
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
@@ -43,9 +45,6 @@ class PersonalPage extends React.Component {
                                'start_first_name':response.data.first_name,
                                'last_name': response.data.last_name,
                                'start_last_name':response.data.last_name,
-                               
-
-                               });
                                
             })
             .catch(error => {
@@ -127,6 +126,7 @@ class PersonalPage extends React.Component {
                     <div className='logo_user'></div>
                     <form onSubmit={(event) => this.handleSubmit(event)} >
                         <div className="title_name">Username</div>
+
                         <input name='username' className='title_input' type="text" placeholder="bmeet" 
                         onChange={(event) => this.handleChange(event)} value={this.state.username}></input>
                         <div className='mail_e'>Email</div>
@@ -134,6 +134,7 @@ class PersonalPage extends React.Component {
                         onChange={(event) => this.handleChange(event)} value={this.state.email}/>
                         <div className='passw'>Пароль</div>
                         <input type="password" name="password" readOnly={this.state['readOnly']} className='passw_input' placeholder="**********" 
+
                         onChange={(event) => this.handleChange(event)} value={this.state.password}/>
                         <button id='one' className={this.state['class_open']}  
                         onClick={(event) => {this._click(event); }}></button>
@@ -142,6 +143,7 @@ class PersonalPage extends React.Component {
                         onChange={(event) => this.handleChange(event)} value={this.state.last_name}/>
                         <div className='first'>Имя</div>
                         <input type="first_name" name="first_name" className="first_name"  placeholder="Введите имя"
+
                         onChange={(event) => this.handleChange(event)} value={this.state.first_name}/>
                         <button className='save' type="submit" value="submit"> Сохранить </button>
                         <button className='cancel' onClick={(event) => this.handleCancel(event)}>Отменить</button>
