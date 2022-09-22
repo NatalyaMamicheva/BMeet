@@ -23,8 +23,8 @@ class VerifyEmail extends React.Component {
         for (let i = 60; i > 0; i--) {
             this.timer = setTimeout(() => {
                 second -= 1
-                this.setState({'info_timer': `Повторная отправка возможна через ${second}`});
-                if (second == 0) {
+                this.setState({'info_timer': `Повторная отправка возможна через ${second} сек.`});
+                if (second === 0) {
                     this.setState({'info_timer': ''});
                     p_again.style["pointer-events"] = "auto";
                     p_again.style["color"] = "#E7B460";
@@ -68,8 +68,8 @@ class VerifyEmail extends React.Component {
                             <span className='auth_yellow'>ee</span>
                             <span className='auth_blue'>t</span>
                         </div>
-                        <p className='err_p'
-                           ref={this.errorRef}>{this.state.error_message}</p>
+                        {/*<p className='err_p'*/}
+                        {/*   ref={this.errorRef}>{this.state.error_message}</p>*/}
                         <div className='auth_content'>
                             <div className='auth_title'>
                                 <p>Необходимо подтвердить вашу почту!</p>
@@ -77,9 +77,10 @@ class VerifyEmail extends React.Component {
                             </div>
                             <div className='auth_input'>
                                 <div className='auth_title_verify auth_title_input'>
-                                    <span>{this.props.email}</span>
+                                    <span>{this.props.email}user@example.com</span>
                                 </div>
                             </div>
+                            <p className='auth_timer'>{this.state.info_timer}</p>
                             <div className='auth_header'>
                                 <p className='auth_header_p'>
                                     Не пришло письмо?</p>
@@ -88,7 +89,6 @@ class VerifyEmail extends React.Component {
                                     this.handleClick(event);
                                     this.startTimer();
                                 }}> Отправить снова </a>
-                                <p className='timerr'>{this.state.info_timer}</p>
                             </div>
                         </div>
                     </div>
