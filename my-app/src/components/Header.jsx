@@ -12,6 +12,7 @@ class Header extends React.Component {
 
     render() {
 
+
         if (!localStorage.getItem('token')) return <Navigate  to="/" />;
         return (
             <div className='header'>
@@ -19,7 +20,6 @@ class Header extends React.Component {
                             <div className='username'>
                                 bmeet
                             </div>
-          
                             <div className="dropdown">
                                 <button className="dropbtn"></button>
 
