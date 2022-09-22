@@ -7,10 +7,17 @@ class Footer extends React.Component {
         super(props)
     }
 
+    static date () {
+        let date = new Date()
+        return (
+            date.toISOString().split('T')[0].split('-')[0]
+        )
+    }
+
     render() {
         return (
             <div className='footer'>
-                <p>COPYRIGHT © 2022</p>
+                <p>COPYRIGHT © {Footer.date()}</p>
                 <p className='footer_bmeet'>BMeet</p>
             </div>
         )
