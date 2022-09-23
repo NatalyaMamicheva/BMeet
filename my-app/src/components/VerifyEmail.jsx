@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '../styles/auth_style.scss';
+import Footer from "./Footer";
 
 
 class VerifyEmail extends React.Component {
@@ -23,8 +24,8 @@ class VerifyEmail extends React.Component {
         for (let i = 60; i > 0; i--) {
             this.timer = setTimeout(() => {
                 second -= 1
-                this.setState({'info_timer': `Повторная отправка возможна через ${second}`});
-                if (second == 0) {
+                this.setState({'info_timer': `Повторная отправка возможна через ${second} сек.`});
+                if (second === 0) {
                     this.setState({'info_timer': ''});
                     p_again.style["pointer-events"] = "auto";
                     p_again.style["color"] = "#E7B460";
@@ -33,9 +34,9 @@ class VerifyEmail extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.timer);
+    // }
 
     handleClick(event) {
         event.preventDefault();
@@ -59,7 +60,6 @@ class VerifyEmail extends React.Component {
 
     render() {
         return (
-            <div className='content'>
                 <div className='auth'>
                     <div className='auth_form_table'>
                         <div className='auth_logo'>
@@ -68,18 +68,20 @@ class VerifyEmail extends React.Component {
                             <span className='auth_yellow'>ee</span>
                             <span className='auth_blue'>t</span>
                         </div>
-                        <p className='err_p'
-                           ref={this.errorRef}>{this.state.error_message}</p>
+                        {/*<p className='err_p'*/}
+                        {/*   ref={this.errorRef}>{this.state.error_message}</p>*/}
                         <div className='auth_content'>
                             <div className='auth_title'>
                                 <p>Необходимо подтвердить вашу почту!</p>
                                 <span>Мы отправили письмо на ваш email -</span>
                             </div>
                             <div className='auth_input'>
-                                <div className='auth_title_verify auth_title_input'>
+                                <div
+                                    className='auth_title_verify auth_title_input'>
                                     <span>{this.props.email}</span>
                                 </div>
                             </div>
+                            <p className='auth_timer'>{this.state.info_timer}</p>
                             <div className='auth_header'>
                                 <p className='auth_header_p'>
                                     Не пришло письмо?</p>
@@ -88,15 +90,10 @@ class VerifyEmail extends React.Component {
                                     this.handleClick(event);
                                     this.startTimer();
                                 }}> Отправить снова </a>
-                                <p className='timerr'>{this.state.info_timer}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='footer'>
-                    <p>COPYRIGHT © 2022</p>
-                    <p className='footer_bmeet'>BMeet</p>
-                </div>
+                <Footer/>
             </div>
 
         )

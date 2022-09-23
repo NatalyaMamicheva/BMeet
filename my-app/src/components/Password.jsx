@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "../styles/auth_style.scss";
+import Footer from "./Footer";
 
 
 class Password extends React.Component {
@@ -18,7 +19,7 @@ class Password extends React.Component {
     }
 
     startTimer = () => {
-        let p_again = document.querySelector('#button');
+        let p_again = document.querySelector('#again');
         p_again.style["pointer-events"] = "none";
         p_again.style["color"] = "#6E6B7B";
         p_again.style["background"] = "#B9B9C3";
@@ -26,20 +27,20 @@ class Password extends React.Component {
         for (let i = 60; i > 0; i--) {
             this.timer = setTimeout(() => {
                 second -= 1
-                this.setState({'info_timer': `Повторный запрос возможен через ${second}`});
+                this.setState({'info_timer': `Повторный запрос возможен через ${second} сек.`});
                 if (second === 0) {
                     this.setState({'info_timer': ''});
                     p_again.style["pointer-events"] = "auto";
-                    p_again.style["color"] = "#E7B460";
+                    p_again.style["color"] = "#FFFFFF";
                     p_again.style["background"] = "#E7B460";
                 }
             }, (i + 1) * 1000)
         }
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
+    // componentWillUnmount() {
+    //     clearTimeout(this.timer);
+    // }
 
 
     handleSubmit(event) {
@@ -66,7 +67,6 @@ class Password extends React.Component {
 
     render() {
         return (
-            <div className='content'>
                 <div className='auth'>
                     <div className='auth_form_table'>
                         <div className='auth_logo'>
@@ -96,7 +96,7 @@ class Password extends React.Component {
                                                 <input
                                                     className='auth_input_text'
                                                     type="email"
-                                                    placeholder="bmeet@gmail.com"
+                                                    placeholder="bmeet@example.com"
                                                     name="email" required
                                                     onChange={(event) => this.handleChange(event)}
                                                     value={this.state.email}>
@@ -105,8 +105,14 @@ class Password extends React.Component {
                                         </div>
                                     </div>
                                     <div className='auth_input_button'>
+                                        <p className='auth_timer'>{this.state.info_timer}</p>
                                         <button type='submit'
-                                                className='auth_button_form'>
+                                                className='auth_button_form'
+                                                id='again'
+                                                onClick={(event) => {
+                                                    this.handleClick(event);
+                                                    this.startTimer();
+                                                }}>
                                             <p>Сбросить
                                                 пароль</p>
                                         </button>
@@ -114,23 +120,13 @@ class Password extends React.Component {
                                 </form>
                             </div>
                             <div className='auth_header'>
-                                <p></p>
-                                <Link className='auth_header_a' to='/'> &lt; Авторизоваться </Link>
-                                <p className='auth_header_p'>{this.state.info_timer}
-                                    </p>
+                                <Link className='auth_header_a'
+                                      to='/'> &lt; Авторизоваться </Link>
+                            </div>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
-                </div>
-
-                <div className='footer'>
-                    <p>COPYRIGHT © 2022</p>
-                    <p className='footer_bmeet'>BMeet</p>
-                </div>
-            </div>
-
-            // <p className='timerr'>{this.state.info_timer}</p>
-            // <Link className='log_in' to='/'> &lt; Авторизоваться </Link>
         )
     }
 }
