@@ -9,8 +9,6 @@ import '../styles/user.scss'
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
-
-
         this.errorRef = React.createRef();
         this.state = {
             'username': '',

@@ -46,13 +46,6 @@ class App extends React.Component {
     }
 
     logout() {
-        let headers = this.getHeader()
-        axios
-            .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/logout/`, {headers})
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => console.log(error))
         localStorage.setItem('token', '')
         localStorage.setItem('username', '')
         localStorage.setItem('email', '')
@@ -74,7 +67,6 @@ class App extends React.Component {
                     <Route path='/users/:action/:email/:key'  element = {<FromEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
-                    <Route exact path='/verify' element = {<VerifyEmail />}/>
 
                     <Route path="*" element = {<NotFound />} />
                 </Routes>

@@ -38,7 +38,6 @@ class RegisterForm extends React.Component {
                 this.id = response.data.id
                 this.username = response.data.username
                 this.password = response.data.password
-                console.log(response.data)
                 this.setState({
                     'username': '',
                     'email': '',
@@ -181,8 +180,6 @@ class RegisterForm extends React.Component {
                         <p className='footer_bmeet'>BMeet</p>
                     </div>
                 </div>
-
-
             )
         }
     }
