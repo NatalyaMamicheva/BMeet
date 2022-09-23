@@ -31,3 +31,16 @@
   font-size: 16px;
   color: #E7B460;
 }
+
+.header {
+  height: 62px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 24px rgba(24, 41, 47, 0.1);
+  border-radius: 6px;
+  margin-left: 14px;
+  margin-right: 14px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

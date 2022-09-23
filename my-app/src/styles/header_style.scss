@@ -1,0 +1,76 @@
+.header_content {
+  display: flex;
+  justify-content: end;
+  margin-right: 29px;
+  min-width: 189px;
+}
+
+.header_p {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 12px;
+  margin-top: 16px;
+}
+
+.header_avatar {
+  margin-top: 16px;
+}
+
+.header_username {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
+
+.header_avatar {
+  background: url("../assets/img/avatar.svg") no-repeat;
+  width: 32px;
+  height: 32px;
+}
+
+.header_dropdown {
+  height: 100%;
+}
+
+.header_menu {
+  display: none;
+  max-width: 189px;
+  background: #FFFFFF;
+  border: #FFFFFF 0 solid;
+  border-radius: 6px;
+  box-shadow: 11px 0 12px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-top: 5px;
+  margin-right: 29px;
+}
+
+.header_links {
+  padding-top: 11px;
+  padding-bottom: 12px;
+}
+
+.header_link {
+  color: #6E6B7B;
+  text-decoration: none;
+  display: block;
+}
+
+.header_link_p {
+  font-size: 14px;
+  padding: 9px 0 10px 18px;
+  line-height: 21px;
+}
+
+.header_menu a:hover {
+  color: #E7B460;
+}
+
+.header_link:hover {
+  background: #FCF6EC;
+}
+
+.header_dropdown:hover .header_menu {
+  display: block;
+}
