@@ -10,6 +10,7 @@ class Login extends React.Component {
         this.state = {
             'email': '',
             'password': '',
+            'token': '',
             'error_message_user': '',
             'error_message': ''
         }
@@ -22,9 +23,13 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
-                localStorage.setItem('token', response.data.token)
-                localStorage.setItem('email', response.data.email)
+                const token = response.data.token
+                localStorage.setItem('token', token)
+                localStorage.setItem('email', this.state.email)
                 localStorage.setItem('username', response.data.username)
+                this.setState({
+                    'token': token,
+                })
             })
             .catch(error => {
                 this.setState({
@@ -42,6 +47,7 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
+        console.log(this.state.email, this.state.password)
         this.getToken(this.state.email, this.state.password)
         event.preventDefault()
     }
@@ -53,7 +59,8 @@ class Login extends React.Component {
     }
 
     render() {
-        if (localStorage.getItem('token')) return <Navigate to="/board_management"/>;
+        if (localStorage.getItem('token')) return <Navigate
+            to="/board_management"/>;
         else
             return (
                 <div className='content'>

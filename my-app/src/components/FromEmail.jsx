@@ -11,6 +11,7 @@ class FromEmail extends React.Component {
             'email': this.props.params.email,
             'key': this.props.params.key,
             'action': this.props.params.action,
+            'token': '',
             'error_message': ''
         }
         localStorage.setItem('token', '');
@@ -22,6 +23,7 @@ class FromEmail extends React.Component {
          axios
              .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/${this.state.action}/${this.state.email}/${this.state.key}/`)
              .then(response => {
+                 this.setState({'token': response.data.token});
                  localStorage.setItem('token', response.data.token);
                  localStorage.setItem('username', response.data.username);
                  localStorage.setItem('email', response.data.email);
@@ -36,7 +38,7 @@ class FromEmail extends React.Component {
      }
 
     render() {
-        if (localStorage.getItem('token')) return <Navigate  to="/board_management" />;
+        if (this.state.token) return <Navigate  to="/board_management" />;
         else return (
              <div>
                  <h1>{this.state.error_message}</h1>

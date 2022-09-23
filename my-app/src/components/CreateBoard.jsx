@@ -17,7 +17,6 @@ class CreateBoard extends React.Component {
     }
 
     handleCreateSubmit(event) {
-        event.preventDefault()
         let headers = this.props.getHeader()
         let group = []
 
@@ -33,11 +32,14 @@ class CreateBoard extends React.Component {
             data: data
         })
         .then(response => {
-            console.log(response.data)
+            this.setState({'error_message': '' });
+            this.props.handleShowCreateBoard(event)
         })
         .catch(error => {
-            this.setState({'error_message': error.message });
+            if (error.code == 'ERR_BAD_REQUEST') this.setState({'error_message': 'Проверьте правильность введеных email' });
+            else this.setState({'error_message': error.message });
         })
+        event.preventDefault()
     }
 
     handleChange(event) {
