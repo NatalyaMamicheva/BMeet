@@ -2,6 +2,7 @@ import {Link, Navigate} from 'react-router-dom';
 import "../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
+import Footer from "./Footer";
 
 class Login extends React.Component {
     constructor(props) {
@@ -63,7 +64,6 @@ class Login extends React.Component {
             to="/board_management"/>;
         else
             return (
-                <div className='content'>
                     <div className='auth'>
                         <div className='auth_form_table'>
                             <div className='auth_logo'>
@@ -145,11 +145,7 @@ class Login extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='footer'>
-                        <p>COPYRIGHT © 2022</p>
-                        <p className='footer_bmeet'>BMeet</p>
-                    </div>
+                    <Footer/>
                 </div>
             );
     };
