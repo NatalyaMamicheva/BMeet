@@ -9,8 +9,6 @@ import '../styles/user.scss'
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
-
-
         this.errorRef = React.createRef();
         this.state = {
             'username': '',
@@ -70,6 +68,7 @@ class PersonalPage extends React.Component {
             localStorage.setItem('email', response.data.email)
         })
         .catch(error => {
+            console.log(error)
             this.setState({'error_message': error.message });
         })
     }

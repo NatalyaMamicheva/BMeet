@@ -74,7 +74,7 @@ class App extends React.Component {
                     <Route path='/cabinet' element = {<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                     <Route path='/board/:id' element = {<Board />} />
                     <Route path='/users/:action/:email/:key'  element = {<FromEmail />} />
-                    <Route path='/profile/:new_email/:old_email/:key'  element = {<ChangeEmail />} />
+                    <Route path='/profile/:old_email/:new_email/:key'  element = {<ChangeEmail />} />
                     <Route exact path='/register' element = {<RegisterForm />}/>
                     <Route exact path='/recpassword' element = {<Password />}/>
                     <Route exact path='/verify' element = {<VerifyEmail />}/>
