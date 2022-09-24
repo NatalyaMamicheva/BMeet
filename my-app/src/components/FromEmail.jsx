@@ -15,6 +15,8 @@ class FromEmail extends React.Component {
             'error_message': ''
         }
         localStorage.setItem('token', '');
+        localStorage.setItem('username', '');
+        localStorage.setItem('email', '');
     }
 
      componentDidMount() {
