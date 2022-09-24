@@ -1,13 +1,33 @@
-@import "variable";
+@import url("//fonts.googleapis.com/css?family=Nunito");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow:hidden;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', serif;
+}
 
-  .app {
-    background-color: $background-color;
-  }
+.content {
+  min-height: 100%;
+}
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  color: #6E6B7B;
+  margin-bottom: 10px;
+}
+
+.footer p {
+  margin: 5px;
+}
+
+.footer_bmeet {
+  font-weight: 600;
+  font-size: 16px;
+  color: #E7B460;
+}

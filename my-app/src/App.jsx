@@ -66,6 +66,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="app">
+                <div className='content'>
               <BrowserRouter>
                 <Routes>
                     <Route exact path='/' element = {<Login />} />
@@ -81,6 +82,7 @@ class App extends React.Component {
                     <Route path="*" element = {<NotFound />} />
                 </Routes>
               </BrowserRouter>
+                </div>
             </div>
         );
     };

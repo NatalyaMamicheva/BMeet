@@ -11,6 +11,8 @@ class Header extends React.Component {
     }
 
     render() {
+
+
         if (!localStorage.getItem('token')) return <Navigate  to="/" />;
         return (
             <div className='header'>
@@ -18,8 +20,9 @@ class Header extends React.Component {
                             <div className='username'>
                                 bmeet
                             </div>
-                            <div class="dropdown">
-                                <button class="dropbtn"></button>
+                            <div className="dropdown">
+                                <button className="dropbtn"></button>
+
                                 <div className='dropdown-content'>
                                 <a className='a1' href="/board_management"><p className='p1'>Главная</p></a>
                                 <a className='a2' href='/cabinet'><p className='p2'>Профиль</p></a>
