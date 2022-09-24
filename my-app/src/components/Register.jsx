@@ -39,7 +39,6 @@ class RegisterForm extends React.Component {
                 this.id = response.data.id
                 this.username = response.data.username
                 this.password = response.data.password
-                console.log(response.data)
                 this.setState({
                     'username': '',
                     'email': '',

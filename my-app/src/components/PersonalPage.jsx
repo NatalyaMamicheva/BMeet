@@ -9,8 +9,6 @@ import Footer from "./Footer";
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
-
-
         this.errorRef = React.createRef();
         this.state = {
             'username': '',

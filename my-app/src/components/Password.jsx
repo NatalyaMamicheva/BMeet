@@ -44,7 +44,6 @@ class Password extends React.Component {
 
 
     handleSubmit(event) {
-        console.log(this.state.email)
         axios
             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/recovery/${this.state.email}/`,
                 {'email': this.props.email}
