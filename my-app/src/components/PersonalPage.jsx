@@ -106,7 +106,8 @@ class PersonalPage extends React.Component {
             'username': this.state.start_username,
             'email': this.state.start_email,
             'first_name': this.state.start_first_name,
-            'last_name': this.state.start_last_name
+            'last_name': this.state.start_last_name,
+            'password': ''
         });
     }
 
