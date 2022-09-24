@@ -4,12 +4,9 @@ import Header from './Header.jsx'
 import '../styles/user.scss'
 
 
-
-
 class PersonalPage extends React.Component {
     constructor(props) {
         super(props)
-        this.errorRef = React.createRef();
         this.state = {
             'username': '',
             'start_username': '',
@@ -22,11 +19,19 @@ class PersonalPage extends React.Component {
             'start_last_name': '',
             'error_message': '',
             'readOnly': true,
-            'class_open': 'close_pass'
+            'class_open': 'close_pass',
+            'error_message': '',
+            'error_message_username': '',
+            'error_message_email': '',
+            'message_change_email': ''
         };
     }    
 
     componentDidMount() {
+         this.setState({'error_message': '',
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        })
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
@@ -49,6 +54,7 @@ class PersonalPage extends React.Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault();
         let headers = this.props.getHeader()
         let data = {}
         if (this.state.username !== this.state.start_username) data['username'] = this.state.username
@@ -66,14 +72,32 @@ class PersonalPage extends React.Component {
         .then(response => {
             localStorage.setItem('username', response.data.username)
             localStorage.setItem('email', response.data.email)
+            if (this.state.email !== this.state.start_email)
+                this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
+            this.componentDidMount()
         })
         .catch(error => {
-            console.log(error)
-            this.setState({'error_message': error.message });
+               this.setState({
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        'error_message': ''
+                    });
+                    if (!error.response.data)
+                        this.setState({error_message: error.message});
+                    else {
+                        if (error.response.data.email)
+                            this.setState({error_message_email: error.response.data.email});
+                        if (error.response.data.username)
+                            this.setState({error_message_username: error.response.data.username});
+                    }
         })
     }
 
     handleCancel(event){
+        this.setState({'error_message': '',
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        })
         event.preventDefault()
         this.setState({'username': this.state.start_username,
                        'email':this.state.start_email,
@@ -114,8 +138,8 @@ class PersonalPage extends React.Component {
 
     render() {
         return (
-            
             <div className='user'>
+            <p className='error_p'>{this.state.error_message}</p>
                 <Header logout={() => this.props.logout()}/>
                 <div className='card_user'>
                     <div className='title' > Профиль {localStorage.getItem('username') }</div>
@@ -126,9 +150,12 @@ class PersonalPage extends React.Component {
 
                         <input name='username' className='title_input' type="text" placeholder="bmeet" 
                         onChange={(event) => this.handleChange(event)} value={this.state.username}></input>
+                        <p className='error_p'>{this.state.error_message_username}</p>
                         <div className='mail_e'>Email</div>
                         <input type="email" className='mail_input' name="email"  placeholder="bmeet@gmail.com" 
                         onChange={(event) => this.handleChange(event)} value={this.state.email}/>
+                        <p className='error_p'>{this.state.error_message_email}</p>
+                        <p className='error_p'>{this.state.message_change_email}</p>
                         <div className='passw'>Пароль</div>
                         <input type="password" name="password" readOnly={this.state['readOnly']} className='passw_input' placeholder="**********" 
 
