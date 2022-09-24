@@ -92,6 +92,8 @@ class BoardManagement extends React.Component {
         return (
              <div>
                   <Header logout={() => this.props.logout()}/>
+
+                  <h1> Доски {localStorage.getItem('username')}</h1>
                   <button  onClick={(event) => this.handleShowCreateBoard(event)}>Создать доску</button>
                   <React.Fragment>
                         {this.state.isOpenCreate && (<CreateBoard getHeader={() => this.props.getHeader()} handleShowCreateBoard={() => this.handleShowCreateBoard()} />)}
