@@ -19,12 +19,15 @@ class CreateBoard extends React.Component {
     handleCreateSubmit(event) {
         let headers = this.props.getHeader()
         let group = []
-
-        for (let email of this.state.group.split(' ')) {
-            group.push({'email': email});
+        let data = {}
+        if (this.state.group) {
+            for (let email of this.state.group.split(' ')) {
+                group.push({'email': email});
+            }
+            data['group'] = group
         }
-
-        let data = {'name':this.state.name, 'description': this.state.description, 'group':group}
+        data['name'] = this.state.name
+        data['description'] = this.state.description
         axios.request({
             url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/board/`,
             method: "post",
