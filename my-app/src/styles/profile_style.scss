@@ -1,0 +1,125 @@
+.profile {
+  margin-bottom: 15%;
+  height: 100%;
+}
+
+.profile_card {
+  margin: 28px;
+  border: white 0 solid;
+  background: #FFFFFF;
+  border-radius: 6px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.profile_title {
+  margin-left: 28px;
+  padding-top: 21px;
+}
+
+.profile_title p {
+  color: #5E5873;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.profile_avatar {
+  background: url("../assets/img/user.svg") no-repeat center;
+  width: 130px;
+  height: 130px;
+  margin-left: 8px;
+  margin-top: 24px;
+}
+
+.profile_form {
+  padding-left: 28.32px;
+  padding-right: 28.32px;
+}
+
+.profile_title_input {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile_input {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #6E6B7B;
+  margin-top: 30px;
+  min-width: 50%;
+}
+
+.profile_title_input {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile_input_border {
+  margin-top: 4.04px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+
+.profile_input_text {
+  height: 38.07px;
+  width: 94%;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 5px;
+  border: 0.5px solid;
+  display: block;
+  box-sizing: border-box;
+  border-color: #B9B9C3;
+}
+
+.profile_psw {
+  display: flex;
+  justify-content: start;
+  padding-right: 6%;
+}
+
+.profile_close {
+  width: 100%;
+}
+
+
+.profile_close_pass, .profile_open_pass {
+  background: url('../assets/img/close.svg') no-repeat center center;
+  width: 37px;
+  height: 37px;
+  border: grey 0.1px solid;
+  outline: none;
+  z-index: 1;
+  border-radius: 6px;
+}
+
+
+.profile_open_pass {
+  background: url('../assets/img/open.svg') no-repeat center center;
+}
+
+.profile_buttons {
+  margin-top: 52.35px;
+  padding-bottom: 23.53px;
+}
+
+.profile_save, .profile_cancel {
+  border-radius: 5px;
+  width: 119px;
+  height: 37.07px;
+}
+
+.profile_save {
+  border: white 1px solid;
+  color: #FFFFFF;
+  background: #E7B460;
+}
+
+.profile_cancel {
+  border: #82868B 1px solid;
+  color: #82868B;
+  background: white;
+  margin-left: 31px;
+}
