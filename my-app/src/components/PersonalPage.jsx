@@ -22,10 +22,8 @@ class PersonalPage extends React.Component {
             'start_first_name': '',
             'last_name': '',
             'start_last_name': '',
-            'error_message': '',
             'readOnly': true,
-            'class_open': 'profile_close_pass'
-            'class_open': 'close_pass',
+            'class_open': 'profile_close_pass',
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
@@ -155,6 +153,7 @@ class PersonalPage extends React.Component {
                         <p>Профиль {localStorage.getItem('username')}</p>
                         <div className='profile_avatar'></div>
                     </div>
+                    <p className='error_p'>{this.state.error_message}</p>
                     {/*/!*<p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>*!/*/}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
@@ -173,6 +172,7 @@ class PersonalPage extends React.Component {
                                                    value={this.state.username}></input>
                                         </label>
                                     </div>
+                                    <p className='error_p'>{this.state.error_message_username}</p>
                                 </div>
 
                                 <div className='profile_input'>
@@ -189,6 +189,8 @@ class PersonalPage extends React.Component {
                                                    value={this.state.email}/>
                                         </label>
                                     </div>
+                                    <p className='error_p'>{this.state.error_message_email}</p>
+                                    <p className='error_p'>{this.state.message_change_email}</p>
                                 </div>
 
                                 <div className='profile_input'>
