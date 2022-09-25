@@ -3,6 +3,9 @@ import axios from 'axios'
 import Header from './Header.jsx'
 import CreateBoard from './CreateBoard.jsx'
 import {Navigate, Link} from 'react-router-dom'
+import Footer from "./Footer";
+import "../styles/board_management.scss";
+
 
 
 class BoardItem extends React.Component {
@@ -30,11 +33,11 @@ class BoardItems extends React.Component {
     render() {
         return (
             <div >
-                <h1> Мои доски </h1>
+                <div className='title_my_boards'> Мои доски {localStorage.getItem('username')}</div>
                 {this.props.my_boards.map(el => (
                     <BoardItem key={el.id} item={el}/>
                 ))}
-                <h1> Доски по приглашению </h1>
+                <div className='title_all_boardss'>Доступные мне </div>
                 {this.props.other_boards.map(el => (
                     <BoardItem key={el.id} item={el}/>
                 ))}
@@ -90,17 +93,61 @@ class BoardManagement extends React.Component {
 
     render() {
         return (
-             <div>
-                  <Header logout={() => this.props.logout()}/>
+                <div className='cont_board'>
+                                            
+                    <Header logout={() => this.props.logout()}/>
+                    <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
+                    <div>
+                        <div class="css-modal-checkbox-container">
+                            <label for="css-modal-checkbox" className="css-modal-checkbox">Создать новую доску</label>
+                    </div>
+                        <label for="css-modal-checkbox" className="my_add_board"></label>
+                    <input type="checkbox" id="css-modal-checkbox" />  
 
-                  <h1> Доски {localStorage.getItem('username')}</h1>
-                  <button  onClick={(event) => this.handleShowCreateBoard(event)}>Создать доску</button>
-                  <React.Fragment>
-                        {this.state.isOpenCreate && (<CreateBoard getHeader={() => this.props.getHeader()} handleShowCreateBoard={() => this.handleShowCreateBoard()} />)}
-                  </React.Fragment>
-                  <BoardItems my_boards={this.state.my_boards} other_boards={this.state.other_boards} />
-                  <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
+                    {/* Это начало модального окна */}
+                    <div className="cmc">
+                        <div className="cmt">
+                            <label for="css-modal-checkbox" className="css-modal-close"></label>
+                            <div className='title_board'>Создание доски</div>
+                            <div className='add_board'>
+                            <p>Создайте новую доску в BMeet и предложите своим коллегам<br/>присоединиться к Вам</p></div>
+                            <div className='board_name'>Название</div>
+                            <input className='name_name' placeholder='Введите название доски'></input>
+                            <div className='info_boaard'>Описание</div>
+                            <p><textarea className='info_info'></textarea> </p>
+                            <div className='board_people'>Пригласить коллег</div>
+                            <div className='board_mail'>Введите адреса электронной почты ваших коллег и пригласите их присоединиться к вашей доске в BMeet </div>
+                            <input className='add_boards'></input>
+                            <button className='board_button' onClick={() => this.message()}>Создать</button>
+                        </div>
+                    </div>
+                    <React.Fragment>
+                            {this.state.isOpenCreate && (<CreateBoard getHeader={() => this.props.getHeader()} handleShowCreateBoard={() => this.handleShowCreateBoard()} />)}
+                    </React.Fragment>
+                    <BoardItems my_boards={this.state.my_boards} other_boards={this.state.other_boards} /> 
+                    </div>
+                    { /* Это конец модального окна */ }
+
+                        <div className='my_all_boards' >
+                        <div className='title_all_boards'>
+                            <button className='all_board'>У Вас пока нет приглашений</button></div>
+                        </div>
+
+                         {/* Это начало карточки созданной доски  */}
+                        <div className='block_card_board'>
+                        <div className='name_board'>Здесь будет название доски
+                        <div className='info_board'>Описание доски</div></div>
+                    </div>
+                                            <div class="css-modal-checkbox-container">
+                            <label for="css-modal-checkbox" className="edit"></label>
+                    </div>
+                    <a href='/board/:id'><button className='log'></button></a>
+                    <a href='#'><button className='trash'></button></a>
+                     {/* Это конец карточки созданной доски  */}
+                    
+                    <Footer/>
              </div>
+             
         )
     }
 }

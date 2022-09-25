@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Header from './Header.jsx'
 import {Navigate, Link} from 'react-router-dom'
+import "../styles/board_management.scss";
 
 
 class CreateBoard extends React.Component {
@@ -55,18 +56,28 @@ class CreateBoard extends React.Component {
         return (
            <form onSubmit={(event) => this.handleCreateSubmit(event)} >
               <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
-              <button onClick={(event) =>  this.props.handleShowCreateBoard(event)}> X </button>
-              <h3>Название доски</h3>
-              <input name="name" type="text" required
-                    onChange={(event) => this.handleChange(event)} value={this.state.name}></input>
-              <h3>Описание</h3>
-              <textarea name="description"
-                    onChange={(event) => this.handleChange(event)} value={this.state.description}></textarea>
-              <h3>Пригласить коллег</h3>
-              <input name="group" type="text"
+                <div className="cmc">
+                    <div className="cmt">
+                        <label onClick={(event) =>  this.props.handleShowCreateBoard(event)} for="css-modal-checkbox" className="css-modal-close"></label>
+                    </div>
+                </div>
+              <div className='title_board'>Создание доски</div>
+              <div className='add_board'>
+                    <p>Создайте новую доску в BMeet и предложите своим коллегам<br/>присоединиться к Вам</p></div>
+              <div className='board_name'>Название</div>
+              <input name="name" className='name_name' type="text" placeholder='Введите название доски' required 
+              onChange={(event) => this.handleChange(event)} value={this.state.name}></input>
+              <div className='info_board'>Описание</div>
+              <p><textarea className='info_info' name="description"
+              onChange={(event) => this.handleChange(event)} value={this.state.description}></textarea></p>
+              <div className='board_people'>Пригласить коллег</div>
+              <div className='board_mail'>Введите адреса электронной почты ваших коллег и пригласите их присоединиться 
+              к вашей доске в BMeet </div>
+              <input className='add_boards' name="group" type="text"
                     onChange={(event) => this.handleChange(event)} value={this.state.group}></input>
-              <button type="submit" value="submit"> Сохранить </button>
+                    <button className='board_button' onClick={() => this.message()}>Создать</button>
           </form>
+        
         )
     }
 }

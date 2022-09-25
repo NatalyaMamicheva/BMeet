@@ -11,7 +11,7 @@ class Header extends React.Component {
     }
 
     render() {
-        if (!localStorage.getItem('token')) return <Navigate  to="/" />;
+        // if (!localStorage.getItem('token')) return <Navigate  to="/" />;
         return (
             <div className='header'>
                 <div className='header_dropdown'>
