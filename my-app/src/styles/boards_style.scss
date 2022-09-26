@@ -1,0 +1,129 @@
+.boards_content {
+  height: 100%;
+  margin-bottom: 20%;
+}
+
+.boards_content h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+  color: #5E5873;
+  margin: 43px 28px 0 28px;
+}
+
+.boards_my_boards {
+  display: inline-flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  margin-left: 28px;
+}
+
+.boards_board {
+  border-radius: 15px;
+  width: 325px;
+  height: 152px;
+  margin: 31px 25px 0 0;
+  box-shadow: 0 4px 24px rgba(24, 41, 47, 0.1);
+  overflow: hidden;
+}
+
+.boards_board_size {
+  width: 100%;
+  height: 86px;
+}
+
+.boards_not_invitations {
+  background: #F8F8F8;
+  border: #B9B9C3 2px solid;
+}
+
+.boards_new_board {
+  background: #F8F8F8;
+  border: #E7B460 2px dashed;
+}
+
+.boards_new_board p {
+  color: #E7B460
+}
+
+.boards_not_invitations_p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #B9B9C3;
+  padding: 20% 0 0 0;
+  height: 100%;
+}
+
+.boards_text p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boards_title {
+  margin: 21px 20px 0 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #5E5873;
+}
+
+.boards_description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin: 5px 20px 0 20px;
+  color: #6E6B7B;
+}
+
+.boards_buttons {
+  white-space: nowrap;
+  margin: 0 21px 21px 22px;
+}
+
+.boards_buttons div {
+  display: inline-block;
+}
+
+.boards_button_update_and_delete {
+  float: right;
+}
+
+.boards_buttons_open {
+  background: url("../assets/img/board_open.svg") no-repeat center center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_open:hover {
+  width: 30px;
+  height: 30px;
+}
+
+.boards_buttons_update {
+  background: url("../assets/img/board_update.svg") no-repeat center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_update:hover {
+  width: 30px;
+  height: 30px;
+}
+
+.boards_buttons_delete {
+  background: url("../assets/img/board_delete.svg") no-repeat center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_delete:hover {
+  width: 30px;
+  height: 30px;
+}

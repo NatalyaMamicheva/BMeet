@@ -68,10 +68,9 @@
   padding-left: 10px;
   outline: none;
   border-radius: 5px;
-  border: 0.5px solid;
+  border: #B9B9C3 0.5px solid;
   display: block;
   box-sizing: border-box;
-  border-color: #B9B9C3;
 }
 
 .profile_psw {
@@ -122,4 +121,12 @@
   color: #82868B;
   background: white;
   margin-left: 31px;
+}
+
+.profile_save:hover {
+  color: #82868B;
+}
+
+.profile_cancel:hover {
+  color: #E7B460;
 }
