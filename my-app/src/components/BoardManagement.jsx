@@ -162,7 +162,8 @@ class BoardManagement extends React.Component {
             <div>
                 <Header logout={() => this.props.logout()}/>
                 <BoardItems my_boards={this.state.my_boards}
-                            other_boards={this.state.other_boards}/>
+                            other_boards={this.state.other_boards}
+                            getHeader={() => this.props.getHeader()}/>
                 <Footer/>
             </div>
         )
