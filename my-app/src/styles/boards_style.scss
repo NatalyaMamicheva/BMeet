@@ -127,3 +127,132 @@
   width: 30px;
   height: 30px;
 }
+
+.new_board {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  padding: 30px 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.new_board_form {
+  background: #FFFFFF;
+  width: 706px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.new_board_close {
+  display: flex;
+  justify-content: end;
+}
+
+.new_board_close_button {
+  background: url("../assets/img/board_close.svg") no-repeat center;
+  width: 20px;
+  height: 20px;
+  -webkit-backdrop-filter: blur(100%);
+  margin: 24.36px 23px 0 0;
+}
+
+.new_board_title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 38px;
+  color: #5E5873;
+  margin-top: 11.49px;
+}
+
+.new_board_text {
+  text-align: center;
+  margin: 13px 112px 0 112px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
+
+.new_board_input {
+  margin: 28px 63px 0 63px;
+}
+
+.new_board_input_title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5E5873;
+}
+
+.new_board_input_border {
+  margin-top: 4px;
+  margin-bottom: 19px;
+}
+
+.new_board_input_text {
+  bottom: 237px;
+  height: 38px;
+  width: 94%;
+  border-color: #B9B9C3;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 14px 0 14px;
+}
+
+.new_board_input_text_area {
+  max-width: 94%;
+  min-width: 94%;
+  min-height: 132px;
+  max-height: 200px;
+  padding: 8px 14px;
+}
+
+.new_board_invite_title {
+  margin: 6px 0 0 61px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #5E5873;
+}
+
+.new_board_invite_text {
+  margin: 11px 61px 0 61px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
+
+.new_board_invite_button {
+  margin: 6px 0 55px 0;
+  display: flex;
+  justify-content: end;
+}
+
+.new_board_invite_button button {
+  background: #E7B460;
+  border-radius: 5px;
+  border-style: none;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  padding: 10px 23px 10px 23px;
+}
+
+.new_board_invite_button button:hover {
+  color: #6E6B7B;
+}
