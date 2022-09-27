@@ -19,6 +19,7 @@ class BoardItem extends React.Component {
         if (author === user) {
             update = true
         }
+        let board_open = '/board/' + this.props.item.id + '/'
         return (
             <div id={this.props.item.id} className='boards_board'>
                 <div className="boards_board_size">
@@ -29,7 +30,7 @@ class BoardItem extends React.Component {
                 </div>
                 <div className="boards_buttons">
                     <div className="boards_open">
-                        <div className="boards_buttons_open"></div>
+                        <a href={board_open}><div className="boards_buttons_open"></div></a>
                     </div>
                     <div className="boards_button_update_and_delete">
 
