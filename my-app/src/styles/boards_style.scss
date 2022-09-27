@@ -63,12 +63,20 @@
   text-overflow: ellipsis;
 }
 
+.boards_text a {
+  text-decoration: none;
+}
+
 .boards_title {
   margin: 21px 20px 0 20px;
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
   color: #5E5873;
+}
+
+.boards_title:hover {
+  color: #E7B460;
 }
 
 .boards_description {

@@ -24,7 +24,7 @@ class BoardItem extends React.Component {
             <div id={this.props.item.id} className='boards_board'>
                 <div className="boards_board_size">
                     <div className="boards_text">
-                        <p className='boards_title'>{this.props.item.name} </p>
+                        <a href={board_open}><p className='boards_title'>{this.props.item.name} </p></a>
                         <p className='boards_description'>{this.props.item.description}</p>
                     </div>
                 </div>
