@@ -75,6 +75,7 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <input className='new_board_input_text'
+                                       maxLength='25'
                                        name="name" type="text" required
                                        placeholder='Введите название доски'
                                        onChange={(event) => this.handleChange(event)}
@@ -88,6 +89,7 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <textarea name="description"
+                                          maxLength='80'
                                           placeholder='Введите описание'
                                           className='new_board_input_text new_board_input_text_area'
                                           onChange={(event) => this.handleChange(event)}

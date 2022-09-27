@@ -57,11 +57,7 @@
   height: 100%;
 }
 
-.boards_text p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.boards_text p {}
 
 .boards_text a {
   text-decoration: none;
@@ -73,6 +69,9 @@
   font-size: 18px;
   line-height: 25px;
   color: #5E5873;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .boards_title:hover {
@@ -85,6 +84,14 @@
   line-height: 21px;
   margin: 5px 20px 0 20px;
   color: #6E6B7B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boards_description:hover {
+  white-space: normal;
+  overflow: clip;
 }
 
 .boards_buttons {
@@ -251,6 +258,7 @@
   min-height: 132px;
   max-height: 200px;
   padding: 8px 14px;
+  resize: none;
 }
 
 .new_board_invite_title {
