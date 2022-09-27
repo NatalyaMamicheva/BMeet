@@ -19,7 +19,7 @@ class CreateBoard extends React.Component {
         let group = []
         let data = {}
         if (this.state.group) {
-            for (let email of this.state.group.split(' ')) {
+            for (let email of this.state.group.split(',')) {
                 group.push({'email': email});
             }
             data['group'] = group
@@ -37,7 +37,7 @@ class CreateBoard extends React.Component {
                 this.props.handleShowCreateBoard(event)
             })
             .catch(error => {
-                if (error.code == 'ERR_BAD_REQUEST') this.setState({'error_message': 'Проверьте правильность введеных email'});
+                if (error.code === 'ERR_BAD_REQUEST') this.setState({'error_message': 'Проверьте правильность введенных email'});
                 else this.setState({'error_message': error.message});
             })
         event.preventDefault()
@@ -50,7 +50,6 @@ class CreateBoard extends React.Component {
     }
 
     render() {
-        let email_reg = '^|((([0-9A-Za-z]{1}[-0-9A-z\\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\\.){1,2}[-A-Za-z]{2,})|$'
         return (
             <div className='new_board'>
                 <form className='new_board_form'
@@ -110,11 +109,11 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border new_board_input_email">
                             <label>
                                 <input className='new_board_input_text'
+                                       multiple
                                        placeholder='Введите несколько email через пробел'
-                                       name="group" type="text"
-                                       pattern={email_reg}
+                                       name="group" type="email"
                                        onChange={(event) => this.handleChange(event)}
-                                       value={this.state.group}></input>
+                                       value={(this.state.group).replace(/ /g, ',')}></input>
                             </label>
                         </div>
                         <div className="new_board_invite_button">
