@@ -19,7 +19,7 @@ class CreateBoard extends React.Component {
         let group = []
         let data = {}
         if (this.state.group) {
-            for (let email of this.state.group.split(',')) {
+            for (let email of this.state.group.split(' ')) {
                 group.push({'email': email});
             }
             data['group'] = group
@@ -54,7 +54,6 @@ class CreateBoard extends React.Component {
             <div className='new_board'>
                 <form className='new_board_form'
                       onSubmit={(event) => this.handleCreateSubmit(event)}>
-                    <p ref={this.errorRef}>{this.state.error_message}</p>
                     <div className="new_board_close">
                         <div
                             onClick={(event) => this.props.handleShowCreateBoard(event)}>
@@ -106,15 +105,17 @@ class CreateBoard extends React.Component {
                             пригласите их присоединиться к вашей доске в
                             BMeet
                         </p>
-                        <div className="new_board_input_border new_board_input_email">
+                        <div
+                            className="new_board_input_border new_board_input_email">
                             <label>
-                                <input className='new_board_input_text'
-                                       multiple
-                                       placeholder='Введите несколько email через пробел'
-                                       name="group" type="email"
-                                       onChange={(event) => this.handleChange(event)}
-                                       value={(this.state.group).replace(/ /g, ',')}></input>
+                                <textarea className='new_board_input_text'
+                                          placeholder='Введите несколько email через пробел'
+                                          name="group"
+                                          onChange={(event) => this.handleChange(event)}
+                                          value={this.state.group}>
+                                </textarea>
                             </label>
+                            <p ref={this.errorRef}>{this.state.error_message}</p>
                         </div>
                         <div className="new_board_invite_button">
                             <button type="submit" value="submit">Создать

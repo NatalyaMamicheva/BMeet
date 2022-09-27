@@ -235,11 +235,14 @@
   padding: 0 14px 0 14px;
 }
 
-.new_board_input_email label input[type="email"] {
+.new_board_input_email label textarea {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: #C18D36;
+  resize: none;
+  padding-top: 10px;
+  height: 28px;
 }
 
 .new_board_input_text_area {
