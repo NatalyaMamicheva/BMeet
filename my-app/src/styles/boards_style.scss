@@ -100,8 +100,7 @@
 }
 
 .boards_buttons_open:hover {
-  width: 30px;
-  height: 30px;
+  background: url("../assets/img/board_open_hover.svg") no-repeat center center;
 }
 
 .boards_buttons_update {
@@ -112,8 +111,7 @@
 }
 
 .boards_buttons_update:hover {
-  width: 30px;
-  height: 30px;
+  background: url("../assets/img/board_update_hover.svg") no-repeat center center;
 }
 
 .boards_buttons_delete {
@@ -124,8 +122,7 @@
 }
 
 .boards_buttons_delete:hover {
-  width: 30px;
-  height: 30px;
+  background: url("../assets/img/board_delete_hover.svg") no-repeat center center;
 }
 
 .new_board {
@@ -166,6 +163,10 @@
   margin: 24.36px 23px 0 0;
 }
 
+.new_board_close_button:hover {
+  background: url("../assets/img/board_close_hover.svg") no-repeat center;
+}
+
 .new_board_title {
   text-align: center;
   font-weight: 500;
@@ -200,6 +201,20 @@
   margin-bottom: 19px;
 }
 
+.new_board_input_border label input[type='text'] {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #5E5873;
+}
+
+.new_board_input_border label textarea {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #5E5873;
+}
+
 .new_board_input_text {
   bottom: 237px;
   height: 38px;
@@ -210,6 +225,13 @@
   border-radius: 5px;
   outline: none;
   padding: 0 14px 0 14px;
+}
+
+.new_board_input_email label input[type="text"] {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #C18D36;
 }
 
 .new_board_input_text_area {

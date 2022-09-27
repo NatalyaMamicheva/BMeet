@@ -50,6 +50,7 @@ class CreateBoard extends React.Component {
     }
 
     render() {
+        let email_reg = '^|((([0-9A-Za-z]{1}[-0-9A-z\\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\\.){1,2}[-A-Za-z]{2,})|$'
         return (
             <div className='new_board'>
                 <form className='new_board_form'
@@ -106,10 +107,12 @@ class CreateBoard extends React.Component {
                             пригласите их присоединиться к вашей доске в
                             BMeet
                         </p>
-                        <div className="new_board_input_border">
+                        <div className="new_board_input_border new_board_input_email">
                             <label>
                                 <input className='new_board_input_text'
-                                       name="group" type="email"
+                                       placeholder='Введите несколько email через пробел'
+                                       name="group" type="text"
+                                       pattern={email_reg}
                                        onChange={(event) => this.handleChange(event)}
                                        value={this.state.group}></input>
                             </label>
