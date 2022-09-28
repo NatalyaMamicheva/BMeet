@@ -174,9 +174,10 @@ class CreateBoard extends React.Component {
                             ))}
 
                             <input
+                                id='enter_email'
                                 className='new_board_input_text_email'
                                 name="email_value"
-                                value={this.state.email_value}
+                                value={(this.state.email_value).replace(/ /g, $('#enter_email').keypress())}
                                 onKeyDown={(event) => this.handleKeyDownEmail(event)}
                                 onChange={(event) => this.handleChange(event)}/>
 
