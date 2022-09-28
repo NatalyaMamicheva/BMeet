@@ -8,8 +8,10 @@ class CreateBoard extends React.Component {
         this.state = {
             'name': '',
             'description': '',
-            'group': '',
-            'error_message': ''
+            'error_message': '',
+            'email_items': [],
+            'email_value': "",
+            'email_error': null
         };
         this.errorRef = React.createRef();
     }
@@ -18,8 +20,8 @@ class CreateBoard extends React.Component {
         let headers = this.props.getHeader()
         let group = []
         let data = {}
-        if (this.state.group) {
-            for (let email of this.state.group.split(' ')) {
+        if (this.state.email_items) {
+            for (let email of this.state.email_items) {
                 group.push({'email': email});
             }
             data['group'] = group
@@ -45,9 +47,60 @@ class CreateBoard extends React.Component {
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            email_error: null
         })
     }
+
+    handleKeyDownEmail(event) {
+        if (["Enter", "Tab", ",", " "].includes(event.key)) {
+            event.preventDefault();
+
+            var value = this.state.email_value.trim();
+
+            if (value && this.isValid(value)) {
+                this.setState({
+                    email_items: [...this.state.email_items, this.state.email_value],
+                    email_value: ""
+                });
+            }
+        }
+    };
+
+    isValid(email) {
+        let error = null;
+
+        if (this.isInList(email)) {
+            error = `${email} has already been added.`;
+        }
+
+        if (!this.isEmail(email)) {
+            error = `${email} is not a valid email address.`;
+        }
+
+        if (error) {
+            this.setState({'email_error': error});
+
+            return false;
+        }
+
+        return true;
+    }
+
+    isInList(email) {
+        return this.state.email_items.includes(email);
+    }
+
+    isEmail(email) {
+        return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    }
+
+    handleDeleteEmail(item) {
+        this.setState({
+            email_items: this.state.email_items.filter(i => i !== item)
+        });
+    };
+
 
     render() {
         return (
@@ -108,17 +161,28 @@ class CreateBoard extends React.Component {
                             BMeet
                         </p>
                         <div
-                            className="new_board_input_border new_board_input_email">
-                            <label>
-                                <textarea className='new_board_input_text'
-                                          placeholder='Введите несколько email через пробел'
-                                          name="group"
-                                          onChange={(event) => this.handleChange(event)}
-                                          value={this.state.group}>
-                                </textarea>
-                            </label>
-                            <p ref={this.errorRef}>{this.state.error_message}</p>
+                            className="new_board_input_email">
+
+                            {this.state.email_items.map(item => (
+                                <div className="boards_tag_item" key={item}>
+                                    <p>{item}</p>
+                                    <div
+                                        className='boards_email_close'
+                                        onClick={() => this.handleDeleteEmail(item)}>
+                                    </div>
+                                </div>
+                            ))}
+
+                            <input
+                                className='new_board_input_text_email'
+                                name="email_value"
+                                value={this.state.email_value}
+                                onKeyDown={(event) => this.handleKeyDownEmail(event)}
+                                onChange={(event) => this.handleChange(event)}/>
+
                         </div>
+                        {this.state.email_error &&
+                                <p className="error">{this.state.email_error}</p>}
                         <div className="new_board_invite_button">
                             <button type="submit" value="submit">Создать
                             </button>
