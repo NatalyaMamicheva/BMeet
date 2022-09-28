@@ -235,19 +235,65 @@
   padding: 0 14px 0 14px;
 }
 
-.new_board_input_email label input[type="email"] {
+//invite emails
+
+.new_board_input_email {
+  margin-top: 4px;
+  margin-bottom: 19px;
+  border: #B9B9C3 1.2px solid;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-flow: wrap;
+  width: 98.5%;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.new_board_input_email input {
+  outline: none;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #C18D36;
+}
+
+.new_board_input_text_email {
+  margin: 10px 10px;
+  border-style: none;
+}
+
+.boards_tag_item {
+  margin: 8px 10px 6px;
+  background: rgba(231, 180, 96, 0.2);
+  border-radius: 5px;
+  padding: 3px 0 3px 6px;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: #C18D36;
+  display: flex;
 }
+
+.boards_tag_item p {
+  margin-top: 3px;
+}
+
+.boards_email_close {
+  margin: 6px 6px 0 23px;
+  background: url("../assets/img/board_email_close.svg") no-repeat center;
+  width: 12px;
+  height: 12px;
+}
+
+//invite emails
 
 .new_board_input_text_area {
   max-width: 94%;
   min-width: 94%;
   min-height: 132px;
-  max-height: 200px;
+  max-height: 132px;
   padding: 8px 14px;
+  resize: none;
 }
 
 .new_board_invite_title {
