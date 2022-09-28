@@ -8,8 +8,10 @@ class CreateBoard extends React.Component {
         this.state = {
             'name': '',
             'description': '',
-            'group': '',
-            'error_message': ''
+            'error_message': '',
+            'email_items': [],
+            'email_value': "",
+            'email_error': null
         };
         this.errorRef = React.createRef();
     }
@@ -18,9 +20,9 @@ class CreateBoard extends React.Component {
         let headers = this.props.getHeader()
         let group = []
         let data = {}
-        if (this.state.group) {
-            for (let email of this.state.group.split(',')) {
-                group.push({'email': email});
+        if (this.state.email_items) {
+            for (let email of this.state.email_items) {
+                group.push({ 'email': email });
             }
             data['group'] = group
         }
@@ -33,27 +35,78 @@ class CreateBoard extends React.Component {
             data: data
         })
             .then(response => {
-                this.setState({'error_message': ''});
+                this.setState({ 'error_message': '' });
                 this.props.handleShowCreateBoard(event)
             })
             .catch(error => {
-                if (error.code === 'ERR_BAD_REQUEST') this.setState({'error_message': 'Проверьте правильность введенных email'});
-                else this.setState({'error_message': error.message});
+                if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
+                else this.setState({ 'error_message': error.message });
             })
         event.preventDefault()
     }
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            email_error: null
         })
     }
+
+    handleKeyDownEmail(event) {
+        if (["Enter", "Tab", ",", " "].includes(event.key)) {
+            event.preventDefault();
+
+            var value = this.state.email_value.trim();
+
+            if (value && this.isValid(value)) {
+                this.setState({
+                    email_items: [...this.state.email_items, this.state.email_value],
+                    email_value: ""
+                });
+            }
+        }
+    };
+
+    isValid(email) {
+        let error = null;
+
+        if (this.isInList(email)) {
+            error = `${email} has already been added.`;
+        }
+
+        if (!this.isEmail(email)) {
+            error = `${email} is not a valid email address.`;
+        }
+
+        if (error) {
+            this.setState({ 'email_error': error });
+
+            return false;
+        }
+
+        return true;
+    }
+
+    isInList(email) {
+        return this.state.email_items.includes(email);
+    }
+
+    isEmail(email) {
+        return /[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/.test(email);
+    }
+
+    handleDeleteEmail(item) {
+        this.setState({
+            email_items: this.state.email_items.filter(i => i !== item)
+        });
+    };
+
 
     render() {
         return (
             <div className='new_board'>
                 <form className='new_board_form'
-                      onSubmit={(event) => this.handleCreateSubmit(event)}>
+                    onSubmit={(event) => this.handleCreateSubmit(event)}>
                     <p ref={this.errorRef}>{this.state.error_message}</p>
                     <div className="new_board_close">
                         <div
@@ -76,10 +129,10 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <input className='new_board_input_text'
-                                       name="name" type="text" required
-                                       placeholder='Введите название доски'
-                                       onChange={(event) => this.handleChange(event)}
-                                       value={this.state.name}></input>
+                                    name="name" type="text" required
+                                    placeholder='Введите название доски'
+                                    onChange={(event) => this.handleChange(event)}
+                                    value={this.state.name}></input>
                             </label>
                         </div>
 
@@ -89,10 +142,10 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <textarea name="description"
-                                          placeholder='Введите описание'
-                                          className='new_board_input_text new_board_input_text_area'
-                                          onChange={(event) => this.handleChange(event)}
-                                          value={this.state.description}>
+                                    placeholder='Введите описание'
+                                    className='new_board_input_text new_board_input_text_area'
+                                    onChange={(event) => this.handleChange(event)}
+                                    value={this.state.description}>
                                 </textarea>
                             </label>
                         </div>
@@ -107,14 +160,39 @@ class CreateBoard extends React.Component {
                             BMeet
                         </p>
                         <div className="new_board_input_border new_board_input_email">
-                            <label>
+                            {/* <label>
                                 <input className='new_board_input_text'
-                                       multiple
-                                       placeholder='Введите несколько email через пробел'
-                                       name="group" type="email"
-                                       onChange={(event) => this.handleChange(event)}
-                                       value={(this.state.group).replace(/ /g, ',')}></input>
-                            </label>
+                                    multiple
+                                    placeholder='Введите несколько email через пробел'
+                                    name="group" type="email"
+                                    onChange={(event) => this.handleChange(event)}
+                                    value={(this.state.group).replace(/ /g, ',')}></input>
+                            </label> */}
+
+                            {this.state.email_items.map(item => (
+                                <div className="tag-item" key={item}>
+                                    {item}
+                                    <button
+                                        type="button"
+                                        className="button"
+                                        onClick={() => this.handleDeleteEmail(item)}
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                            ))}
+
+                            <input
+                                className='new_board_input_text'
+                                name="email_value"
+                                value={this.state.email_value}
+                                placeholder="Введите email"
+                                onKeyDown={(event) => this.handleKeyDownEmail(event)}
+                                onChange={(event) => this.handleChange(event)}
+                            />
+
+                            {this.state.email_error && <p className="error">{this.state.email_error}</p>}
+
                         </div>
                         <div className="new_board_invite_button">
                             <button type="submit" value="submit">Создать
