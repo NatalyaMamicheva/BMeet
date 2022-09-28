@@ -3,17 +3,20 @@ import "../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
 import Footer from "./Footer";
+import VerifyEmail from "./VerifyEmail";
 
 class Login extends React.Component {
     constructor(props) {
         super(props)
         this.errorRef = React.createRef();
         this.state = {
+            'id': null,
             'email': '',
             'password': '',
-            'token': '',
+            'token':'',
             'error_message_user': '',
-            'error_message': ''
+            'error_message': '',
+            'not_verify': false
         }
     }
 
@@ -24,13 +27,10 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
-                const token = response.data.token
-                localStorage.setItem('token', token)
-                localStorage.setItem('email', this.state.email)
+                this.setState({'token': response.data.token});
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('email', response.data.email)
                 localStorage.setItem('username', response.data.username)
-                this.setState({
-                    'token': token,
-                })
             })
             .catch(error => {
                 this.setState({
@@ -40,15 +40,20 @@ class Login extends React.Component {
                 if (!error.response.data)
                     this.setState({error_message: error.message});
                 else {
-                    this.setState({error_message_user: "Неверный Email или пароль"});
-                }
+                     if (error.response.status == 400) this.setState({error_message_user: "Неверный Email или пароль"});
+                     if (error.response.status == 403) this.setState({
+                                                                        'not_verify': true,
+                                                                        'email' : error.response.data.email,
+                                                                        'username' : error.response.data.username,
+                                                                        'id': error.response.data.id
+                                                                      });
+                    }
                 this.errorRef.current.focus();
             })
 
     }
 
     handleSubmit(event) {
-        console.log(this.state.email, this.state.password)
         this.getToken(this.state.email, this.state.password)
         event.preventDefault()
     }
@@ -60,8 +65,10 @@ class Login extends React.Component {
     }
 
     render() {
-        if (localStorage.getItem('token')) return <Navigate
-            to="/board_management"/>;
+        if (localStorage.getItem('token')) return <Navigate to="/board_management"/>;
+        else if (this.state.not_verify)
+            return (<VerifyEmail email={this.state.email} id={this.state.id} username={this.state.username}
+                        password={this.state.password}/>)
         else
             return (
                     <div className='auth'>
@@ -130,8 +137,8 @@ class Login extends React.Component {
                                                     className='auth_button_form'>
                                                 <p>Войти</p></button>
                                         </div>
-                                                <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
-                                                <p className='error_p' ref={this.errorRef} >{this.state.error_message_user}</p>
+                                        <p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>
+                                        <p className='error_p' ref={this.errorRef} >{this.state.error_message_user}</p>
                                     </form>
                                 </div>
 

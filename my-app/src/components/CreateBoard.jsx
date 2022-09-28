@@ -107,7 +107,6 @@ class CreateBoard extends React.Component {
             <div className='new_board'>
                 <form className='new_board_form'
                       onSubmit={(event) => this.handleCreateSubmit(event)}>
-                    <p ref={this.errorRef}>{this.state.error_message}</p>
                     <div className="new_board_close">
                         <div
                             onClick={(event) => this.props.handleShowCreateBoard(event)}>
@@ -129,6 +128,7 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <input className='new_board_input_text'
+                                       maxLength='25'
                                        name="name" type="text" required
                                        placeholder='Введите название доски'
                                        onChange={(event) => this.handleChange(event)}
@@ -142,6 +142,7 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <textarea name="description"
+                                          maxLength='80'
                                           placeholder='Введите описание'
                                           className='new_board_input_text new_board_input_text_area'
                                           onChange={(event) => this.handleChange(event)}
@@ -177,8 +178,8 @@ class CreateBoard extends React.Component {
                                 name="email_value"
                                 value={this.state.email_value}
                                 onKeyDown={(event) => this.handleKeyDownEmail(event)}
-                                onChange={(event) => this.handleChange(event)}
-                            />
+                                onChange={(event) => this.handleChange(event)}/>
+
                         </div>
                         {this.state.email_error &&
                                 <p className="error">{this.state.email_error}</p>}
