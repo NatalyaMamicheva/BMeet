@@ -24,13 +24,17 @@ class BoardItem extends React.Component {
             <div id={this.props.item.id} className='boards_board'>
                 <div className="boards_board_size">
                     <div className="boards_text">
-                        <a href={board_open}><p className='boards_title'>{this.props.item.name} </p></a>
+                        <a href={board_open}><p
+                            className='boards_title'>{this.props.item.name} </p>
+                        </a>
                         <p className='boards_description'>{this.props.item.description}</p>
                     </div>
                 </div>
                 <div className="boards_buttons">
                     <div className="boards_open">
-                        <a href={board_open}><div className="boards_buttons_open"></div></a>
+                        <a href={board_open}>
+                            <div className="boards_buttons_open"></div>
+                        </a>
                     </div>
                     <div className="boards_button_update_and_delete">
 
@@ -154,6 +158,9 @@ class BoardManagement extends React.Component {
             })
             .catch(error => {
                 this.setState({'error_message': error.message})
+                if (error.response.status === 401) {
+                    this.props.logout()
+                }
             })
     }
 

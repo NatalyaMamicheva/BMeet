@@ -30,10 +30,11 @@ class PersonalPage extends React.Component {
     }
 
     componentDidMount() {
-         this.setState({'error_message': '',
-                        'error_message_username': '',
-                        'error_message_email': '',
-                        })
+        this.setState({
+            'error_message': '',
+            'error_message_username': '',
+            'error_message_email': '',
+        })
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
@@ -53,6 +54,9 @@ class PersonalPage extends React.Component {
             })
             .catch(error => {
                 this.setState({'error_message': error.message})
+                if (error.response.status === 401) {
+                    this.props.logout()
+                }
             })
     }
 
@@ -72,35 +76,36 @@ class PersonalPage extends React.Component {
             headers: headers,
             data: data
         })
-        .then(response => {
-            localStorage.setItem('username', response.data.username)
-            localStorage.setItem('email', response.data.email)
-            if (this.state.email !== this.state.start_email)
-                this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
-            this.componentDidMount()
-        })
-        .catch(error => {
-               this.setState({
-                        'error_message_username': '',
-                        'error_message_email': '',
-                        'error_message': ''
-                    });
-                    if (!error.response.data)
-                        this.setState({error_message: error.message});
-                    else {
-                        if (error.response.data.email)
-                            this.setState({error_message_email: error.response.data.email});
-                        if (error.response.data.username)
-                            this.setState({error_message_username: error.response.data.username});
-                    }
-        })
+            .then(response => {
+                localStorage.setItem('username', response.data.username)
+                localStorage.setItem('email', response.data.email)
+                if (this.state.email !== this.state.start_email)
+                    this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
+                this.componentDidMount()
+            })
+            .catch(error => {
+                this.setState({
+                    'error_message_username': '',
+                    'error_message_email': '',
+                    'error_message': ''
+                });
+                if (!error.response.data)
+                    this.setState({error_message: error.message});
+                else {
+                    if (error.response.data.email)
+                        this.setState({error_message_email: error.response.data.email});
+                    if (error.response.data.username)
+                        this.setState({error_message_username: error.response.data.username});
+                }
+            })
     }
 
-    handleCancel(event){
-        this.setState({'error_message': '',
-                        'error_message_username': '',
-                        'error_message_email': '',
-                        })
+    handleCancel(event) {
+        this.setState({
+            'error_message': '',
+            'error_message_username': '',
+            'error_message_email': '',
+        })
         event.preventDefault()
         this.setState({
             'username': this.state.start_username,
@@ -145,7 +150,6 @@ class PersonalPage extends React.Component {
         return (
 
             <div className='profile'>
-                <p className='error_p'>{this.state.error_message}</p>
                 <Header logout={() => this.props.logout()}/>
                 <div className='profile_card'>
                     <div className='profile_title'>
@@ -153,7 +157,6 @@ class PersonalPage extends React.Component {
                         <div className='profile_avatar'></div>
                     </div>
                     <p className='error_p'>{this.state.error_message}</p>
-                    {/*/!*<p className='error_p' ref={this.errorRef} >{this.state.error_message}</p>*!/*/}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
                             <div className='profile_title_input'>

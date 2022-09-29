@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "../styles/auth_style.scss";
@@ -65,6 +65,8 @@ class Password extends React.Component {
     }
 
     render() {
+        if (localStorage.getItem('token')) return <Navigate
+            to="/board_management"/>
         return (
                 <div className='auth'>
                     <div className='auth_form_table'>
