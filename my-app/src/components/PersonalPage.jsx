@@ -79,6 +79,7 @@ class PersonalPage extends React.Component {
             .then(response => {
                 localStorage.setItem('username', response.data.username)
                 localStorage.setItem('email', response.data.email)
+                localStorage.setItem('token', response.data.token)
                 if (this.state.email !== this.state.start_email)
                     this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
                 this.componentDidMount()
