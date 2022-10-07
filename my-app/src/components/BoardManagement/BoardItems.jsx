@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateBoard from './CreateBoard.jsx'
+import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
 
 
@@ -86,8 +86,16 @@ class BoardItems extends React.Component {
 
                 <React.Fragment>
                     {this.state.isOpenCreate && (
-                        <CreateBoard getHeader={() => this.props.getHeader()}
-                            handleShowCreateBoard={() => this.handleShowCreateBoard()} />)}
+                        <CreateUpdateBoard
+                            getHeader={() => this.props.getHeader()}
+                            handleShowCreateBoard={() => this.handleShowCreateBoard()}
+                            email_items={[]}
+                            title='Создание доски'
+                            description=''
+                            name=''
+                            text_p='Введите адреса электронной почты ваших коллег и пригласите их присоединиться к вашей доске в
+                            BMeet' />)
+                    }
                 </React.Fragment>
 
                 <div className="boards_me_boards">

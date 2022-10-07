@@ -2,14 +2,14 @@ import React from 'react'
 import axios from 'axios'
 
 
-class CreateBoard extends React.Component {
+class CreateUpdateBoard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            'name': '',
-            'description': '',
+            'name': this.props.name,
+            'description': this.props.description,
             'error_message': '',
-            'email_items': [],
+            'email_items': this.props.email_items,
             'email_value': "",
             'email_error': null
         };
@@ -22,7 +22,7 @@ class CreateBoard extends React.Component {
         let data = {}
         if (this.state.email_items) {
             for (let email of this.state.email_items) {
-                group.push({'email': email});
+                group.push({ 'email': email });
             }
             data['group'] = group
         }
@@ -35,12 +35,12 @@ class CreateBoard extends React.Component {
             data: data
         })
             .then(response => {
-                this.setState({'error_message': ''});
+                this.setState({ 'error_message': '' });
                 this.props.handleShowCreateBoard(event)
             })
             .catch(error => {
-                if (error.code === 'ERR_BAD_REQUEST') this.setState({'error_message': 'Проверьте правильность введенных email'});
-                else this.setState({'error_message': error.message});
+                if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
+                else this.setState({ 'error_message': error.message });
             })
         event.preventDefault()
     }
@@ -79,7 +79,7 @@ class CreateBoard extends React.Component {
         }
 
         if (error) {
-            this.setState({'email_error': error});
+            this.setState({ 'email_error': error });
 
             return false;
         }
@@ -106,7 +106,7 @@ class CreateBoard extends React.Component {
         return (
             <div className='new_board'>
                 <form className='new_board_form'
-                      onSubmit={(event) => this.handleCreateSubmit(event)}>
+                    onSubmit={(event) => this.handleCreateSubmit(event)}>
                     <div className="new_board_close">
                         <div
                             onClick={(event) => this.props.handleShowCreateBoard(event)}>
@@ -114,11 +114,10 @@ class CreateBoard extends React.Component {
                         </div>
                     </div>
                     <div className="new_board_title">
-                        <p>Создание доски</p>
+                        <p>{this.props.title}</p>
                     </div>
                     <div className="new_board_text">
-                        <p>Создайте новую доску в BMeet и предложите своим
-                            коллегам присоединиться к Вам</p>
+                        <p>{this.props.text_p}</p>
                     </div>
 
                     <div className="new_board_input">
@@ -128,11 +127,11 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <input className='new_board_input_text'
-                                       maxLength='25'
-                                       name="name" type="text" required
-                                       placeholder='Введите название доски'
-                                       onChange={(event) => this.handleChange(event)}
-                                       value={this.state.name}></input>
+                                    maxLength='25'
+                                    name="name" type="text" required
+                                    placeholder='Введите название доски'
+                                    onChange={(event) => this.handleChange(event)}
+                                    value={this.state.name}></input>
                             </label>
                         </div>
 
@@ -142,11 +141,11 @@ class CreateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <textarea name="description"
-                                          maxLength='80'
-                                          placeholder='Введите описание'
-                                          className='new_board_input_text new_board_input_text_area'
-                                          onChange={(event) => this.handleChange(event)}
-                                          value={this.state.description}>
+                                    maxLength='80'
+                                    placeholder='Введите описание'
+                                    className='new_board_input_text new_board_input_text_area'
+                                    onChange={(event) => this.handleChange(event)}
+                                    value={this.state.description}>
                                 </textarea>
                             </label>
                         </div>
@@ -178,11 +177,11 @@ class CreateBoard extends React.Component {
                                 name="email_value"
                                 value={this.state.email_value}
                                 onKeyDown={(event) => this.handleKeyDownEmail(event)}
-                                onChange={(event) => this.handleChange(event)}/>
+                                onChange={(event) => this.handleChange(event)} />
 
                         </div>
                         {this.state.email_error &&
-                                <p className="error">{this.state.email_error}</p>}
+                            <p className="error">{this.state.email_error}</p>}
                         <div className="new_board_invite_button">
                             <button type="submit" value="submit">Создать
                             </button>
@@ -194,4 +193,4 @@ class CreateBoard extends React.Component {
     }
 }
 
-export default CreateBoard
+export default CreateUpdateBoard
