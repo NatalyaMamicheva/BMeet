@@ -183,7 +183,7 @@ class CreateUpdateBoard extends React.Component {
                         {this.state.email_error &&
                             <p className="error">{this.state.email_error}</p>}
                         <div className="new_board_invite_button">
-                            <button type="submit" value="submit">Создать
+                            <button type="submit" value="submit">{this.props.text_button}
                             </button>
                         </div>
                     </div>

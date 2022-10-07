@@ -91,6 +91,7 @@ class BoardItems extends React.Component {
                             handleShowCreateBoard={() => this.handleShowCreateBoard()}
                             email_items={[]}
                             title='Создание доски'
+                            text_button='Создать'
                             description=''
                             name=''
                             text_p='Введите адреса электронной почты ваших коллег и пригласите их присоединиться к вашей доске в
