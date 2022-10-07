@@ -5,18 +5,40 @@ import axios from 'axios'
 class CreateUpdateBoard extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            'name': this.props.name,
-            'description': this.props.description,
-            'error_message': '',
-            'email_items': this.props.email_items,
-            'email_value': "",
-            'email_error': null
-        };
+        if (this.props.create_or_update === 'update')
+            this.state = {
+                'method': 'patch',
+                'name': this.props.item.name,
+                'description': this.props.item.description,
+                'error_message': '',
+                'email_items': this.setEmails(this.props.item.group),
+                'email_value': '',
+                'email_error': null
+            };
+        else
+            this.state = {
+                'method': 'post',
+                'name': '',
+                'description': '',
+                'error_message': '',
+                'email_items': [],
+                'email_value': '',
+                'email_error': null
+            };
         this.errorRef = React.createRef();
     }
 
-    handleCreateSubmit(event) {
+    setEmails(emails) {
+        let email_items = []
+        if (emails) {
+            for (let email of emails)
+                if (this.props.item.author.email !== email.email)
+                    email_items.push(email.email)
+        }
+        return email_items
+    }
+
+    handleCreateUpdateSubmit(event) {
         let headers = this.props.getHeader()
         let group = []
         let data = {}
@@ -28,21 +50,38 @@ class CreateUpdateBoard extends React.Component {
         }
         data['name'] = this.state.name
         data['description'] = this.state.description
-        axios.request({
-            url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/board/`,
-            method: "post",
-            headers: headers,
-            data: data
-        })
-            .then(response => {
-                this.setState({ 'error_message': '' });
-                this.props.handleShowCreateBoard(event)
+        if (this.state.method === 'post') {
+            axios.request({
+                url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/board/`,
+                method: this.state.method,
+                headers: headers,
+                data: data
             })
-            .catch(error => {
-                if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
-                else this.setState({ 'error_message': error.message });
+                .then(response => {
+                    this.setState({ 'error_message': '' });
+                    this.props.handleShowCreateUpdateBoard(event)
+                })
+                .catch(error => {
+                    if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
+                    else this.setState({ 'error_message': error.message });
+                })
+        }
+        else {
+            axios.request({
+                url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/board/update/${this.props.item.id}/`,
+                method: this.state.method,
+                headers: headers,
+                data: data
             })
-        event.preventDefault()
+                .then(response => {
+                    this.setState({ 'error_message': '' });
+                    this.props.handleShowCreateUpdateBoard(event)
+                })
+                .catch(error => {
+                    if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
+                    else this.setState({ 'error_message': error.message });
+                })
+        }
     }
 
     handleChange(event) {
@@ -106,10 +145,12 @@ class CreateUpdateBoard extends React.Component {
         return (
             <div className='new_board'>
                 <form className='new_board_form'
-                    onSubmit={(event) => this.handleCreateSubmit(event)}>
+                    onSubmit={(event) => this.handleCreateUpdateSubmit(event)}>
+                    {this.state.error_message &&
+                        <p className="error">{this.state.error_message}</p>}
                     <div className="new_board_close">
                         <div
-                            onClick={(event) => this.props.handleShowCreateBoard(event)}>
+                            onClick={(event) => this.props.handleShowCreateUpdateBoard(event)}>
                             <div className="new_board_close_button"></div>
                         </div>
                     </div>

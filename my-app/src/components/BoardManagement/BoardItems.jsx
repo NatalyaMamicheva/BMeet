@@ -4,6 +4,17 @@ import '../../styles/boards_style.scss'
 
 
 class BoardItem extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isOpenUpdate: false,
+        }
+    }
+
+
+    handleShowUpdateBoard(event) {
+        this.setState({ isOpenUpdate: !this.state.isOpenUpdate });
+    }
 
     render() {
         let author = this.props.item.author.username
@@ -15,6 +26,18 @@ class BoardItem extends React.Component {
         let board_open = '/board/' + this.props.item.id + '/'
         return (
             <div id={this.props.item.id} className='boards_board'>
+                <React.Fragment>
+                    {this.state.isOpenUpdate && (
+                        <CreateUpdateBoard
+                            getHeader={() => this.props.getHeader()}
+                            handleShowCreateUpdateBoard={() => this.handleShowUpdateBoard()}
+                            item={this.props.item}
+                            create_or_update='update'
+                            title='Редактирование доски'
+                            text_button='Сохранить'
+                            text_p='Здесь Вы можете отредактировать основную информацию о доске' />)
+                    }
+                </React.Fragment>
                 <div className="boards_board_size">
                     <div className="boards_text">
                         <a href={board_open}><p
@@ -32,7 +55,7 @@ class BoardItem extends React.Component {
                     <div className="boards_button_update_and_delete">
 
                         {update ? (
-                            <div className="boards_buttons_update"></div>
+                            <div className="boards_buttons_update" onClick={(event) => this.handleShowUpdateBoard(event)}></div>
                         ) : (
                             <div></div>
                         )}
@@ -71,7 +94,7 @@ class BoardItems extends React.Component {
                 <div className="boards_me_boards_content">
                     <div className="boards_my_boards">
                         {this.props.my_boards.map(el => (
-                            <BoardItem key={el.id} item={el} />
+                            <BoardItem key={el.id} item={el} getHeader={() => this.props.getHeader()} />
                         ))}
                         <div className="boards_board boards_new_board">
                             <div className="boards_board_size">
@@ -88,12 +111,10 @@ class BoardItems extends React.Component {
                     {this.state.isOpenCreate && (
                         <CreateUpdateBoard
                             getHeader={() => this.props.getHeader()}
-                            handleShowCreateBoard={() => this.handleShowCreateBoard()}
-                            email_items={[]}
+                            create_or_update='create'
+                            handleShowCreateUpdateBoard={() => this.handleShowCreateBoard()}
                             title='Создание доски'
                             text_button='Создать'
-                            description=''
-                            name=''
                             text_p='Введите адреса электронной почты ваших коллег и пригласите их присоединиться к вашей доске в
                             BMeet' />)
                     }
@@ -104,7 +125,7 @@ class BoardItems extends React.Component {
                     <div className="boards_me_boards_content">
                         <div className="boards_my_boards">
                             {this.props.other_boards.map(el => (
-                                <BoardItem key={el.id} item={el} />
+                                <BoardItem key={el.id} item={el} getHeader={() => this.props.getHeader()} />
                             ))}
                             <div>
                                 {other_boards_count ? (
