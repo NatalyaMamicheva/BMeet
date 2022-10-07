@@ -3,11 +3,8 @@ import '../styles/auth_style.scss';
 
 
 class Footer extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
-    static date () {
+    static date() {
         let date = new Date()
         return (
             date.toISOString().split('T')[0].split('-')[0]

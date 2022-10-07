@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/toolbar.scss"
+import "../../styles/toolbar.scss"
 
 const SettingBar = () => {
     return (

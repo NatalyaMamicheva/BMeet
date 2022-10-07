@@ -1,8 +1,8 @@
-import {Link, Navigate} from 'react-router-dom';
-import "../styles/auth_style.scss";
+import { Link, Navigate } from 'react-router-dom';
+import "../../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
-import Footer from "./Footer";
+import Footer from "../Footer";
 import VerifyEmail from "./VerifyEmail";
 
 class Login extends React.Component {
@@ -27,7 +27,7 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
-                this.setState({'token': response.data.token});
+                this.setState({ 'token': response.data.token });
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('username', response.data.username)
@@ -38,9 +38,9 @@ class Login extends React.Component {
                     'error_message': ''
                 });
                 if (!error.response.data)
-                    this.setState({error_message: error.message});
+                    this.setState({ error_message: error.message });
                 else {
-                    if (error.response.status === 400) this.setState({error_message_user: "Неверный Email или пароль"});
+                    if (error.response.status === 400) this.setState({ error_message_user: "Неверный Email или пароль" });
                     if (error.response.status === 403) {
                         axios
                             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/${error.response.data.id}/`,
@@ -77,11 +77,11 @@ class Login extends React.Component {
 
     render() {
         if (localStorage.getItem('token')) return <Navigate
-            to="/board_management"/>;
+            to="/board_management" />;
         else if (this.state.not_verify)
             return (<VerifyEmail email={this.state.email} id={this.state.id}
-                                 username={this.state.username}
-                                 password={this.state.password}/>)
+                username={this.state.username}
+                password={this.state.password} />)
         else
             return (
                 <div className='auth'>
@@ -104,9 +104,9 @@ class Login extends React.Component {
                                     <div className='auth_input'>
 
                                         <div className='auth_title_input'>
-                        <span>
-                            Email / Username
-                        </span>
+                                            <span>
+                                                Email / Username
+                                            </span>
                                         </div>
                                         <div className='auth_input_border'>
                                             <label>
@@ -124,9 +124,9 @@ class Login extends React.Component {
 
 
                                         <div className='auth_title_input'>
-                            <span>
-                                        Пароль
-                                    </span>
+                                            <span>
+                                                Пароль
+                                            </span>
                                             <Link to='/recpassword'>Забыли
                                                 пароль?</Link>
                                         </div>
@@ -147,13 +147,13 @@ class Login extends React.Component {
                                     </div>
                                     <div className='auth_input_button'>
                                         <button type='submit'
-                                                className='auth_button_form'>
+                                            className='auth_button_form'>
                                             <p>Войти</p></button>
                                     </div>
                                     <p className='error_p'
-                                       ref={this.errorRef}>{this.state.error_message}</p>
+                                        ref={this.errorRef}>{this.state.error_message}</p>
                                     <p className='error_p'
-                                       ref={this.errorRef}>{this.state.error_message_user}</p>
+                                        ref={this.errorRef}>{this.state.error_message_user}</p>
                                 </form>
                             </div>
 
@@ -162,12 +162,12 @@ class Login extends React.Component {
                                     платформе?
                                 </p>
                                 <Link className='auth_header_a'
-                                      to='/register'>Создать
+                                    to='/register'>Создать
                                     аккаунт</Link>
                             </div>
                         </div>
                     </div>
-                    <Footer/>
+                    <Footer />
                 </div>
             );
     };
