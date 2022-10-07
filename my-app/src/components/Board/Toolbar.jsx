@@ -1,8 +1,8 @@
 import React from 'react';
-import "../styles/toolbar.scss";
-import canvasState from "../store/canvasState";
-import toolState from "../store/toolState";
-import Brush from '../tools/Brush';
+import "../../styles/toolbar.scss";
+import canvasState from "./store/canvasState";
+import toolState from "./store/toolState";
+import Brush from './tools/Brush';
 
 const Toolbar = () => {
 
