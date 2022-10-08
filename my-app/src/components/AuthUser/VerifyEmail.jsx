@@ -65,8 +65,8 @@ class VerifyEmail extends React.Component {
                         <span className='auth_yellow'>ee</span>
                         <span className='auth_blue'>t</span>
                     </div>
-                    {/*<p className='err_p'*/}
-                    {/*   ref={this.errorRef}>{this.state.error_message}</p>*/}
+                    {this.state.error_message &&
+                        <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='auth_content'>
                         <div className='auth_title'>
                             <p>Необходимо подтвердить вашу почту!</p>

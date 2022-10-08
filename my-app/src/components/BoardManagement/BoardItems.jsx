@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
 
@@ -6,14 +7,36 @@ import '../../styles/boards_style.scss'
 class BoardItem extends React.Component {
     constructor(props) {
         super(props)
+        this.errorRef = React.createRef();
         this.state = {
             isOpenUpdate: false,
+            error_message: ''
         }
     }
 
 
     handleShowUpdateBoard(event) {
         this.setState({ isOpenUpdate: !this.state.isOpenUpdate });
+    }
+
+    DeleteBoard(event) {
+        let headers = this.props.getHeader()
+        axios.request({
+            url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/board/delete/${this.props.item.id}/`,
+            method: 'delete',
+            headers: headers,
+        })
+            .then(response => {
+                this.setState({ 'error_message': '' });
+                this.props.isReload()
+            })
+            .catch(error => {
+                this.setState({ 'error_message': error.message })
+                if (error.response.status === 401) {
+                    this.props.logout()
+                }
+                this.errorRef.current.focus();
+            })
     }
 
     render() {
@@ -26,6 +49,8 @@ class BoardItem extends React.Component {
         let board_open = '/board/' + this.props.item.id + '/'
         return (
             <div id={this.props.item.id} className='boards_board'>
+                {this.state.error_message &&
+                    <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
                 <React.Fragment>
                     {this.state.isOpenUpdate && (
                         <CreateUpdateBoard
@@ -60,7 +85,7 @@ class BoardItem extends React.Component {
                             <div></div>
                         )}
 
-                        <div className="boards_buttons_delete"></div>
+                        <div className="boards_buttons_delete" onClick={(event) => this.DeleteBoard(event)}></div>
                     </div>
                 </div>
             </div>
@@ -94,7 +119,10 @@ class BoardItems extends React.Component {
                 <div className="boards_me_boards_content">
                     <div className="boards_my_boards">
                         {this.props.my_boards.map(el => (
-                            <BoardItem key={el.id} item={el} getHeader={() => this.props.getHeader()} />
+                            <BoardItem key={el.id} item={el}
+                                getHeader={() => this.props.getHeader()}
+                                isReload={() => this.props.isReload()}
+                            />
                         ))}
                         <div className="boards_board boards_new_board">
                             <div className="boards_board_size">
@@ -125,7 +153,10 @@ class BoardItems extends React.Component {
                     <div className="boards_me_boards_content">
                         <div className="boards_my_boards">
                             {this.props.other_boards.map(el => (
-                                <BoardItem key={el.id} item={el} getHeader={() => this.props.getHeader()} />
+                                <BoardItem key={el.id} item={el}
+                                    getHeader={() => this.props.getHeader()}
+                                    isReload={() => this.props.isReload()}
+                                />
                             ))}
                             <div>
                                 {other_boards_count ? (

@@ -11,7 +11,7 @@ class CreateUpdateBoard extends React.Component {
                 'name': this.props.item.name,
                 'description': this.props.item.description,
                 'error_message': '',
-                'email_items': this.setEmails(this.props.item.group),
+                'email_items': this.setEmails(),
                 'email_value': '',
                 'email_error': null
             };
@@ -28,13 +28,18 @@ class CreateUpdateBoard extends React.Component {
         this.errorRef = React.createRef();
     }
 
-    setEmails(emails) {
+    setEmails() {
         let email_items = []
-        if (emails) {
-            for (let email of emails)
+        if (this.props.item.group) {
+            for (let email of this.props.item.group)
                 if (this.props.item.author.email !== email.email)
                     email_items.push(email.email)
         }
+        if (this.props.item.group_no_register) {
+            for (let email of this.props.item.group_no_register)
+                email_items.push(email.email)
+        }
+        console.log(email_items)
         return email_items
     }
 

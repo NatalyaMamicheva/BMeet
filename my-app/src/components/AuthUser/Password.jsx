@@ -48,7 +48,10 @@ class Password extends React.Component {
                 console.log(response)
             })
             .catch(error => {
-                this.setState({ 'error_message': error.response.data["Invalid"] });
+                if (error.response.status === 400) {
+                    this.setState({ 'error_message': error.response.data["Invalid"] });
+                } else
+                    this.setState({ 'error_message': error.message });
                 this.errorRef.current.focus();
             })
         event.preventDefault();
@@ -112,6 +115,8 @@ class Password extends React.Component {
                                         <p>Сбросить
                                             пароль</p>
                                     </button>
+                                    {this.state.error_message &&
+                                        <p className="error" ref={this.errorRef}>{this.state.error_message}</p>}
                                 </div>
                             </form>
                         </div>

@@ -7,6 +7,7 @@ import axios from 'axios'
 class ChangeEmail extends React.Component {
     constructor(props) {
         super(props)
+        this.errorRef = React.createRef();
         this.state = {
             'new_email': this.props.params.new_email,
             'old_email': this.props.params.old_email,
@@ -29,14 +30,16 @@ class ChangeEmail extends React.Component {
                     this.setState({ 'error_message': 'Неверная ссылка. Запросите повторную отправку письма' });
                 else
                     this.setState({ 'error_message': error.message });
+                this.errorRef.current.focus();
             })
     }
 
     render() {
-        if (!this.state.error_message) return <Navigate to="/cabinet" />;
+        if (this.state.token) return <Navigate to="/cabinet" />;
         else return (
             <div>
-                <h1>{this.state.error_message}</h1>
+                {this.state.error_message &&
+                    <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
             </div>
         )
     }

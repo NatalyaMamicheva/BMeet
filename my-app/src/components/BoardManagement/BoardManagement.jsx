@@ -14,8 +14,12 @@ class BoardManagement extends React.Component {
             isOpenCreate: false,
             my_boards: [],
             other_boards: [],
-            error_message: ''
+            error_message: '',
         };
+    }
+
+    isReload() {
+        this.componentDidMount()
     }
 
     componentDidMount() {
@@ -40,17 +44,24 @@ class BoardManagement extends React.Component {
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
+                this.errorRef.current.focus();
             })
     }
+
+
 
 
     render() {
         return (
             <div>
                 <Header logout={() => this.props.logout()} />
+                {this.state.error_message &&
+                    <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
                 <BoardItems my_boards={this.state.my_boards}
                     other_boards={this.state.other_boards}
-                    getHeader={() => this.props.getHeader()} />
+                    getHeader={() => this.props.getHeader()}
+                    isReload={() => this.isReload()}
+                />
                 <Footer />
             </div>
         )
