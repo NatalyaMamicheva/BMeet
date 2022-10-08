@@ -47,6 +47,7 @@ class BoardManagement extends React.Component {
                 }
                 this.errorRef.current.focus();
             })
+        this.Ref.current.focus();
     }
 
 
@@ -54,11 +55,11 @@ class BoardManagement extends React.Component {
 
     render() {
         return (
-            <div>
+            <div ref={this.Ref}>
                 <Header logout={() => this.props.logout()} />
                 {this.state.error_message &&
                     <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
-                <BoardItems ref={this.Ref} my_boards={this.state.my_boards}
+                <BoardItems my_boards={this.state.my_boards}
                     other_boards={this.state.other_boards}
                     getHeader={() => this.props.getHeader()}
                     isReload={() => this.isReload()}
