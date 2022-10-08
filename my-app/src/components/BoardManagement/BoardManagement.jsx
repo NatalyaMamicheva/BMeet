@@ -10,6 +10,7 @@ class BoardManagement extends React.Component {
     constructor(props) {
         super(props)
         this.errorRef = React.createRef();
+        this.Ref = React.createRef();
         this.state = {
             isOpenCreate: false,
             my_boards: [],
@@ -57,7 +58,7 @@ class BoardManagement extends React.Component {
                 <Header logout={() => this.props.logout()} />
                 {this.state.error_message &&
                     <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
-                <BoardItems my_boards={this.state.my_boards}
+                <BoardItems ref={this.Ref} my_boards={this.state.my_boards}
                     other_boards={this.state.other_boards}
                     getHeader={() => this.props.getHeader()}
                     isReload={() => this.isReload()}
