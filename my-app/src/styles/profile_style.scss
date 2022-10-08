@@ -104,7 +104,8 @@
 }
 
 
-.profile_close_pass, .profile_open_pass {
+.profile_close_pass,
+.profile_open_pass {
   background: url('../assets/img/close.svg') no-repeat center center;
   width: 37px;
   height: 37px;
@@ -124,29 +125,28 @@
   padding-bottom: 23.53px;
 }
 
-.profile_save, .profile_cancel {
+.profile_save,
+.profile_cancel {
   border-radius: 5px;
   width: 119px;
   height: 37.07px;
-}
-
-.profile_save {
   border: white 1px solid;
   color: #FFFFFF;
   background: #E7B460;
 }
 
 .profile_cancel {
-  border: #82868B 1px solid;
-  color: #82868B;
-  background: white;
   margin-left: 31px;
 }
 
-.profile_save:hover {
+.profile_save:hover,
+.profile_cancel:hover {
   color: #82868B;
 }
 
-.profile_cancel:hover {
-  color: #E7B460;
+.profile_save:disabled,
+.profile_cancel:disabled {
+  border: #82868B 1px solid;
+  color: #82868B;
+  background: white;
 }

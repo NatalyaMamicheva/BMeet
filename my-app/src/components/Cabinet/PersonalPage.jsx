@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Header from '../Header.jsx'
+import IsSaveInfo from './IsSaveInfo.jsx'
 import '../../styles/profile_style.scss'
 import '../../styles/auth_style.scss'
 import Footer from "../Footer";
@@ -16,6 +17,7 @@ class PersonalPage extends React.Component {
             'email': '',
             'start_email': '',
             'password': '',
+            'start_password': '',
             'first_name': '',
             'start_first_name': '',
             'last_name': '',
@@ -25,15 +27,19 @@ class PersonalPage extends React.Component {
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
-            'message_change_email': ''
+            'message_change_email': '',
+            'disabled_btn': true,
+            'is_save': false,
         };
     }
 
     componentDidMount() {
+        console.log(this.state.is_save)
         this.setState({
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
+            'disabled_btn': true,
         })
         let headers = this.props.getHeader()
         axios
@@ -67,7 +73,7 @@ class PersonalPage extends React.Component {
         let data = {}
         if (this.state.username !== this.state.start_username) data['username'] = this.state.username
         if (this.state.email !== this.state.start_email) data['email'] = this.state.email
-        if (this.state.password !== '') data['password'] = this.state.password
+        if (this.state.password !== this.state.start_password) data['password'] = this.state.password
         if (this.state.first_name !== this.state.start_first_name) data['first_name'] = this.state.first_name
         if (this.state.last_name !== this.state.start_last_name) data['last_name'] = this.state.last_name
 
@@ -78,6 +84,7 @@ class PersonalPage extends React.Component {
             data: data
         })
             .then(response => {
+                this.handleShowIsSave()
                 localStorage.setItem('username', response.data.username)
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('token', response.data.token)
@@ -103,18 +110,18 @@ class PersonalPage extends React.Component {
     }
 
     handleCancel(event) {
+        event.preventDefault()
         this.setState({
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
-        })
-        event.preventDefault()
-        this.setState({
             'username': this.state.start_username,
             'email': this.state.start_email,
             'first_name': this.state.start_first_name,
             'last_name': this.state.start_last_name,
-            'password': ''
+            'password': '',
+            'disabled_btn': true,
+
         });
     }
 
@@ -122,6 +129,11 @@ class PersonalPage extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
+
+        if (event.target.value !== this.state['start_' + event.target.name])
+            this.setState({ 'disabled_btn': false })
+        else
+            this.setState({ 'disabled_btn': true })
     }
 
     state_close(event) {
@@ -138,7 +150,6 @@ class PersonalPage extends React.Component {
 
     _click(event) {
         event.preventDefault()
-        // this.b_open = document.querySelector('#one');
         if (this.state['readOnly'] === true) {
             this.state_close(event);
         }
@@ -148,11 +159,26 @@ class PersonalPage extends React.Component {
 
     }
 
+    handleShowIsSave() {
+        this.setState({ 'is_save': !this.state.is_save });
+        setTimeout(
+            () => this.setState({ 'is_save': false }),
+            2000
+        );
+
+    }
+
     render() {
         return (
 
             <div className='profile'>
                 <Header logout={() => this.props.logout()} />
+
+                <React.Fragment>
+                    {this.state.is_save && (
+                        <IsSaveInfo handleShowIsSave={() => this.handleShowIsSave()} />)}
+                </React.Fragment>
+
                 <div className='profile_card'>
                     <div className='profile_title'>
                         <p>Профиль {localStorage.getItem('username')}</p>
@@ -173,8 +199,9 @@ class PersonalPage extends React.Component {
                                                 className='profile_input_text'
                                                 type="text"
                                                 placeholder="bmeet"
+                                                value={this.state.username}
                                                 onChange={(event) => this.handleChange(event)}
-                                                value={this.state.username}></input>
+                                            ></input>
                                         </label>
                                     </div>
                                     <p className='error_p'>{this.state.error_message_username}</p>
@@ -262,9 +289,11 @@ class PersonalPage extends React.Component {
 
                             <div className='profile_buttons'>
                                 <button className='profile_save' type="submit"
-                                    value="submit"> Сохранить
+                                    disabled={this.state.disabled_btn}
+                                    value="submit" id="save" > Сохранить
                                 </button>
                                 <button className='profile_cancel'
+                                    disabled={this.state.disabled_btn} id="cancel"
                                     onClick={(event) => this.handleCancel(event)}>Отменить
                                 </button>
                             </div>
@@ -272,7 +301,7 @@ class PersonalPage extends React.Component {
                     </div>
                 </div>
                 <Footer />
-            </div>
+            </div >
         )
     }
 }
