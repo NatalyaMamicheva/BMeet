@@ -39,6 +39,7 @@ class BoardManagement extends React.Component {
                     my_boards: my_boards,
                     other_boards: other_boards
                 });
+                this.Ref.current.focus();
             })
             .catch(error => {
                 this.setState({ 'error_message': error.message })
@@ -47,7 +48,6 @@ class BoardManagement extends React.Component {
                 }
                 this.errorRef.current.focus();
             })
-        this.Ref.current.focus();
     }
 
 
