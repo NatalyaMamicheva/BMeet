@@ -63,6 +63,7 @@ class PersonalPage extends React.Component {
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
+                this.errorRef.current.focus();
             })
     }
 
@@ -183,7 +184,8 @@ class PersonalPage extends React.Component {
                         <p>Профиль {localStorage.getItem('username')}</p>
                         <div className='profile_avatar'></div>
                     </div>
-                    <p className='error_p'>{this.state.error_message}</p>
+                    {this.state.error_message &&
+                        <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
                             <div className='profile_title_input'>

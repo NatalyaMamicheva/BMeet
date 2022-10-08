@@ -150,10 +150,10 @@ class Login extends React.Component {
                                             className='auth_button_form'>
                                             <p>Войти</p></button>
                                     </div>
-                                    <p className='error_p'
-                                        ref={this.errorRef}>{this.state.error_message}</p>
-                                    <p className='error_p'
-                                        ref={this.errorRef}>{this.state.error_message_user}</p>
+                                    {this.state.error_message &&
+                                        <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
+                                    {this.state.error_message_user &&
+                                        <p className="error_p" ref={this.errorRef}>{this.state.error_message_user}</p>}
                                 </form>
                             </div>
 
