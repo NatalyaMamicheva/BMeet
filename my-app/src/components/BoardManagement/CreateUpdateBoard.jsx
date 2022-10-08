@@ -65,6 +65,7 @@ class CreateUpdateBoard extends React.Component {
                 .then(response => {
                     this.setState({ 'error_message': '' });
                     this.props.handleShowCreateUpdateBoard(event)
+                    this.props.isReload()
                 })
                 .catch(error => {
                     if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
@@ -81,6 +82,7 @@ class CreateUpdateBoard extends React.Component {
                 .then(response => {
                     this.setState({ 'error_message': '' });
                     this.props.handleShowCreateUpdateBoard(event)
+                    this.props.isReload()
                 })
                 .catch(error => {
                     if (error.code === 'ERR_BAD_REQUEST') this.setState({ 'error_message': 'Проверьте правильность введенных email' });
