@@ -39,7 +39,10 @@ class BoardManagement extends React.Component {
                 });
             })
             .catch(error => {
-                this.setState({ 'error_message': error.message })
+                this.setState({
+                    error_message: error.message,
+                    is_load: true
+                })
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
