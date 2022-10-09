@@ -3,6 +3,7 @@
   justify-content: end;
   margin-right: 29px;
   min-width: 189px;
+  background: #FFFFFF;
 }
 
 .header_p {
@@ -11,6 +12,7 @@
   align-items: center;
   margin-right: 12px;
   margin-top: 16px;
+  background: #FFFFFF;
 }
 
 
@@ -19,6 +21,7 @@
   font-size: 14px;
   line-height: 21px;
   color: #6E6B7B;
+  background: #FFFFFF;
 }
 
 .header_avatar {
@@ -30,7 +33,8 @@
 
 .header_dropdown {
   height: 100%;
-  z-index: 1;
+  // z-index: 1;
+  background: #FFFFFF;
 }
 
 .header_menu {

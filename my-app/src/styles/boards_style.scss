@@ -99,12 +99,15 @@
   margin: 0 21px 21px 22px;
 }
 
-.boards_buttons div {
-  display: inline-block;
-}
+// .boards_buttons div {
+//   display: inline-block;
+// }
 
 .boards_button_update_and_delete {
-  float: right;
+  display: inline-flex;
+  margin-top: -22px;
+  margin-left: 232px;
+  position: fixed;
 }
 
 .boards_buttons_open {
@@ -129,14 +132,14 @@
   background: url("../assets/img/board_update_hover.svg") no-repeat center center;
 }
 
-.boards_buttons_delete {
+#boards_buttons_delete {
   background: url("../assets/img/board_delete.svg") no-repeat center;
   width: 24px;
   height: 24px;
   -webkit-backdrop-filter: blur(100%);
 }
 
-.boards_buttons_delete:hover {
+#boards_buttons_delete:hover {
   background: url("../assets/img/board_delete_hover.svg") no-repeat center center;
 }
 

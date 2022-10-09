@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
+import '../../styles/delete.scss'
 
 
 class BoardItem extends React.Component {
@@ -14,6 +15,21 @@ class BoardItem extends React.Component {
         }
     }
 
+
+    close_window(event){
+
+        let c = document.querySelector('#css-modal-details #details #cmc');
+        c.style["display"] = 'none';
+        // c.style["pointer-events"] = 'none';
+    }
+
+    
+    open_window(event){        
+  
+        let o = document.querySelector('#css-modal-details #details #cmc');
+        o.style["display"] = 'flex';
+
+    }
 
     handleShowUpdateBoard(event) {
         this.setState({ isOpenUpdate: !this.state.isOpenUpdate });
@@ -37,7 +53,12 @@ class BoardItem extends React.Component {
                 }
                 this.errorRef.current.focus();
             })
+
+
+
     }
+
+    
 
     render() {
         let author = this.props.item.author.username
@@ -84,9 +105,29 @@ class BoardItem extends React.Component {
                         ) : (
                             <div></div>
                         )}
-
-                        <div className="boards_buttons_delete" onClick={(event) => this.DeleteBoard(event)}></div>
+                        <div id="css-modal-details">    
+                            <details id='details'>
+                                <summary onClick={(event) => this.open_window(event)} id="boards_buttons_delete"></summary>
+                                <div id="cmc">
+                                    <div id="cmt">
+                                        <div className='modal_close'><button className='close_window'
+                                         onClick={(event) => this.close_window(event)}></button></div>
+                                    <div className='text_window'>
+                                    <div className='delete_board_title'>Удаление доски</div>  
+                                    <div className='delete_board_descr'>Вы уверены, что хотите удалить доску?</div>
+                                    </div>
+                                    <div className='button_window'>
+                                    <button classname='btnn_delete_board' 
+                                    onClick={(event) => this.DeleteBoard(event)}>Удалить</button>
+                                <button id='btnna_delete_board' onClick={(event) => this.close_window(event)}>Отменить</button>
+                                </div>  
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
                     </div>
+
+                    
                 </div>
             </div>
         )
