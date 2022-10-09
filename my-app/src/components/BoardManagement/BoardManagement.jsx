@@ -10,11 +10,11 @@ class BoardManagement extends React.Component {
     constructor(props) {
         super(props)
         this.errorRef = React.createRef();
-        this.Ref = React.createRef();
         this.state = {
             isOpenCreate: false,
             my_boards: [],
             other_boards: [],
+            is_load: false,
             error_message: '',
         };
     }
@@ -33,9 +33,9 @@ class BoardManagement extends React.Component {
                 }
                 this.setState({
                     my_boards: my_boards,
-                    other_boards: other_boards
+                    other_boards: other_boards,
+                    is_load: true
                 });
-                this.Ref.current.focus();
             })
             .catch(error => {
                 this.setState({ 'error_message': error.message })
@@ -54,8 +54,9 @@ class BoardManagement extends React.Component {
 
 
     render() {
+        if (!this.state.is_load) return null
         return (
-            <div ref={this.Ref}>
+            <div>
                 <Header logout={() => this.props.logout()} />
                 {this.state.error_message &&
                     <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
