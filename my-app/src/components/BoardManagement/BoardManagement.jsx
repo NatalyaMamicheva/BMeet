@@ -27,8 +27,9 @@ class BoardManagement extends React.Component {
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/board/`,
                 { headers })
-            .then(response => {
-                for (let board of response.data) {
+            .then(response => response.data)
+            .then((result) => {
+                for (let board of result.data) {
                     if (board.author.username === localStorage.getItem('username')) my_boards.push(board)
                     else other_boards.push(board)
                 }
@@ -37,7 +38,8 @@ class BoardManagement extends React.Component {
                     other_boards: other_boards,
                     is_load: true
                 });
-            })
+            },
+            )
             .catch(error => {
                 this.setState({
                     error_message: error.message,
@@ -58,7 +60,7 @@ class BoardManagement extends React.Component {
 
 
     render() {
-        if (!this.state.is_load) return null
+        if (!this.state.is_load) return <div>Загрузка...</div>;
         return (
             <div>
                 <Header logout={() => this.props.logout()} />
