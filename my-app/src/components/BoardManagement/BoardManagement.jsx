@@ -20,10 +20,6 @@ class BoardManagement extends React.Component {
     }
 
     isReload() {
-        this.componentDidMount()
-    }
-
-    componentDidMount() {
         let my_boards = []
         let other_boards = []
         let headers = this.props.getHeader()
@@ -48,6 +44,10 @@ class BoardManagement extends React.Component {
                 }
                 this.errorRef.current.focus();
             })
+    }
+
+    componentDidMount() {
+        this.isReload()
     }
 
 
