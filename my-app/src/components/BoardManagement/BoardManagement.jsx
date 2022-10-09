@@ -20,6 +20,7 @@ class BoardManagement extends React.Component {
     }
 
     isReload() {
+        this.setState({ is_load: false })
         let my_boards = []
         let other_boards = []
         let headers = this.props.getHeader()
