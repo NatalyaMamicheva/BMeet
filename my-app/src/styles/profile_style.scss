@@ -149,3 +149,45 @@
   color: #FFFFFF;
   background: #D8D6DE;
 }
+
+.profile_save_modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-flow: column nowrap;
+  background: #FFFFFF;
+  margin: 70px 57px 0 0;
+  border: #6E6B7B 0.1px solid;
+  border-radius: 10px;
+  z-index: 100;
+}
+
+.profile_save_close {
+  background: url("../assets/img/board_close.svg") no-repeat center;
+  width: 13.41px;
+  height: 15px;
+  margin: 10px 12.59px 0 0;
+}
+
+.profile_save_close:hover {
+  background: url("../assets/img/board_close_hover.svg") no-repeat center;
+}
+
+.profile_save_button_close {
+  border: none;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  background: #FFFFFF;
+}
+
+.profile_save_text {
+  margin: 5px 24px 30px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
