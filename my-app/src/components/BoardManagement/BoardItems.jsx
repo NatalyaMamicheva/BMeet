@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
+// import ModalDelete from './ModalDelete.jsx'
+import '../../styles/delete.scss'
 
 
 class BoardItem extends React.Component {
@@ -48,6 +50,7 @@ class BoardItem extends React.Component {
         }
         let board_open = '/board/' + this.props.item.id + '/'
         return (
+            
             <div id={this.props.item.id} className='boards_board'>
                 {this.state.error_message &&
                     <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
@@ -84,8 +87,34 @@ class BoardItem extends React.Component {
                         ) : (
                             <div></div>
                         )}
-
-                        <div className="boards_buttons_delete" onClick={(event) => this.DeleteBoard(event)}></div>
+                         <div id="css-modal-details">    
+                            <details id='details'>
+                                <summary onClick={(event) => this.open_window(event)} className="boards_buttons_delete"></summary>
+                                <div id="cmc">
+                                    <div id="cmt">
+                                        {/* <div className='modal_close'><button className='close_window'
+                                        onClick={(event) => this.close_window(event)}></button></div> */}
+                                                                                            <form >
+                                                    <button className="delete_close_button" type="submit" value="submit"></button>
+                                                    </form>
+                                    <div className='text_window'>
+                                    <div className='delete_board_title'>Удаление доски</div>  
+                                    <div className='delete_board_descr'>Вы уверены, что хотите удалить доску?</div>
+                                    </div>
+                                    <div className='button_window'>
+                                    <button classname='btnn_delete_board' 
+                                    onClick={(event) => this.DeleteBoard(event)}>Удалить</button>
+                                                <form >
+                                                    <button type="submit" value="submit">Отмена</button>
+                                                    </form>
+                                                    
+                                </div>  
+                                </div>
+                                </div>
+                            </details>
+                        </div>
+                        {/* <modalDelete/> */}
+                        {/* <div className="boards_buttons_delete" onClick={(event) => this.DeleteBoard(event)}></div> */}
                     </div>
                 </div>
             </div>
