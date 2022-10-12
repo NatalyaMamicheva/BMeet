@@ -264,27 +264,32 @@ class PersonalPage extends React.Component {
                                     <div className='profile_title_input_name'>
                                         <span>Пароль</span>
                                     </div>
-                                    <div className='profile_input_border'>
+
+                                    <div
+                                        className='profile_input_border password_input_border'>
                                         <label>
-                                            <div className='profile_psw'>
-                                                <div className='profile_close'>
-                                                    <input type="password"
-                                                           name="password"
-                                                           readOnly={this.state['readOnly']}
-                                                           className='profile_input_text'
-                                                           placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                                           onChange={(event) => this.handleChange(event)}
-                                                           value={this.state.password}/>
-                                                </div>
-                                                <div>
-                                                    <input type='button'
-                                                           id='one'
-                                                           className={this.state['class_open']}
-                                                           onClick={(event) => {
-                                                               this._click(event);
-                                                           }}/>
-                                                </div>
-                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <th>
+                                                        <input type="password"
+                                                               name="password"
+                                                               readOnly={this.state['readOnly']}
+                                                               className='profile_input_text password_input_text'
+                                                               placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                               onChange={(event) => this.handleChange(event)}
+                                                               value={this.state.password}/>
+                                                    </th>
+                                                    <th>
+                                                        <div
+                                                            className={this.state['class_open']}
+                                                            id='one'
+                                                            onClick={(event) => {
+                                                                this._click(event)
+                                                            }}>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </table>
                                         </label>
                                     </div>
                                 </div>
