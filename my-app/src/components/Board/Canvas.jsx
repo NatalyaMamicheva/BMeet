@@ -10,12 +10,10 @@ import Line from "./tools/Line";
 const Canvas = observer(() => {
     const canvasRef = useRef()
 
+
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}`;
-        if (url.toString().slice(-1) !== '/') {
-            url += '/'
-        }
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         socket.onopen = () => {
@@ -23,11 +21,28 @@ const Canvas = observer(() => {
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
+            if (data.type === 'INITIAL_DATA' || data.type === 'UPDATE_BOARD') {
+                canvasState.undo_list = []
+                canvasState.redo_list = []
+                for (let object of data.data.redo_objects) {
+                    if (object.user === localStorage.getItem('username'))
+                        canvasState.pushToRedo(object)
+                }
+                for (let object of data.data.objects) {
+                    if (object.user === localStorage.getItem('username'))
+                        canvasState.pushToUndo(object)
+                }
+                let ctx = canvasRef.current.getContext('2d')
+                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+                drawHandler(data)
+            }
+            if (data.type === 'ADD_OBJECT' && data.data.objects[0].user === localStorage.getItem('username'))
+                canvasState.pushToUndo(data.data.objects[0])
             drawHandler(data)
         }
-        socket.onclose = function (e) {
-            if (e.wasClean) {
-                console.log(`[close] Соединение закрыто чисто, код=${e.code} причина=${e.reason}`);
+        socket.onclose = function (error) {
+            if (error.wasClean) {
+                console.log(`[close] Соединение закрыто чисто, код=${error.code} причина=${error.reason}`);
             } else {
                 console.log('[close] Соединение прервано');
             }
