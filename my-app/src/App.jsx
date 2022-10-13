@@ -1,5 +1,5 @@
 import React from 'react';
-import "./styles/app.scss"
+import "./styles/app_style.scss"
 import Board from './components/Board/Board.jsx'
 import Login from './components/AuthUser/Login.jsx'
 import RegisterForm from './components/AuthUser/Register.jsx'
@@ -54,7 +54,7 @@ class App extends React.Component {
                             <Route exact path='/' element={<Login />} />
                             <Route path='/board_management' element={<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()} />} />
                             <Route path='/cabinet' element={<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()} />} />
-                            <Route path='/board/:id' element={<Board />} />
+                            <Route path='/board/:id' element={<Board getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
                             <Route path='/users/:action/:email/:key' element={<FromEmail />} />
                             <Route path='/profile/:old_email/:new_email/:key' element={<ChangeEmail />} />
                             <Route exact path='/register' element={<RegisterForm />} />
