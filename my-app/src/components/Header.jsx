@@ -51,7 +51,7 @@ class Header extends React.Component {
     }
 
     getBoardName(pathname) {
-        let url = `http://${process.env.REACT_APP_BACKEND_HOST}/api${pathname}/`
+        let url = `http://${process.env.REACT_APP_BACKEND_HOST}/api${pathname}`
         let headers = this.props.getHeader()
         axios.request({
             url: url,
