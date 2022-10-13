@@ -26,7 +26,6 @@ class CanvasState {
         this.redo_list.push(data)
     }
 
-
     undo() {
         if (this.undo_list.length > 0) {
             let obj = this.undo_list.pop()
@@ -40,10 +39,10 @@ class CanvasState {
 
     redo() {
         if (this.redo_list.length > 0) {
-            let data = this.redo_list.pop()
+            let obj = this.redo_list.pop()
             this.socket.send(JSON.stringify({
                 method: 'redo',
-                data: data
+                data: obj
             }))
         }
     }
