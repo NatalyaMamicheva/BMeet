@@ -61,6 +61,7 @@ class BoardManagement extends React.Component {
 
     render() {
         if (!this.state.is_load) return <div>Загрузка...</div>;
+
         return (
             <div>
                 <Header logout={() => this.props.logout()} />
