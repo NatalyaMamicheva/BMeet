@@ -27,6 +27,8 @@ const Toolbar = () => {
                 id="line-width"
                 type="number" defaultValue={1} min={1} max={50}
             />
+            <button className="toolbar__btn undo" onClick={() => canvasState.undo()} />
+            <button className="toolbar__btn redo" onClick={() => canvasState.redo()} />
         </div>
 
     );
