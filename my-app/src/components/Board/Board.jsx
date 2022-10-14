@@ -1,24 +1,26 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom'
-import '../../styles/board.scss';
+import '../../styles/board_style.scss';
 import Header from '../Header.jsx'
 import Toolbar from "./Toolbar";
 import Canvas from "./Canvas";
 
-const Board = () => {
+class Board extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get('name');
+    render() {
+        return (
+            <div>
+                <Header logout={() => this.props.logout()} getHeader={() => this.props.getHeader()}/>
+                <div className='board_content'>
+                    <Toolbar/>
+                    <Canvas/>
+                </div>
+            </div>
+        )
+    }
+}
 
-    if (!name) return <Navigate to="/board_management" />;
-    return (
-
-        <div>
-            <Header board_name={name} />
-            <Toolbar />
-            <Canvas />
-        </div>
-    );
-};
 
 export default Board;
