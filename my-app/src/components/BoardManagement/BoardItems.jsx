@@ -108,9 +108,12 @@ class BoardItem extends React.Component {
                 </React.Fragment>
                 <div className="boards_board_size">
                     <div className="boards_text">
-                        <a href={board_open}><p
-                            className='boards_title'>{this.props.item.name} </p>
-                        </a>
+                        <p
+                            className='boards_title'>
+                            <a href={board_open}>
+                                {this.props.item.name}
+                            </a>
+                        </p>
                         <p className='boards_description'>{this.props.item.description}</p>
                     </div>
                 </div>

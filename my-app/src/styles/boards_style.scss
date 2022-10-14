@@ -75,7 +75,11 @@
   text-overflow: ellipsis;
 }
 
-.boards_title:hover {
+.boards_title a {
+  color: #5E5873;
+}
+
+.boards_title a:hover {
   color: #E7B460;
 }
 
