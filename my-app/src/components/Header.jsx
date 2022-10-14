@@ -21,7 +21,9 @@ class Header extends React.Component {
         }
         return (
             <div className='header'>
-                <p className='header_name_board'>{this.state.board_name}</p>
+                <div className='header_name_board'>
+                    <p>{this.state.board_name}</p>
+                </div>
                 <div className='header_dropdown'>
                     <div className='header_content'>
                         <div className='header_p'>

@@ -68,9 +68,9 @@ const Canvas = observer(() => {
 
 
     return (
-        <div className="canvas">
-            <canvas ref={canvasRef} width={window.innerWidth}
-                    height={window.innerHeight}/>
+        <div className="board_canvas">
+            <canvas ref={canvasRef} width={window.innerWidth - 118}
+                    height={window.innerHeight - 105}/>
         </div>
     );
 });

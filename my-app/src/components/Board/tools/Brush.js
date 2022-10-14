@@ -23,7 +23,44 @@ export default class Brush extends Tool {
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
     };
 
+    static getScales() {
+        let first_width = 1728
+        let first_height = 1117
+        let width = window.innerWidth
+        let height = window.innerHeight
+        let xScale = first_width / width
+        let yScale = first_height / height
+        let kx = 1
+        let ky = 1
+
+        if (width <= 1600) {
+            for (let i = 1600; i >= width; i) {
+                kx += 0.03
+                width += 100
+            }
+        } else if (width > 1600) {
+            for (let i = 1600; i <= width; i) {
+                kx += 0.03
+                width -= 100
+            }
+        }
+
+        if (height <= 1600) {
+            for (let i = 1600; i >= height; i) {
+                ky += 0.04
+                height += 100
+            }
+        } else if (height > 1600) {
+            for (let i = 1600; i <= height; i) {
+                ky += 0.04
+                height -= 100
+            }
+        }
+        return [xScale, yScale, kx, ky]
+    }
+
     static drawLine(ctx, coord, fill_color, stroke_color, line_width) {
+        let scales = Brush.getScales()
         let color_stroke_temp = ctx.strokeStyle
         let color_fill_temp = ctx.fillStyle
         let line_width_temp = ctx.lineWidth
@@ -31,10 +68,10 @@ export default class Brush extends Tool {
         ctx.strokeStyle = stroke_color
         ctx.lineWidth = line_width
         ctx.beginPath();
-        ctx.moveTo(coord[0][0], coord[0][1]);
+        ctx.moveTo(coord[0][0] / scales[0] / scales[2], coord[0][1] / scales[1] / scales[3]);
         ctx.stroke();
         coord.forEach(function (e) {
-            ctx.lineTo(e[0], e[1]);
+            ctx.lineTo(e[0] / scales[0] / scales[2], e[1] / scales[1] / scales[3]);
             ctx.stroke();
         })
         ctx.strokeStyle = color_stroke_temp
@@ -76,9 +113,10 @@ export default class Brush extends Tool {
 
     mouseMoveHandler(e) {
         if (this.mouseDown) {
+            let scales = Brush.getScales()
             let x = e.pageX - e.target.offsetLeft
             let y = e.pageY - e.target.offsetTop
-            this.coords.coord.push([x, y]);
+            this.coords.coord.push([x * scales[0] * scales[2], y * scales[1] * scales[3]]);
             this.ctx.lineTo(x, y);
             this.ctx.stroke();
         }
