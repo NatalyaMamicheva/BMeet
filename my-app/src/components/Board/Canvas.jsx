@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom'
 import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import Brush from "./tools/Brush";
@@ -8,6 +9,7 @@ import Line from "./tools/Line";
 
 const Canvas = observer(() => {
     const canvasRef = useRef()
+    const [userAccess, setUserAccess] = useState(true);
 
 
     useEffect(() => {
@@ -37,9 +39,8 @@ const Canvas = observer(() => {
         }
         socket.onclose = function (error) {
             if (error.wasClean) {
-                console.log(`[close] Соединение закрыто чисто, код=${error.code} причина=${error.reason}`);
-            } else {
-                console.log('[close] Соединение прервано');
+                console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
+                if (error.code == '4003') setUserAccess(false)
             }
         };
         socket.onerror = function (error) {
@@ -69,6 +70,8 @@ const Canvas = observer(() => {
         }
     }
 
+    if (!userAccess)
+        return <Navigate to="/board_management" />
 
     return (
         <div className="canvas">
