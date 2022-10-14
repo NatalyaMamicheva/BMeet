@@ -30,13 +30,11 @@ export default class Brush extends Tool {
         ctx.fillStyle = fill_color
         ctx.strokeStyle = stroke_color
         ctx.lineWidth = line_width
-        for (let coord_array of coord) {
-            ctx.beginPath();
-            ctx.moveTo(coord_array[0][0], coord_array[0][1]);
-            for (let arr in coord_array) {
-                ctx.lineTo(`${coord_array[arr][0]}`, `${coord_array[arr][1]}`);
-                ctx.stroke();
-            }
+        ctx.beginPath();
+        ctx.moveTo(coord[0][0], coord[0][1]);
+        for (let arr in coord) {
+            ctx.lineTo(`${coord[arr][0]}`, `${coord[arr][1]}`);
+            ctx.stroke();
         }
         ctx.strokeStyle = color_stroke_temp
         ctx.fillStyle = color_fill_temp

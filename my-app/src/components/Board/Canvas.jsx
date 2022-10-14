@@ -53,26 +53,22 @@ const Canvas = observer(() => {
         const ctx = canvasRef.current.getContext('2d');
         for (let object of data_objects) {
             // eslint-disable-next-line default-case
-            switch (object.type) {
-                case "r":
-                    let coord = []
-                    for (let object of data_objects) {
-                        coord.push(object.coord)
-                        Brush.drawLine(ctx, coord, object.fill_color, object.stroke_color, object.width)
-                        coord = []
-                    }
-                    break
-                case "v":
-                    if (object.other_data === 'rect')
-                        Rect.staticDrawRect(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
-                    else if (object.other_data === 'circle')
-                        Circle.staticDrawCircle(ctx, object.coord[0], object.coord[1], object.coord[2], object.fill_color, object.stroke_color, object.width)
-                    else if (object.other_data === 'line')
-                        Line.staticDrawStrightLine(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
-                    break
+            if (object.type === "r") {
+                for (let object of data_objects) {
+                    Brush.drawLine(ctx, object.coord, object.fill_color, object.stroke_color, object.width)
+                }
+            } else {
+                if (object.other_data === 'rect')
+                    Rect.staticDrawRect(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
+                else if (object.other_data === 'circle')
+                    Circle.staticDrawCircle(ctx, object.coord[0], object.coord[1], object.coord[2], object.fill_color, object.stroke_color, object.width)
+                else if (object.other_data === 'line')
+                    Line.staticDrawStrightLine(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
             }
+
         }
     }
+
 
     return (
         <div className="canvas">
