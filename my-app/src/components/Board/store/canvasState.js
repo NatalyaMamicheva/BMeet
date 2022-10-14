@@ -26,6 +26,7 @@ class CanvasState {
         this.redo_list.push(data)
     }
 
+
     undo() {
         if (this.undo_list.length > 0) {
             let obj = this.undo_list.pop()

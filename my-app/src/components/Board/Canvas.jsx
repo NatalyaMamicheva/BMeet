@@ -20,22 +20,18 @@ const Canvas = observer(() => {
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
-            if (data.type === 'INITIAL_DATA' || data.type === 'UPDATE_BOARD') {
+            let msg_type = data.type
+            if (msg_type === 'INITIAL_DATA' || msg_type === 'UPDATE_BOARD') {
                 canvasState.undo_list = []
                 canvasState.redo_list = []
-                for (let object of data.data.redo_objects) {
-                    if (object.user === localStorage.getItem('username'))
-                        canvasState.pushToRedo(object)
+                canvasState.pushToRedo(data.data.redo_object)
+                canvasState.pushToUndo(data.data.undo_object)
+                if (msg_type === 'UPDATE_BOARD') {
+                    let ctx = canvasRef.current.getContext('2d')
+                    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
                 }
-                for (let object of data.data.objects) {
-                    if (object.user === localStorage.getItem('username'))
-                        canvasState.pushToUndo(object)
-                }
-                let ctx = canvasRef.current.getContext('2d')
-                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-                drawHandler(data)
             }
-            if (data.type === 'ADD_OBJECT' && data.data.objects[0].user === localStorage.getItem('username'))
+            if (msg_type === 'ADD_OBJECT')
                 canvasState.pushToUndo(data.data.objects[0])
             drawHandler(data)
         }
