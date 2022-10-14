@@ -52,12 +52,10 @@ const Canvas = observer(() => {
     const drawHandler = (data) => {
         let data_objects = data.data.objects;
         const ctx = canvasRef.current.getContext('2d');
-        for (let object of data_objects) {
-            // eslint-disable-next-line default-case
+
+        data_objects.forEach(function (object) {
             if (object.type === "r") {
-                for (let object of data_objects) {
-                    Brush.drawLine(ctx, object.coord, object.fill_color, object.stroke_color, object.width)
-                }
+                Brush.drawLine(ctx, object.coord, object.fill_color, object.stroke_color, object.width)
             } else {
                 if (object.other_data === 'rect')
                     Rect.staticDrawRect(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
@@ -66,8 +64,7 @@ const Canvas = observer(() => {
                 else if (object.other_data === 'line')
                     Line.staticDrawStrightLine(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
             }
-
-        }
+        })
     }
 
     if (!userAccess)
@@ -75,7 +72,8 @@ const Canvas = observer(() => {
 
     return (
         <div className="canvas">
-            <canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />
+            <canvas ref={canvasRef} width={window.innerWidth}
+                height={window.innerHeight} />
         </div>
     );
 });
