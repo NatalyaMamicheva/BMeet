@@ -40,7 +40,9 @@ const Canvas = observer(() => {
         socket.onclose = function (error) {
             if (error.wasClean) {
                 console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
-                if (error.code === '4003') setUserAccess(false)
+                if (error.code === 4003) {
+                    setUserAccess(false)
+                }
             }
         };
         socket.onerror = function (error) {
