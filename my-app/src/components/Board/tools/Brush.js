@@ -32,11 +32,10 @@ export default class Brush extends Tool {
         ctx.lineWidth = line_width
         ctx.beginPath();
         ctx.moveTo(coord[0][0], coord[0][1]);
-        ctx.stroke();
-        coord.forEach(function (e) {
-            ctx.lineTo(e[0], e[1]);
+        for (let arr in coord) {
+            ctx.lineTo(`${coord[arr][0]}`, `${coord[arr][1]}`);
             ctx.stroke();
-        })
+        }
         ctx.strokeStyle = color_stroke_temp
         ctx.fillStyle = color_fill_temp
         ctx.lineWidth = line_width_temp
@@ -76,11 +75,16 @@ export default class Brush extends Tool {
 
     mouseMoveHandler(e) {
         if (this.mouseDown) {
-            let x = e.pageX - e.target.offsetLeft
-            let y = e.pageY - e.target.offsetTop
+            this.draw(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop);
+        }
+    };
+
+    draw(x, y) {
+        if (this.mouseDown) {
             this.coords.coord.push([x, y]);
             this.ctx.lineTo(x, y);
             this.ctx.stroke();
         }
     };
+
 }

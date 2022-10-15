@@ -5,17 +5,14 @@ import Toolbar from "./Toolbar";
 import Canvas from "./Canvas";
 
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
             <div>
-                <Header logout={() => this.props.logout()} getHeader={() => this.props.getHeader()}/>
+                <Header logout={() => this.props.logout()} getHeader={() => this.props.getHeader()} />
                 <div className='board_content'>
-                    <Toolbar/>
-                    <Canvas/>
+                    <Toolbar />
+                    <Canvas />
                 </div>
             </div>
         )

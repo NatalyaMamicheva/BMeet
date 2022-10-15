@@ -1,5 +1,6 @@
-import React, {useEffect, useRef} from 'react';
-import {observer} from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import Brush from "./tools/Brush";
 import Rect from "./tools/Rect";
@@ -8,11 +9,13 @@ import Line from "./tools/Line";
 
 const Canvas = observer(() => {
     const canvasRef = useRef()
+    const [userAccess, setUserAccess] = useState(true);
 
 
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}`;
+        let board_name = new URLSearchParams(window.location.search).get('name')
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}&name=${board_name}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         socket.onopen = () => {
@@ -37,9 +40,8 @@ const Canvas = observer(() => {
         }
         socket.onclose = function (error) {
             if (error.wasClean) {
-                console.log(`[close] Соединение закрыто чисто, код=${error.code} причина=${error.reason}`);
-            } else {
-                console.log('[close] Соединение прервано');
+                console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
+                if (error.code == '4003') setUserAccess(false)
             }
         };
         socket.onerror = function (error) {
@@ -66,11 +68,13 @@ const Canvas = observer(() => {
         })
     }
 
+    if (!userAccess)
+        return <Navigate to="/board_management" />
 
     return (
         <div className="canvas">
             <canvas ref={canvasRef} width={window.innerWidth}
-                    height={window.innerHeight}/>
+                height={window.innerHeight} />
         </div>
     );
 });
