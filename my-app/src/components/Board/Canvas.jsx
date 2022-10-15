@@ -14,7 +14,8 @@ const Canvas = observer(() => {
 
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}`;
+        let board_name = new URLSearchParams(window.location.search).get('name')
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}&name=${board_name}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         socket.onopen = () => {
