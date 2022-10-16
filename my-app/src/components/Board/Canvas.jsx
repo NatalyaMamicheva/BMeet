@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Navigate} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import Brush from "./tools/Brush";
 import Rect from "./tools/Rect";
@@ -11,10 +11,11 @@ const Canvas = observer(() => {
     const canvasRef = useRef()
     const [userAccess, setUserAccess] = useState(true);
 
+
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
         let board_name = new URLSearchParams(window.location.search).get('name')
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}&name=${board_name}`;
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         socket.onopen = () => {
@@ -24,6 +25,11 @@ const Canvas = observer(() => {
             let data = JSON.parse(event.data)
             let msg_type = data.type
             if (msg_type === 'INITIAL_DATA' || msg_type === 'UPDATE_BOARD') {
+                if (data.data.board_name !== board_name) {
+                    setUserAccess(false)
+                    socket.close()
+                    return
+                }
                 canvasState.undo_list = []
                 canvasState.redo_list = []
                 canvasState.pushToRedo(data.data.redo_object)
@@ -40,9 +46,7 @@ const Canvas = observer(() => {
         socket.onclose = function (error) {
             if (error.wasClean) {
                 console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
-                if (error.code === 4003) {
-                    setUserAccess(false)
-                }
+                if (error.code == '4003') setUserAccess(false)
             }
         };
         socket.onerror = function (error) {
@@ -70,11 +74,12 @@ const Canvas = observer(() => {
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management"/>
+        return <Navigate to="/board_management" />
+
     return (
-        <div className="board_canvas">
-            <canvas ref={canvasRef} width={window.innerWidth - 118}
-                    height={window.innerHeight - 105}/>
+        <div className="canvas">
+            <canvas ref={canvasRef} width={window.innerWidth}
+                height={window.innerHeight} />
         </div>
     );
 });
