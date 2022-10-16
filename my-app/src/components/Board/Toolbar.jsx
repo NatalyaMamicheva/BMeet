@@ -65,6 +65,14 @@ class Toolbar extends React.Component {
                     </div>
                 </div>
 
+                <div>
+                    <input className="toolbar_buttons board_color_fill_button"
+                           onChange={event => toolState.setFillColor(event.target.value)}
+                           id="toolbar_color" type='color'>
+                    </input>
+                    <label htmlFor="toolbar_color"></label>
+                </div>
+
                 <div className="toolbar_buttons board_figure_content"
                      ref={this.setWrapperRef}
                      onClick={(e) => canvasState.openFigure(e)}>
