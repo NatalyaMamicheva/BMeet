@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import {makeAutoObservable} from "mobx";
 
 class CanvasState {
     canvas = null
@@ -48,7 +48,23 @@ class CanvasState {
         }
     }
 
+    openLine(e) {
+        let target = e.target.querySelector('#board_line_content')
+        if (!target.style['display']) {
+            target.style['display'] = 'block'
+        } else if (target.style['display']) {
+            target.style['display'] = null
+        }
+    }
 
+    openFigure(e) {
+        let target = e.target.querySelector('#board_figures')
+        if (!target.style['display']) {
+            target.style['display'] = 'flex'
+        } else if (target.style['display'] === 'flex') {
+            target.style['display'] = null
+        }
+    }
 }
 
 export default new CanvasState()

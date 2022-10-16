@@ -6,31 +6,87 @@ import Line from './tools/Line';
 import Rect from "./tools/Rect";
 import Circle from "./tools/Circle";
 
-const Toolbar = () => {
+class Toolbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
 
-    return (
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
 
-        <div className='toolbar'>
-            <button className='toolbar__btn brush' onClick={() => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket))} />
-            <button className="toolbar__btn rect" onClick={() => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket))} />
-            <button className="toolbar__btn circle" onClick={() => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket))} />
-            <button className="toolbar__btn line" onClick={() => toolState.setTool(new Line(canvasState.canvas, canvasState.socket))} />
-            <label htmlFor="stroke-color">Цвет линии/обводки</label>
-            <input onChange={event => toolState.setStrokeColor(event.target.value)} id="stroke-color" type="color" />
-            <label htmlFor="stroke-color">Цвет заливки</label>
-            <input onChange={event => toolState.setFillColor(event.target.value)} style={{ marginLeft: 10 }} type="color" />
-            <label htmlFor="line-width">Толщина линии</label>
-            <input
-                onChange={e => toolState.setLineWidth(e.target.value)}
-                style={{ margin: '0 10px' }}
-                id="line-width"
-                type="number" defaultValue={1} min={1} max={50}
-            />
-            <button className="toolbar__btn undo" onClick={() => canvasState.undo()} />
-            <button className="toolbar__btn redo" onClick={() => canvasState.redo()} />
-        </div>
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
 
-    );
-};
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            let figure = document.querySelector('#board_figures')
+            if (figure) {
+                figure.style['display'] = null
+            }
+        }
+    }
+
+    render() {
+        return (
+
+            <div className='board_toolbar'>
+                <div className="toolbar_buttons board_undo_button"
+                     onClick={() => canvasState.undo()}>
+                </div>
+
+                <div className="toolbar_buttons board_redo_button"
+                     onClick={() => canvasState.redo()}>
+                </div>
+
+                <div>
+                    <input className="toolbar_buttons board_color_button"
+                           onChange={event => toolState.setStrokeColor(event.target.value)}
+                           id="toolbar_color" type='color'>
+                    </input>
+                    <label htmlFor="toolbar_color"></label>
+                </div>
+
+                <div className="toolbar_buttons board_width_line"
+                     ref={this.setWrapperRef}
+                     onClick={(e) => canvasState.openLine(e)}>
+                    <div className="board_line_content"
+                         id="board_line_content">
+                        <input className="board_line" id='board_line'
+                               onChange={e => toolState.setLineWidth(e.target.value)}
+                               type="range" defaultValue={1} min={1} max={50}/>
+                    </div>
+                </div>
+
+                <div className="toolbar_buttons board_figure_content"
+                     ref={this.setWrapperRef}
+                     onClick={(e) => canvasState.openFigure(e)}>
+                    <div className="board_figures" id='board_figures'>
+                        <div className="board_rect"
+                             onClick={() => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket))}></div>
+                        <div className="board_circle"
+                             onClick={() => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket))}></div>
+                        <div className="board__line"
+                             onClick={() => toolState.setTool(new Line(canvasState.canvas, canvasState.socket))}></div>
+                    </div>
+                </div>
+
+                <div className="toolbar_buttons board_brush"
+                     onClick={() => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket))}>
+                </div>
+
+                <div className="toolbar_buttons board_eraser"></div>
+            </div>
+
+        );
+    }
+}
 
 export default Toolbar;
