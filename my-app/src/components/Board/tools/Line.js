@@ -8,6 +8,7 @@ export default class Line extends Tool {
     }
 
     listen() {
+        this.updateColorButtonsToolbar()
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)

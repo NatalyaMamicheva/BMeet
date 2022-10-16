@@ -8,6 +8,7 @@ export default class Circle extends Tool {
     }
 
     listen() {
+        this.updateColorButtonsToolbar()
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)

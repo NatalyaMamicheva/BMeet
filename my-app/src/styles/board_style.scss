@@ -165,6 +165,10 @@ input[type=range]::-moz-range-thumb {
   background: url("../assets/img/toolbar_figure_hover.svg") no-repeat center;
 }
 
+.board_figure_content_active {
+  background: url("../assets/img/toolbar_figure_hover.svg") no-repeat center;
+}
+
 .board_figures {
   display: none;
   width: 98px;
@@ -224,6 +228,10 @@ input[type=range]::-moz-range-thumb {
 
 .board_brush:active {
   background: url("../assets/img/toolbar_brush.svg") no-repeat center;
+}
+
+.board_brush_active {
+  background: url("../assets/img/toolbar_brush_hover.svg") no-repeat center;
 }
 
 .board_eraser {
