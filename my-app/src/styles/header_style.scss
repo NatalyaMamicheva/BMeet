@@ -28,7 +28,41 @@
   margin-top: 16px;
 }
 
-.header_name_board {}
+.header_name_board {
+  text-align: center;
+  width: 68%;
+  margin: 0 2px 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  color: #5E5873;
+}
+
+@media only screen and (min-width: 1440px) {
+  .header_name_board {
+    width: 73%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .header_name_board {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .header_name_board {
+    font-size: 10px;
+    line-height: 15px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .header_name_board {
+    display: none;
+  }
+}
 
 .header_dropdown {
   height: 100%;
