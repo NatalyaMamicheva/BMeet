@@ -11,6 +11,17 @@ class Footer extends React.Component {
         )
     }
 
+    componentDidMount() {
+        let url = window.location.pathname
+        if (url === '/') {
+            document.title = 'Добро пожаловать!'
+        } else if (url === '/recpassword') {
+            document.title = 'Восстановление пароля'
+        } else if (url === '/register') {
+            document.title = 'Регистрация'
+        }
+    }
+
     render() {
         return (
             <div className='footer'>
