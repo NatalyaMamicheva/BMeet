@@ -57,7 +57,7 @@ class BoardItem extends React.Component {
         if (author === user) {
             update = true
         }
-        let board_open = '/board/' + this.props.item.id + '/?name=' + this.props.item.name
+        let board_open = '/board/' + this.props.item.id + '/?name=' + encodeURIComponent(this.props.item.name).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");
         return (
             <div id={this.props.item.id} className='boards_board'>
 
