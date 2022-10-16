@@ -37,7 +37,6 @@ export default class Line extends Tool {
         if (this.mouseDown) {
             this.x = e.pageX - e.target.offsetLeft
             this.y = e.pageY - e.target.offsetTop;
-            this.draw(this.x, this.y)
         }
     }
 
@@ -46,8 +45,7 @@ export default class Line extends Tool {
         this.ctx.beginPath()
         this.ctx.moveTo(this.currentX, this.currentY)
         this.ctx.lineTo(x, y)
-        if (!this.mouseDown)
-            this.ctx.stroke()
+        this.ctx.stroke()
     }
 
     static staticDrawStrightLine(ctx, start_x, start_y, x, y, fill_color, stroke_color, line_width) {

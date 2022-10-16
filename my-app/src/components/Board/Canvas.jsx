@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Navigate} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import Brush from "./tools/Brush";
 import Rect from "./tools/Rect";
@@ -13,8 +13,7 @@ const Canvas = observer(() => {
 
     useEffect(() => {
         canvasState.setCanvas(canvasRef.current)
-        let board_name = new URLSearchParams(window.location.search).get('name')
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}?token=${localStorage.getItem('token').split(' ')[1]}&name=${board_name}`;
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         socket.onopen = () => {
@@ -70,11 +69,11 @@ const Canvas = observer(() => {
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management"/>
+        return <Navigate to="/board_management" />
     return (
         <div className="board_canvas">
             <canvas ref={canvasRef} width={window.innerWidth - 118}
-                    height={window.innerHeight - 105}/>
+                height={window.innerHeight - 105} />
         </div>
     );
 });
