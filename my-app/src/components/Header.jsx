@@ -13,6 +13,15 @@ class Header extends React.Component {
         }
     }
 
+    componentDidMount() {
+        let url = window.location.pathname
+        if (url === '/board_management') {
+            document.title = 'Мои доски'
+        } else if (url === '/cabinet') {
+            document.title = 'Профиль'
+        }
+    }
+
     render() {
         if (!localStorage.getItem('token')) return <Navigate to="/"/>;
         let pathname = window.location.pathname
