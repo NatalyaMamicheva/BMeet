@@ -48,7 +48,11 @@ export default class Tool {
                 figure.classList.add('board_figure_content_board_rect')
             } else if (element === rect || element === line || element === circle) {
                 let figure_content = figure.classList.value.split(' ')[1]
-                let figure_content_add = `${figure_content}_${event.path[0].classList.value}_active`
+                try {
+                    var figure_content_add = `${figure_content}_${event.path[0].classList.value}_active`
+                } catch (err) {
+                    figure_content_add = `${figure_content}_${event.toElement.classList.value}_active`
+                }
                 this.removeFigureClass(figure_class, figure)
                 figure.classList.add(figure_content_add)
                 brush.classList.add('board_brush')
