@@ -12,6 +12,7 @@ const Canvas = observer(() => {
     const [userAccess, setUserAccess] = useState(true);
 
     useEffect(() => {
+        let username = localStorage.getItem('username')
         canvasState.setCanvas(canvasRef.current)
         let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
@@ -22,18 +23,15 @@ const Canvas = observer(() => {
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
             let msg_type = data.type
-            if (msg_type === 'INITIAL_DATA' || msg_type === 'UPDATE_BOARD') {
-                canvasState.undo_list = []
-                canvasState.redo_list = []
-                canvasState.pushToRedo(data.data.redo_object)
+            console.log(data.data.undo_object)
+            if (data.data.undo_object && data.data.undo_object.user === username)
                 canvasState.pushToUndo(data.data.undo_object)
-                if (msg_type === 'UPDATE_BOARD') {
-                    let ctx = canvasRef.current.getContext('2d')
-                    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-                }
+            if (data.data.redo_object && data.data.redo_object.user === username)
+                canvasState.pushToRedo(data.data.redo_object)
+            if (msg_type === 'UPDATE_BOARD') {
+                let ctx = canvasRef.current.getContext('2d')
+                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             }
-            if (msg_type === 'ADD_OBJECT')
-                canvasState.pushToUndo(data.data.objects[0])
             drawHandler(data)
         }
         socket.onclose = function (error) {
