@@ -73,7 +73,7 @@ class Toolbar extends React.Component {
                     <label htmlFor="toolbar_color"></label>
                 </div>
 
-                <div className="toolbar_buttons board_figure_content"
+                <div className="toolbar_buttons board_figure_content board_figure_content_board_rect"
                      ref={this.setWrapperRef}
                      onClick={(e) => canvasState.openFigure(e)}>
                     <div className="board_figures" id='board_figures'>

@@ -24,22 +24,33 @@ export default class Tool {
         this.canvas.onmouseup = null
     }
 
+    removeFigureClass(figure_class, figure) {
+        figure_class.forEach((e) => {
+            figure.classList.remove(e)
+            figure.classList.remove(`${e}_active`)
+        })
+    }
+
     updateColorButtonsToolbar() {
         let brush = document.querySelector('.board_brush')
         let circle = document.querySelector('.board_circle')
         let rect = document.querySelector('.board_rect')
         let line = document.querySelector('.board__line')
         let figure = document.querySelector('.board_figure_content')
+        let figure_class = ['board_figure_content_board_rect', 'board_figure_content_board_circle', 'board_figure_content_board__line']
 
         document.addEventListener('click', event => {
             let element = event.target
             if (element === brush) {
                 brush.classList.add('board_brush_active')
                 brush.classList.remove('board_brush')
-                figure.classList.add('board_figure_content')
-                figure.classList.remove('board_figure_content_active')
+                this.removeFigureClass(figure_class, figure)
+                figure.classList.add('board_figure_content_board_rect')
             } else if (element === rect || element === line || element === circle) {
-                figure.classList.add('board_figure_content_active')
+                let figure_content = figure.classList.value.split(' ')[1]
+                let figure_content_add = `${figure_content}_${event.path[0].classList.value}_active`
+                this.removeFigureClass(figure_class, figure)
+                figure.classList.add(figure_content_add)
                 brush.classList.add('board_brush')
                 brush.classList.remove('board_brush_active')
             }
