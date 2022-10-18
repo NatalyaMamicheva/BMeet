@@ -91,6 +91,10 @@ class Toolbar extends React.Component {
                 </div>
 
                 <div className="toolbar_buttons board_eraser"></div>
+
+                <div className="toolbar_collapse">
+                    <a href='#' onClick={() => toolState.collapse()}>Свернуть</a>
+                </div>
             </div>
 
         );

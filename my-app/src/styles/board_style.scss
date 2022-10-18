@@ -252,7 +252,7 @@ input[type=range]::-moz-range-thumb {
 
 .board_eraser {
   background: url("../assets/img/toolbar_eraser.svg") no-repeat center;
-  margin-bottom: 19px;
+  //margin-bottom: 19px;
 }
 
 .board_eraser:hover {
@@ -263,25 +263,41 @@ input[type=range]::-moz-range-thumb {
   background: url("../assets/img/toolbar_eraser.svg") no-repeat center;
 }
 
-@media only screen and (max-height: 450px) {
+.toolbar_collapse {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.toolbar_collapse a {
+  color: #6E6B7B;
+  text-decoration: none;
+}
+
+.toolbar_collapse a:hover {
+  color: #E7B460;
+}
+
+@media only screen and (max-height: 475px) {
   .toolbar_buttons {
     margin: 14px 19px 0;
   }
 }
 
-@media only screen and (max-height: 415px) {
+@media only screen and (max-height: 440px) {
   .toolbar_buttons {
     margin: 10px 19px 0;
   }
 }
 
-@media only screen and (max-height: 380px) {
+@media only screen and (max-height: 410px) {
   .toolbar_buttons {
     margin: 5px 19px 0;
   }
 }
 
-@media only screen and (max-height: 335px) {
+@media only screen and (max-height: 370px) {
   .toolbar_buttons {
     margin: 1px 19px 0;
   }
