@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom'
 import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
+import toolState from "./store/toolState";
 import Brush from "./tools/Brush";
 import Rect from "./tools/Rect";
 import Circle from "./tools/Circle";
@@ -17,13 +18,13 @@ const Canvas = observer(() => {
         let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
+        toolState.setTool(new Brush(canvasRef.current, socket))
         socket.onopen = () => {
             console.log('Подключение установлено')
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
             let msg_type = data.type
-            console.log(data.data.undo_object)
             if (data.data.undo_object && data.data.undo_object.user === username)
                 canvasState.pushToUndo(data.data.undo_object)
             if (data.data.redo_object && data.data.redo_object.user === username)
