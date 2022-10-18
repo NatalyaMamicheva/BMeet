@@ -94,44 +94,5 @@ export default class Tool {
             height_result
         )
     }
-
-    static getScales() {
-        let first_width = 1600
-        let first_height = 1600
-        let width = window.innerWidth
-        let height = window.innerHeight
-        let xScale = first_width / width
-        let yScale = first_height / height
-        let kx = 1
-        let ky = 1
-        let kr = 1
-
-        if (width <= 1600) {
-            for (let i = 1600; i >= width; i) {
-                kx += 0.004
-                width += 10
-            }
-        } else if (width > 1600) {
-            for (let i = 1600; i <= width; i) {
-                kx += 0.006
-                width -= 10
-            }
-        }
-
-        if (height <= 1600) {
-            for (let i = 1600; i >= height; i) {
-                ky += 0.004
-                height += 10
-            }
-        } else if (height > 1600) {
-            for (let i = 1600; i <= height; i) {
-                ky += 0.008
-                height -= 10
-            }
-        }
-        let k_radius = ((kx + ky) / 2.3)
-        console.log(kr)
-        return [xScale, yScale, kx, ky, k_radius]
-    }
 }
 
