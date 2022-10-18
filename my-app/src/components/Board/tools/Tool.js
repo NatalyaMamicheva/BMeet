@@ -60,5 +60,78 @@ export default class Tool {
             }
         })
     }
+
+    static getWidthHeight() {
+        let width_window = window.innerWidth - 58
+        let width_height = window.innerHeight - 104
+        let height = this.getHeight(width_window)
+        for (width_window; height > width_height; width_window--) {
+            height = this.getHeight(width_window)
+        }
+        return (
+            [width_window, height]
+        )
+    }
+
+    static getScaleX(width) {
+        let width_start = 1605
+        return (
+            width_start / width
+        )
+    }
+
+    static getScaleY(height) {
+        let height_start = 800
+        return (
+            height_start / height
+        )
+    }
+
+    static getHeight(width) {
+        let height_start = 800
+        let height_result = height_start / (this.getScaleX(width))
+        return (
+            height_result
+        )
+    }
+
+    static getScales() {
+        let first_width = 1600
+        let first_height = 1600
+        let width = window.innerWidth
+        let height = window.innerHeight
+        let xScale = first_width / width
+        let yScale = first_height / height
+        let kx = 1
+        let ky = 1
+        let kr = 1
+
+        if (width <= 1600) {
+            for (let i = 1600; i >= width; i) {
+                kx += 0.004
+                width += 10
+            }
+        } else if (width > 1600) {
+            for (let i = 1600; i <= width; i) {
+                kx += 0.006
+                width -= 10
+            }
+        }
+
+        if (height <= 1600) {
+            for (let i = 1600; i >= height; i) {
+                ky += 0.004
+                height += 10
+            }
+        } else if (height > 1600) {
+            for (let i = 1600; i <= height; i) {
+                ky += 0.008
+                height -= 10
+            }
+        }
+        let k_radius = ((kx + ky) / 2.3)
+        console.log(kr)
+        return [xScale, yScale, kx, ky, k_radius]
+    }
 }
 

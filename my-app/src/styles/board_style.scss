@@ -5,12 +5,13 @@
 
 .board_canvas {
   width: 100%;
-  text-align: end;
+  text-align: center;
 }
 
 canvas {
   margin-top: 18px;
-  margin-right: 28px;
+  border: 0.1px solid #B9B9C3;
+  border-radius: 6px;
 }
 
 .board_toolbar {
