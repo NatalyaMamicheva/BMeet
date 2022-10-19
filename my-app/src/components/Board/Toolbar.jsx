@@ -34,6 +34,8 @@ class Toolbar extends React.Component {
         }
     }
 
+    collapseLineWidth() {}
+
     render() {
         return (
 
@@ -55,7 +57,6 @@ class Toolbar extends React.Component {
                 </div>
 
                 <div className="toolbar_buttons board_width_line"
-                     ref={this.setWrapperRef}
                      onClick={(e) => canvasState.openLine(e)}>
                     <div className="board_line_content"
                          id="board_line_content">
@@ -91,6 +92,10 @@ class Toolbar extends React.Component {
                 </div>
 
                 <div className="toolbar_buttons board_eraser"></div>
+
+                <div className="toolbar_collapse">
+                    <a href='#' onClick={() => toolState.collapse()}>Свернуть</a>
+                </div>
             </div>
 
         );

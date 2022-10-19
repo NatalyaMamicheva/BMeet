@@ -5,6 +5,8 @@ export default class Circle extends Tool {
     constructor(canvas, socket) {
         super(canvas, socket);
         this.listen()
+        this.height = 0
+        this.width = 0
     }
 
     listen() {
@@ -22,9 +24,11 @@ export default class Circle extends Tool {
     }
 
     mouseUpHandler(e) {
+        let scaleX = Tool.getScaleX(this.canvas.width)
+        let scaleY = Tool.getScaleY(this.canvas.height)
         this.mouseDown = false
         this.socket.send(JSON.stringify({
-            "coord": [this.startX, this.startY, this.r],
+            "coord": [this.startX * scaleX, this.startY * scaleY, this.r * (((scaleX + scaleY) / 2))],
             "type": "v",
             "stroke_color": this.ctx.strokeStyle,
             "fill_color": this.ctx.fillStyle,
@@ -36,23 +40,31 @@ export default class Circle extends Tool {
 
     mouseMoveHandler(e) {
         if (this.mouseDown) {
-            let curentX = e.pageX - e.target.offsetLeft
-            let curentY = e.pageY - e.target.offsetTop
-            let width = curentX - this.startX
-            let height = curentY - this.startY
+            let scaleX = Tool.getScaleX(this.canvas.width)
+            let scaleY = Tool.getScaleY(this.canvas.height)
+            let currentX = e.pageX - e.target.offsetLeft
+            let currentY = e.pageY - e.target.offsetTop
+            let width = currentX - this.startX
+            let height = currentY - this.startY
             this.r = Math.sqrt(width ** 2 + height ** 2)
-            // this.draw(this.startX, this.startY, this.r)
+            // this.draw(this.startX * scaleX, this.startY * scaleY, this.r * (((scaleX + scaleY) / 2)))
         }
     }
 
     draw(x, y, r) {
+        let scaleX = Tool.getScaleX(this.canvas.width)
+        let scaleY = Tool.getScaleY(this.canvas.height)
         this.ctx.beginPath()
-        this.ctx.arc(x, y, r, 0, 2 * Math.PI)
+        this.ctx.arc(x / scaleX, y / scaleY, r / ((scaleX + scaleY) / 2), 0, 2 * Math.PI)
         this.ctx.fill()
         this.ctx.stroke()
     }
 
     static staticDrawCircle(ctx, x, y, r, fill_color, stroke_color, line_width) {
+        this.height = ctx.canvas.height
+        this.width = ctx.canvas.width
+        let scaleX = Tool.getScaleX(this.width)
+        let scaleY = Tool.getScaleY(this.height)
         let color_stroke_temp = ctx.strokeStyle
         let color_fill_temp = ctx.fillStyle
         let line_width_temp = ctx.lineWidth
@@ -60,7 +72,7 @@ export default class Circle extends Tool {
         ctx.strokeStyle = stroke_color
         ctx.lineWidth = line_width
         ctx.beginPath()
-        ctx.arc(x, y, r, 0, 2 * Math.PI)
+        ctx.arc(x / scaleX, y / scaleY, r / ((scaleX + scaleY) / 2), 0, 2 * Math.PI)
         ctx.fill()
         ctx.stroke()
         ctx.strokeStyle = color_stroke_temp

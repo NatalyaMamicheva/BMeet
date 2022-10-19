@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom'
-import { observer } from "mobx-react-lite";
+import React, {useEffect, useRef, useState} from 'react';
+import {Navigate} from 'react-router-dom'
+import {observer} from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import toolState from "./store/toolState";
 import Brush from "./tools/Brush";
 import Rect from "./tools/Rect";
 import Circle from "./tools/Circle";
 import Line from "./tools/Line";
+import Tool from "./tools/Tool";
 
 const Canvas = observer(() => {
     const canvasRef = useRef()
@@ -62,17 +63,17 @@ const Canvas = observer(() => {
                 else if (object.other_data === 'circle')
                     Circle.staticDrawCircle(ctx, object.coord[0], object.coord[1], object.coord[2], object.fill_color, object.stroke_color, object.width)
                 else if (object.other_data === 'line')
-                    Line.staticDrawStrightLine(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
+                    Line.staticDrawStraightLine(ctx, object.coord[0], object.coord[1], object.coord[2], object.coord[3], object.fill_color, object.stroke_color, object.width)
             }
         })
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management" />
+        return <Navigate to="/board_management"/>
     return (
         <div className="board_canvas">
-            <canvas ref={canvasRef} width={window.innerWidth - 118}
-                height={window.innerHeight - 105} />
+            <canvas ref={canvasRef} width={Tool.getWidthHeight()[0]}
+                    height={Tool.getWidthHeight()[1]}/>
         </div>
     );
 });
