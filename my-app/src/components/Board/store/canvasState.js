@@ -5,6 +5,7 @@ class CanvasState {
     socket = null
     undo_list = []
     redo_list = []
+    line_width = ''
 
     constructor() {
         makeAutoObservable(this)
@@ -58,7 +59,14 @@ class CanvasState {
 
 
     openLine(e) {
-        let target = e.target.querySelector('#board_line_content')
+        this.line_width = e.target
+        console.log(this.line_width)
+        let target = this.line_width.querySelector('#board_line_content')
+        document.addEventListener('click', event => {
+            if (this.line_width !== event.target) {
+                target.style['display'] = null
+            }
+        })
         if (!target.style['display']) {
             target.style['display'] = 'block'
         } else if (target.style['display']) {

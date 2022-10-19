@@ -14,11 +14,12 @@ export default class Rect extends Tool {
     }
 
 
-
     mouseUpHandler(e) {
+        let scaleX = Tool.getScaleX(this.canvas.width)
+        let scaleY = Tool.getScaleY(this.canvas.height)
         this.mouseDown = false
         this.socket.send(JSON.stringify({
-            "coord": [this.startX, this.startY, this.width, this.height],
+            "coord": [this.startX * scaleX, this.startY * scaleY, this.width * scaleX, this.height * scaleY],
             "type": "v",
             "stroke_color": this.ctx.strokeStyle,
             "fill_color": this.ctx.fillStyle,
@@ -36,22 +37,28 @@ export default class Rect extends Tool {
 
     mouseMoveHandler(e) {
         if (this.mouseDown) {
+            let scaleX = Tool.getScaleX(this.canvas.width)
+            let scaleY = Tool.getScaleY(this.canvas.height)
             let currentX = e.pageX - e.target.offsetLeft;
             let currentY = e.pageY - e.target.offsetTop;
             this.width = currentX - this.startX;
             this.height = currentY - this.startY;
-            // this.draw(this.startX, this.startY, this.width, this.height)
+            // this.draw(this.startX * scaleX, this.startY * scaleY, this.width * scaleX, this.height * scaleY)
         }
     }
 
     draw(x, y, w, h) {
+        let scaleX = Tool.getScaleX(this.canvas.width)
+        let scaleY = Tool.getScaleY(this.canvas.height)
         this.ctx.beginPath()
-        this.ctx.rect(x, y, w, h)
+        this.ctx.rect(x / scaleX, y / scaleY, w / scaleX, h / scaleX)
         this.ctx.fill()
         this.ctx.stroke()
     }
 
     static staticDrawRect(ctx, x, y, w, h, fill_color, stroke_color, line_width) {
+        let scaleX = Tool.getScaleX(ctx.canvas.width)
+        let scaleY = Tool.getScaleY(ctx.canvas.height)
         let color_stroke_temp = ctx.strokeStyle
         let color_fill_temp = ctx.fillStyle
         let line_width_temp = ctx.lineWidth
@@ -59,7 +66,7 @@ export default class Rect extends Tool {
         ctx.strokeStyle = stroke_color
         ctx.lineWidth = line_width
         ctx.beginPath()
-        ctx.rect(x, y, w, h)
+        ctx.rect(x / scaleX, y / scaleY, w / scaleX, h / scaleY)
         ctx.fill()
         ctx.stroke()
         ctx.strokeStyle = color_stroke_temp
