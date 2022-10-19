@@ -47,7 +47,7 @@ export default class Circle extends Tool {
             let width = currentX - this.startX
             let height = currentY - this.startY
             this.r = Math.sqrt(width ** 2 + height ** 2)
-            this.draw(this.startX * scaleX, this.startY * scaleY, this.r * (((scaleX + scaleY) / 2)))
+            // this.draw(this.startX * scaleX, this.startY * scaleY, this.r * (((scaleX + scaleY) / 2)))
         }
     }
 
