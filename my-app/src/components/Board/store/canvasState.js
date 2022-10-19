@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class CanvasState {
     canvas = null
@@ -47,6 +47,15 @@ class CanvasState {
             }))
         }
     }
+
+    onResize() {
+        console.log('resize')
+        this.socket.send(JSON.stringify({
+            method: 'resize'
+        }))
+    }
+
+
 
     openLine(e) {
         let target = e.target.querySelector('#board_line_content')

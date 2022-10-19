@@ -11,9 +11,12 @@ import Line from "./tools/Line";
 const Canvas = observer(() => {
     const canvasRef = useRef()
     const [userAccess, setUserAccess] = useState(true);
+    const [dataURL, setDataURL] = useState('');
 
     useEffect(() => {
         let username = localStorage.getItem('username')
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
         canvasState.setCanvas(canvasRef.current)
         let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
@@ -21,6 +24,7 @@ const Canvas = observer(() => {
         toolState.setTool(new Brush(canvasRef.current, socket))
         socket.onopen = () => {
             console.log('Подключение установлено')
+            window.addEventListener('resize', onResize);
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
@@ -46,7 +50,30 @@ const Canvas = observer(() => {
         socket.onerror = function (error) {
             console.log(`[error] ${error.message}`);
         };
+
+        const onResize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let img = document.createElement('img');
+            img.src = canvas.toDataURL('image/png')
+            context.drawImage(img, 0, 0);
+            context.restore();
+        };
+
+
     }, [])
+
+
+    // const onResize = () => {
+    //     let canvas = document.querySelector('#canvas')
+    //     const context = canvas.getContext('2d');
+    //     canvas.width = window.innerWidth;
+    //     canvas.height = window.innerHeight;
+    //     let img = document.createElement('img');
+    //     img.src = this.canvas.toDataURL('image/png');;
+    //     context.drawImage(img, 0, 0);
+    //     context.restore();
+    // };
 
 
     const drawHandler = (data) => {
@@ -67,11 +94,12 @@ const Canvas = observer(() => {
         })
     }
 
+
     if (!userAccess)
         return <Navigate to="/board_management" />
     return (
         <div className="board_canvas">
-            <canvas ref={canvasRef} width={window.innerWidth - 118}
+            <canvas className="canvas" ref={canvasRef} width={window.innerWidth - 118}
                 height={window.innerHeight - 105} />
         </div>
     );
