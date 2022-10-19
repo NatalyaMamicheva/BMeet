@@ -32,7 +32,7 @@ export default class Tool {
     }
 
     updateColorButtonsToolbar() {
-        let brush = document.querySelector('.board_brush')
+        let brush = document.querySelector('.board_brush_active')
         let circle = document.querySelector('.board_circle')
         let rect = document.querySelector('.board_rect')
         let line = document.querySelector('.board__line')

@@ -87,7 +87,7 @@ class Toolbar extends React.Component {
                     </div>
                 </div>
 
-                <div className="toolbar_buttons board_brush"
+                <div className="toolbar_buttons board_brush_active"
                      onClick={() => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket))}>
                 </div>
 
