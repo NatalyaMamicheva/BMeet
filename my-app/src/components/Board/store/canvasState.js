@@ -50,7 +50,6 @@ class CanvasState {
     }
 
     onResize() {
-        console.log('resize')
         this.socket.send(JSON.stringify({
             method: 'resize'
         }))

@@ -1,6 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Navigate} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom'
+import { Navigate } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import toolState from "./store/toolState";
 import Brush from "./tools/Brush";
@@ -22,6 +23,8 @@ const Canvas = observer(() => {
         toolState.setTool(new Brush(canvasRef.current, socket))
         socket.onopen = () => {
             console.log('Подключение установлено')
+            window.addEventListener("resize", onResize);
+
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
@@ -47,6 +50,12 @@ const Canvas = observer(() => {
         socket.onerror = function (error) {
             console.log(`[error] ${error.message}`);
         };
+
+        const onResize = () => {
+            socket.send(JSON.stringify({
+                method: 'resize'
+            }))
+        }
     }, [])
 
 
@@ -69,11 +78,11 @@ const Canvas = observer(() => {
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management"/>
+        return <Navigate to="/board_management" />
     return (
         <div className="board_canvas">
-            <canvas ref={canvasRef} width={Tool.getWidthHeight()[0]}
-                    height={Tool.getWidthHeight()[1]}/>
+            <canvas id="canvas" ref={canvasRef} width={Tool.getWidthHeight()[0]}
+                height={Tool.getWidthHeight()[1]} />
         </div>
     );
 });
