@@ -49,13 +49,6 @@ class CanvasState {
         }
     }
 
-    onResize() {
-        this.socket.send(JSON.stringify({
-            method: 'resize'
-        }))
-    }
-
-
 
     openLine(e) {
         this.line_width = e.target

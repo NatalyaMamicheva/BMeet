@@ -24,7 +24,7 @@ const Canvas = observer(() => {
         socket.onopen = () => {
             console.log('Подключение установлено')
             window.addEventListener("resize", onResize);
-
+            document.querySelector('html').style['overflow'] = 'hidden'
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
@@ -40,6 +40,7 @@ const Canvas = observer(() => {
             drawHandler(data)
         }
         socket.onclose = function (error) {
+            document.querySelector('html').style['overflow'] = null
             if (error.wasClean) {
                 console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
                 if (error.code === 4003) {
@@ -48,13 +49,15 @@ const Canvas = observer(() => {
             }
         };
         socket.onerror = function (error) {
+            document.querySelector('html').style['overflow'] = null
             console.log(`[error] ${error.message}`);
         };
 
-        const onResize = () => {
+        function onResize() {
             socket.send(JSON.stringify({
                 method: 'resize'
             }))
+            window.location.reload()
         }
     }, [])
 
