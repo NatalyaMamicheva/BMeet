@@ -242,11 +242,15 @@ input[type=range]::-moz-range-thumb {
   background: url("../assets/img/toolbar_brush_hover.svg") no-repeat center;
 }
 
-.board_brush:active {
+.board_brush_active {
+  background: url("../assets/img/toolbar_brush_hover.svg") no-repeat center;
+}
+
+.board_brush_active:hover {
   background: url("../assets/img/toolbar_brush.svg") no-repeat center;
 }
 
-.board_brush_active {
+.board_brush_active:active {
   background: url("../assets/img/toolbar_brush_hover.svg") no-repeat center;
 }
 
