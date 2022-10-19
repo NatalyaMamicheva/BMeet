@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class CanvasState {
     canvas = null
@@ -48,6 +48,7 @@ class CanvasState {
             }))
         }
     }
+
 
     openLine(e) {
         this.line_width = e.target

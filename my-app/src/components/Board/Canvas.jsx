@@ -1,6 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Navigate} from 'react-router-dom'
-import {observer} from "mobx-react-lite";
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom'
+import { Navigate } from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import toolState from "./store/toolState";
 import Brush from "./tools/Brush";
@@ -22,6 +23,8 @@ const Canvas = observer(() => {
         toolState.setTool(new Brush(canvasRef.current, socket))
         socket.onopen = () => {
             console.log('Подключение установлено')
+            window.addEventListener("resize", onResize);
+            document.querySelector('html').style['overflow'] = 'hidden'
         }
         socket.onmessage = (event) => {
             let data = JSON.parse(event.data)
@@ -37,6 +40,7 @@ const Canvas = observer(() => {
             drawHandler(data)
         }
         socket.onclose = function (error) {
+            document.querySelector('html').style['overflow'] = null
             if (error.wasClean) {
                 console.log(`[close] Соединение закрыто чисто, код=${error.code}`);
                 if (error.code === 4003) {
@@ -45,8 +49,16 @@ const Canvas = observer(() => {
             }
         };
         socket.onerror = function (error) {
+            document.querySelector('html').style['overflow'] = null
             console.log(`[error] ${error.message}`);
         };
+
+        function onResize() {
+            socket.send(JSON.stringify({
+                method: 'resize'
+            }))
+            window.location.reload()
+        }
     }, [])
 
 
@@ -69,11 +81,11 @@ const Canvas = observer(() => {
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management"/>
+        return <Navigate to="/board_management" />
     return (
         <div className="board_canvas">
-            <canvas ref={canvasRef} width={Tool.getWidthHeight()[0]}
-                    height={Tool.getWidthHeight()[1]}/>
+            <canvas id="canvas" ref={canvasRef} width={Tool.getWidthHeight()[0]}
+                height={Tool.getWidthHeight()[1]} />
         </div>
     );
 });
