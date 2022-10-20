@@ -26,7 +26,12 @@ class Footer extends React.Component {
         return (
             <div className='footer'>
                 <p>COPYRIGHT © {Footer.date()}</p>
-                <p className='footer_bmeet'>BMeet</p>
+                <p className='footer_bmeet'>                            
+                    <span className='auth_yellow'>B</span>
+                    <span className='auth_blue'>M</span>
+                    <span className='auth_yellow'>ee</span>
+                    <span className='auth_blue'>t</span>
+                </p>
             </div>
         )
     }
