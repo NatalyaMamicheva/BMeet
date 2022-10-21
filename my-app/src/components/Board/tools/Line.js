@@ -9,16 +9,21 @@ export default class Line extends Tool {
 
     listen() {
         this.updateColorButtonsToolbar()
-        this.canvas.onmousedown = this.mouseDownHandler.bind(this)
-        this.canvas.onmouseup = this.mouseUpHandler.bind(this)
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
+        this.canvas.ontouchmove = this.mouseMoveHandler.bind(this)
+        this.canvas.onmousedown = this.mouseDownHandler.bind(this)
+        this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
+        this.canvas.onmouseup = this.mouseUpHandler.bind(this)
+        this.canvas.ontouchend = this.mouseUpHandler.bind(this)
     }
 
     mouseDownHandler(e) {
         this.mouseDown = true
+        this.touchStart = true
         this.ctx.beginPath()
-        this.currentX = (e.pageX - e.target.offsetLeft)
-        this.currentY = (e.pageY - e.target.offsetTop)
+        this.currentX = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft)
+        this.currentY = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop)
+        
 
     }
 
@@ -27,6 +32,7 @@ export default class Line extends Tool {
         let scaleY = Tool.getScaleY(this.canvas.height)
         let scale = (scaleX + scaleY) / 2
         this.mouseDown = false
+        this.touchStart = false
         this.socket.send(JSON.stringify({
             "coord": [this.currentX * scale, this.currentY * scale, this.x, this.y],
             "type": "v",
@@ -38,12 +44,12 @@ export default class Line extends Tool {
     }
 
     mouseMoveHandler(e) {
-        if (this.mouseDown) {
+        if (this.mouseDown || this.touchStart) {
             let scaleX = Tool.getScaleX(this.canvas.width)
             let scaleY = Tool.getScaleY(this.canvas.height)
             let scale = (scaleX + scaleY) / 2
-            this.x = (e.pageX - e.target.offsetLeft) * scale
-            this.y = (e.pageY - e.target.offsetTop) * scale
+            this.x = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft) * scale
+            this.y = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop) * scale
         }
     }
 
