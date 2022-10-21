@@ -60,7 +60,6 @@ class BoardItem extends React.Component {
         let board_open = '/board/' + this.props.item.id
         return (
             <div id={this.props.item.id} className='boards_board'>
-
                 <div className="boards_delete_content boards_delete_display"
                     id={`board_${this.props.item.id}`}>
                     <div className="boards_delete_window">
@@ -173,7 +172,7 @@ class BoardItems extends React.Component {
                                 isReload={() => this.props.isReload()}
                             />
                         ))}
-                        <div className="boards_board boards_new_board">
+                        <a className='a_create_board' href='#'><div className="boards_board boards_new_board">
                             <div className="boards_board_size">
                                 <p className='boards_not_invitations_p'
                                     onClick={(event) => this.handleShowCreateBoard(event)}>
@@ -181,6 +180,7 @@ class BoardItems extends React.Component {
                                 </p>
                             </div>
                         </div>
+                        </a>
                     </div>
                 </div>
 
