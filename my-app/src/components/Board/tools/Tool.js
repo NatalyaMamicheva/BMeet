@@ -20,8 +20,11 @@ export default class Tool {
 
     destroyEvents() {
         this.canvas.onmousemove = null
+        this.canvas.ontouchmove = null
         this.canvas.onmousedown = null
+        this.canvas.ontouchstart = null
         this.canvas.onmouseup = null
+        this.canvas.ontouchend = null
     }
 
     removeFigureClass(figure_class, figure) {

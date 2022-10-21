@@ -23,8 +23,11 @@ export default class Brush extends Tool {
     listen() {
         this.updateColorButtonsToolbar()
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
+        this.canvas.ontouchmove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
+        this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
+        this.canvas.ontouchend = this.mouseUpHandler.bind(this)
     };
 
     static drawLine(ctx, coord, fill_color, stroke_color, line_width) {
@@ -52,7 +55,8 @@ export default class Brush extends Tool {
 
     mouseUpHandler() {
         this.mouseDown = false;
-        if (!this.mouseDown) {
+        this.touchStart = false;
+        if (!this.mouseDown || !this.touchStart) {
             Brush.drawLine(this.ctx, this.coords.coord, this.ctx.fillStyle, this.ctx.strokeStyle)
             if (this.coords.coord.length > 0) {
                 this.coords.stroke_color = this.ctx.strokeStyle
@@ -77,16 +81,17 @@ export default class Brush extends Tool {
 
     mouseDownHandler(e) {
         this.mouseDown = this.coords.coord.length <= 0;
+        this.touchStart = this.coords.coord.length <= 0;
         this.ctx.beginPath();
-        this.ctx.moveTo(e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop);
+        this.ctx.moveTo((e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop) || e.touches[0].pageX - e.target.offsetLeft, e.touches[0].pageY - e.target.offsetTop);
     };
 
     mouseMoveHandler(e) {
-        if (this.mouseDown) {
+        if (this.mouseDown || this.touchStart) {
             let scaleX = Tool.getScaleX(this.canvas.width)
             let scaleY = Tool.getScaleY(this.canvas.height)
-            let x = e.pageX - e.target.offsetLeft
-            let y = e.pageY - e.target.offsetTop
+            let x = e.pageX - e.target.offsetLeft || e.touches[0].pageX - e.target.offsetLeft
+            let y = e.pageY - e.target.offsetTop || e.touches[0].pageY - e.target.offsetTop
             this.coords.coord.push([x * scaleX, y * scaleY]);
             this.ctx.lineTo(x, y);
             this.ctx.stroke();

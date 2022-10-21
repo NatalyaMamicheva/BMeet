@@ -12,21 +12,26 @@ export default class Circle extends Tool {
     listen() {
         this.updateColorButtonsToolbar()
         this.canvas.onmousemove = this.mouseMoveHandler.bind(this)
+        this.canvas.ontouchmove = this.mouseMoveHandler.bind(this)
         this.canvas.onmousedown = this.mouseDownHandler.bind(this)
+        this.canvas.ontouchstart = this.mouseDownHandler.bind(this)
         this.canvas.onmouseup = this.mouseUpHandler.bind(this)
+        this.canvas.ontouchend = this.mouseUpHandler.bind(this)
     }
 
     mouseDownHandler(e) {
         this.mouseDown = true
+        this.touchStart = true
         this.ctx.beginPath()
-        this.startX = e.pageX - e.target.offsetLeft
-        this.startY = e.pageY - e.target.offsetTop
+        this.startX  = e.pageX - e.target.offsetLeft || e.touches[0].pageX - e.target.offsetLeft
+        this.startY  = e.pageY - e.target.offsetTop || e.touches[0].pageY - e.target.offsetTop
     }
 
     mouseUpHandler(e) {
         let scaleX = Tool.getScaleX(this.canvas.width)
         let scaleY = Tool.getScaleY(this.canvas.height)
         this.mouseDown = false
+        this.touchStart = false
         this.socket.send(JSON.stringify({
             "coord": [this.startX * scaleX, this.startY * scaleY, this.r * (((scaleX + scaleY) / 2))],
             "type": "v",
@@ -39,11 +44,11 @@ export default class Circle extends Tool {
     }
 
     mouseMoveHandler(e) {
-        if (this.mouseDown) {
+        if (this.mouseDown || this.touchStart) {
             let scaleX = Tool.getScaleX(this.canvas.width)
             let scaleY = Tool.getScaleY(this.canvas.height)
-            let currentX = e.pageX - e.target.offsetLeft
-            let currentY = e.pageY - e.target.offsetTop
+            let currentX = e.pageX - e.target.offsetLeft || e.touches[0].pageX - e.target.offsetLeft
+            let currentY = e.pageY - e.target.offsetTop || e.touches[0].pageY - e.target.offsetTop
             let width = currentX - this.startX
             let height = currentY - this.startY
             this.r = Math.sqrt(width ** 2 + height ** 2)
