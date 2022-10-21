@@ -19,8 +19,9 @@ class Toolbar extends React.Component {
     }
 
     componentWillUnmount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-        document.addEventListener('touchstart', this.handleClickOutside);
+        document.removeEventListener('mousedown', this.handleClickOutside);
+        document.removeEventListener('touchstart', this.handleClickOutside);
+
     }
 
     setWrapperRef(node) {
