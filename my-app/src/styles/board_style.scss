@@ -55,14 +55,17 @@ canvas {
 .board_color_button {
   border: none;
   background: transparent url("../assets/img/toolbar_color.svg") no-repeat center;
+  
 }
 
 .board_color_button:hover {
   background: url("../assets/img/toolbar_color_hover.svg") no-repeat center;
+  
 }
 
 .board_color_button:focus {
   background: url("../assets/img/toolbar_color_hover.svg") no-repeat center;
+  
 }
 
 input[type="color" i]::-webkit-color-swatch-wrapper {
@@ -261,6 +264,7 @@ input[type=range]::-moz-range-thumb {
 
 .board_eraser:hover {
   background: url("../assets/img/toolbar_eraser_hover.svg") no-repeat center;
+  
 }
 
 .board_eraser:active {
@@ -306,3 +310,29 @@ input[type=range]::-moz-range-thumb {
     margin: 1px 19px 0;
   }
 }
+
+[data-tooltip] {
+  position: relative;
+ }
+[data-tooltip]::after {
+  content: attr(data-tooltip); 
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  position: relative;
+  width: 300px; 
+  left: 0; top: 0;
+  background: #FFFFFF; 
+  color: #E7B460;
+  padding: 0.5em; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+  pointer-events: none; 
+  opacity: 0; 
+  transition: 1s;
+ } 
+[data-tooltip]:hover::after {
+  opacity: 1; 
+  left: 3.7em; 
+ }
+

@@ -15,13 +15,11 @@ class Toolbar extends React.Component {
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        document.addEventListener('touchstart', this.handleClickOutside);
     }
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
         document.removeEventListener('touchstart', this.handleClickOutside);
-
     }
 
     setWrapperRef(node) {
@@ -44,42 +42,43 @@ class Toolbar extends React.Component {
 
             <div className='board_toolbar'>
                 <div className="toolbar_buttons board_undo_button"
-                     onClick={() => canvasState.undo()}>
+                     onClick={() => canvasState.undo()} data-tooltip="Отменить">
                 </div>
 
                 <div className="toolbar_buttons board_redo_button"
-                     onClick={() => canvasState.redo()}>
+                     onClick={() => canvasState.redo()} data-tooltip="Повторить">
                 </div>
 
                 <div>
                     <input className="toolbar_buttons board_color_button"
                            onChange={event => toolState.setStrokeColor(event.target.value)}
-                           id="toolbar_color" type='color'>
+                           id="toolbar_color" type='color' data-tooltip="Цвет">
                     </input>
                     <label htmlFor="toolbar_color"></label>
                 </div>
 
                 <div className="toolbar_buttons board_width_line"
-                     onClick={(e) => canvasState.openLine(e)}>
+                     onClick={(e) => canvasState.openLine(e)} data-tooltip="Толщина">
                     <div className="board_line_content"
                          id="board_line_content">
                         <input className="board_line" id='board_line'
                                onChange={e => toolState.setLineWidth(e.target.value)}
                                type="range" defaultValue={1} min={1} max={50}/>
+                        
                     </div>
                 </div>
 
                 <div>
                     <input className="toolbar_buttons board_color_fill_button"
                            onChange={event => toolState.setFillColor(event.target.value)}
-                           id="toolbar_color" type='color'>
+                           id="toolbar_color" type='color' data-tooltip="Заливка">
                     </input>
                     <label htmlFor="toolbar_color"></label>
                 </div>
 
                 <div className="toolbar_buttons board_figure_content board_figure_content_board_rect"
                      ref={this.setWrapperRef}
-                     onClick={(e) => canvasState.openFigure(e)}>
+                     onClick={(e) => canvasState.openFigure(e)} data-tooltip="Фигуры">
                     <div className="board_figures" id='board_figures'>
                         <div className="board_rect"
                              onClick={() => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket))}></div>
@@ -91,10 +90,11 @@ class Toolbar extends React.Component {
                 </div>
 
                 <div className="toolbar_buttons board_brush_active"
+                    data-tooltip="Карандаш"
                      onClick={() => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket))}>
                 </div>
 
-                <div className="toolbar_buttons board_eraser"></div>
+               <div className="toolbar_buttons board_eraser"  data-tooltip="Ластик"></div>
 
                 <div className="toolbar_collapse">
                     <a href='#' onClick={() => toolState.collapse()}>Свернуть</a>
