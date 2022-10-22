@@ -337,5 +337,5 @@ input[type=range]::-moz-range-thumb {
 [data-tooltip]:hover::after {
   opacity: 1;
   left: 3.7em;
+  border-radius: 10px;
 }
-
