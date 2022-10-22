@@ -16,7 +16,7 @@ class BoardItem extends React.Component {
 
 
     handleShowUpdateBoard() {
-        this.setState({ isOpenUpdate: !this.state.isOpenUpdate });
+        this.setState({isOpenUpdate: !this.state.isOpenUpdate});
     }
 
     static DeleteModal(event) {
@@ -38,11 +38,11 @@ class BoardItem extends React.Component {
             headers: headers,
         })
             .then(response => {
-                this.setState({ 'error_message': '' });
+                this.setState({'error_message': ''});
                 this.props.isReload()
             })
             .catch(error => {
-                this.setState({ 'error_message': error.message })
+                this.setState({'error_message': error.message})
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
@@ -61,12 +61,12 @@ class BoardItem extends React.Component {
         return (
             <div id={this.props.item.id} className='boards_board'>
                 <div className="boards_delete_content boards_delete_display"
-                    id={`board_${this.props.item.id}`}>
+                     id={`board_${this.props.item.id}`}>
                     <div className="boards_delete_window">
                         <div className="boards_delete_close">
                             <div className="boards_delete_close_button"
-                                id={`board_${this.props.item.id}`}
-                                onClick={(event) => BoardItem.DeleteModal(event)}></div>
+                                 id={`board_${this.props.item.id}`}
+                                 onClick={(event) => BoardItem.DeleteModal(event)}></div>
                         </div>
                         <div className="boards_delete_text">
                             <div className="boards_delete_title">
@@ -78,12 +78,12 @@ class BoardItem extends React.Component {
                         </div>
                         <div className="boards_delete_buttons">
                             <button className='profile_save'
-                                onClick={(event) => this.DeleteBoard(event)}>
+                                    onClick={(event) => this.DeleteBoard(event)}>
                                 Удалить
                             </button>
                             <button className='boards_delete_button_cancel'
-                                id={`board_${this.props.item.id}`}
-                                onClick={(event) => BoardItem.DeleteModal(event)}>
+                                    id={`board_${this.props.item.id}`}
+                                    onClick={(event) => BoardItem.DeleteModal(event)}>
                                 Отменить
                             </button>
                         </div>
@@ -92,7 +92,7 @@ class BoardItem extends React.Component {
 
                 {this.state.error_message &&
                     <p className="error_p"
-                        ref={this.errorRef}>{this.state.error_message}</p>}
+                       ref={this.errorRef}>{this.state.error_message}</p>}
                 <React.Fragment>
                     {this.state.isOpenUpdate && (
                         <CreateUpdateBoard
@@ -102,7 +102,7 @@ class BoardItem extends React.Component {
                             create_or_update='update'
                             title='Редактирование доски'
                             text_button='Сохранить'
-                            text_p='Здесь Вы можете отредактировать основную информацию о доске' />)
+                            text_p='Здесь Вы можете отредактировать основную информацию о доске'/>)
                     }
                 </React.Fragment>
                 <div className="boards_board_size">
@@ -125,15 +125,19 @@ class BoardItem extends React.Component {
                     <div className="boards_button_update_and_delete">
 
                         {update ? (
-                             <a className='a_create_board' href='#'><div className="boards_buttons_update"
-                                onClick={(event) => this.handleShowUpdateBoard(event)}></div></a>
+                            <a className='boards_button_a' href='#'>
+                                <div className="boards_buttons_update"
+                                     onClick={(event) => this.handleShowUpdateBoard(event)}></div>
+                            </a>
                         ) : (
                             <div></div>
                         )}
 
-                        <a className='a_create_board' href='#'><div className="boards_buttons_delete"
-                            id={`board_${this.props.item.id}`}
-                            onClick={(event) => BoardItem.DeleteModal(event)}></div></a>
+                        <a className='boards_button_a' href='#'>
+                            <div className="boards_buttons_delete"
+                                 id={`board_${this.props.item.id}`}
+                                 onClick={(event) => BoardItem.DeleteModal(event)}></div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -148,11 +152,10 @@ class BoardItems extends React.Component {
         this.state = {
             isOpenCreate: false,
         }
-
     }
 
     handleShowCreateBoard() {
-        this.setState({ isOpenCreate: !this.state.isOpenCreate });
+        this.setState({isOpenCreate: !this.state.isOpenCreate});
     }
 
     render() {
@@ -168,18 +171,19 @@ class BoardItems extends React.Component {
                     <div className="boards_my_boards">
                         {this.props.my_boards.map(el => (
                             <BoardItem key={el.id} item={el}
-                                getHeader={() => this.props.getHeader()}
-                                isReload={() => this.props.isReload()}
+                                       getHeader={() => this.props.getHeader()}
+                                       isReload={() => this.props.isReload()}
                             />
                         ))}
-                        <a className='a_create_board' href='#'><div className="boards_board boards_new_board">
-                            <div className="boards_board_size">
-                                <p className='boards_not_invitations_p'
-                                    onClick={(event) => this.handleShowCreateBoard(event)}>
-                                    Создать новую доску
-                                </p>
+                        <a className='boards_button_a' href='#'>
+                            <div className="boards_board boards_new_board">
+                                <div className="boards_board_size">
+                                    <p className='boards_not_invitations_p'
+                                       onClick={(event) => this.handleShowCreateBoard(event)}>
+                                        Создать новую доску
+                                    </p>
+                                </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 </div>
@@ -203,8 +207,8 @@ class BoardItems extends React.Component {
                         <div className="boards_my_boards">
                             {this.props.other_boards.map(el => (
                                 <BoardItem key={el.id} item={el}
-                                    getHeader={() => this.props.getHeader()}
-                                    isReload={() => this.props.isReload()}
+                                           getHeader={() => this.props.getHeader()}
+                                           isReload={() => this.props.isReload()}
                                 />
                             ))}
                             <div>
