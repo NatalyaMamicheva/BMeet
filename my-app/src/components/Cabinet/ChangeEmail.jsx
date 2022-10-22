@@ -18,7 +18,6 @@ class ChangeEmail extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.state.new_email, this.state.old_email)
         axios
             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${this.state.old_email}/${this.state.new_email}/${this.state.key}/`)
             .then(response => {
@@ -35,7 +34,7 @@ class ChangeEmail extends React.Component {
     }
 
     render() {
-        if (this.state.token) return <Navigate to="/cabinet" />;
+        if (localStorage.getItem('token')) return <Navigate to="/cabinet" />;
         else return (
             <div>
                 {this.state.error_message &&
