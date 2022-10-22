@@ -43,7 +43,7 @@
 }
 
 .boards_new_board p {
-  color: #E7B460
+  color: #E7B460;
 }
 
 .boards_not_invitations_p {
@@ -81,6 +81,7 @@
 
 .boards_title a:hover {
   color: #E7B460;
+
 }
 
 .boards_description {
@@ -414,4 +415,8 @@
   background: #D8D6DE;
   color: #FFFFFF;
   border: #D8D6DE 1px solid;
+}
+
+.boards_button_a {
+  text-decoration: none;
 }
