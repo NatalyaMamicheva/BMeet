@@ -125,15 +125,15 @@ class BoardItem extends React.Component {
                     <div className="boards_button_update_and_delete">
 
                         {update ? (
-                            <div className="boards_buttons_update"
-                                onClick={(event) => this.handleShowUpdateBoard(event)}></div>
+                             <a className='a_create_board' href='#'><div className="boards_buttons_update"
+                                onClick={(event) => this.handleShowUpdateBoard(event)}></div></a>
                         ) : (
                             <div></div>
                         )}
 
-                        <div className="boards_buttons_delete"
+                        <a className='a_create_board' href='#'><div className="boards_buttons_delete"
                             id={`board_${this.props.item.id}`}
-                            onClick={(event) => BoardItem.DeleteModal(event)}></div>
+                            onClick={(event) => BoardItem.DeleteModal(event)}></div></a>
                     </div>
                 </div>
             </div>
