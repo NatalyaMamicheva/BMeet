@@ -44,7 +44,7 @@ class PersonalPage extends React.Component {
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
-                {headers})
+                { headers })
             .then(response => {
                 this.setState({
                     'username': response.data.username,
@@ -59,7 +59,7 @@ class PersonalPage extends React.Component {
 
             })
             .catch(error => {
-                this.setState({'error_message': error.message})
+                this.setState({ 'error_message': error.message })
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
@@ -71,6 +71,9 @@ class PersonalPage extends React.Component {
         event.preventDefault();
         let headers = this.props.getHeader()
         let data = {}
+        this.setState({
+            'email': this.state.email.toLowerCase()
+        })
         if (this.state.username !== this.state.start_username) data['username'] = this.state.username
         if (this.state.email !== this.state.start_email) data['email'] = this.state.email
         if (this.state.password !== this.state.start_password) data['password'] = this.state.password
@@ -89,7 +92,7 @@ class PersonalPage extends React.Component {
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('token', response.data.token)
                 if (this.state.email !== this.state.start_email)
-                    this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
+                    this.setState({ message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email` });
                 this.componentDidMount()
             })
             .catch(error => {
@@ -99,12 +102,12 @@ class PersonalPage extends React.Component {
                     'error_message': ''
                 });
                 if (!error.response.data)
-                    this.setState({error_message: error.message});
+                    this.setState({ error_message: error.message });
                 else {
                     if (error.response.data.email)
-                        this.setState({error_message_email: error.response.data.email});
+                        this.setState({ error_message_email: error.response.data.email });
                     if (error.response.data.username)
-                        this.setState({error_message_username: error.response.data.username});
+                        this.setState({ error_message_username: error.response.data.username });
                 }
             })
     }
@@ -131,21 +134,21 @@ class PersonalPage extends React.Component {
         })
 
         if (event.target.value !== this.state['start_' + event.target.name])
-            this.setState({'disabled_btn': false})
+            this.setState({ 'disabled_btn': false })
         else
-            this.setState({'disabled_btn': true})
+            this.setState({ 'disabled_btn': true })
     }
 
     state_close(event) {
         event.preventDefault()
         this.b_open = document.querySelector('#one');
-        this.setState({'readOnly': false, 'class_open': 'profile_open_pass'})
+        this.setState({ 'readOnly': false, 'class_open': 'profile_open_pass' })
     }
 
     state_open(event) {
         event.preventDefault()
         this.b_open = document.querySelector('#one');
-        this.setState({'readOnly': true, 'class_open': 'profile_close_pass'})
+        this.setState({ 'readOnly': true, 'class_open': 'profile_close_pass' })
     }
 
     _click(event) {
@@ -164,7 +167,7 @@ class PersonalPage extends React.Component {
             this.state.is_save = true
         }
         setTimeout(
-            () => this.setState({'is_save': false}),
+            () => this.setState({ 'is_save': false }),
             3000
         );
     }
@@ -173,12 +176,12 @@ class PersonalPage extends React.Component {
         return (
 
             <div className='profile'>
-                <Header logout={() => this.props.logout()}/>
+                <Header logout={() => this.props.logout()} />
 
                 <React.Fragment>
                     {this.state.is_save && (
                         <IsSaveInfo
-                            handleShowIsSave={() => this.handleShowIsSave()}/>)}
+                            handleShowIsSave={() => this.handleShowIsSave()} />)}
                 </React.Fragment>
 
                 <div className='profile_card'>
@@ -188,7 +191,7 @@ class PersonalPage extends React.Component {
                     </div>
                     {this.state.error_message &&
                         <p className="error_p"
-                           ref={this.errorRef}>{this.state.error_message}</p>}
+                            ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
                             <div className='profile_title_input'>
@@ -199,11 +202,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input name='username'
-                                                   className='profile_input_text'
-                                                   type="text"
-                                                   placeholder="bmeet"
-                                                   value={this.state.username}
-                                                   onChange={(event) => this.handleChange(event)}
+                                                className='profile_input_text'
+                                                type="text"
+                                                placeholder="bmeet"
+                                                value={this.state.username}
+                                                onChange={(event) => this.handleChange(event)}
                                             ></input>
                                         </label>
                                     </div>
@@ -217,11 +220,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="email"
-                                                   className='profile_input_text'
-                                                   name="email"
-                                                   placeholder="bmeet@gmail.com"
-                                                   onChange={(event) => this.handleChange(event)}
-                                                   value={this.state.email}/>
+                                                className='profile_input_text'
+                                                name="email"
+                                                placeholder="bmeet@gmail.com"
+                                                onChange={(event) => this.handleChange(event)}
+                                                value={this.state.email} />
                                         </label>
                                     </div>
                                     <p className='error_p'>{this.state.error_message_email}</p>
@@ -235,11 +238,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="text"
-                                                   name="last_name"
-                                                   className="profile_input_text"
-                                                   placeholder="Введите фамилию"
-                                                   onChange={(event) => this.handleChange(event)}
-                                                   value={this.state.last_name}/>
+                                                name="last_name"
+                                                className="profile_input_text"
+                                                placeholder="Введите фамилию"
+                                                onChange={(event) => this.handleChange(event)}
+                                                value={this.state.last_name} />
                                         </label>
                                     </div>
                                 </div>
@@ -251,11 +254,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="text"
-                                                   name="first_name"
-                                                   className="profile_input_text"
-                                                   placeholder="Введите имя"
-                                                   onChange={(event) => this.handleChange(event)}
-                                                   value={this.state.first_name}/>
+                                                name="first_name"
+                                                className="profile_input_text"
+                                                placeholder="Введите имя"
+                                                onChange={(event) => this.handleChange(event)}
+                                                value={this.state.first_name} />
                                         </label>
                                     </div>
                                 </div>
@@ -272,12 +275,12 @@ class PersonalPage extends React.Component {
                                                 <tr>
                                                     <th>
                                                         <input type="password"
-                                                               name="password"
-                                                               readOnly={this.state['readOnly']}
-                                                               className='profile_input_text password_input_text'
-                                                               placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                                               onChange={(event) => this.handleChange(event)}
-                                                               value={this.state.password}/>
+                                                            name="password"
+                                                            readOnly={this.state['readOnly']}
+                                                            className='profile_input_text password_input_text'
+                                                            placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                            onChange={(event) => this.handleChange(event)}
+                                                            value={this.state.password} />
                                                     </th>
                                                     <th>
                                                         <div
@@ -297,19 +300,19 @@ class PersonalPage extends React.Component {
 
                             <div className='profile_buttons'>
                                 <button className='profile_save' type="submit"
-                                        disabled={this.state.disabled_btn}
-                                        value="submit" id="save"> Сохранить
+                                    disabled={this.state.disabled_btn}
+                                    value="submit" id="save"> Сохранить
                                 </button>
                                 <button className='profile_cancel'
-                                        disabled={this.state.disabled_btn}
-                                        id="cancel"
-                                        onClick={(event) => this.handleCancel(event)}>Отменить
+                                    disabled={this.state.disabled_btn}
+                                    id="cancel"
+                                    onClick={(event) => this.handleCancel(event)}>Отменить
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         )
     }
