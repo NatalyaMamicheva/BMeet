@@ -27,6 +27,7 @@ class PersonalPage extends React.Component {
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
+            'message_password': '',
             'message_change_email': '',
             'disabled_btn': true,
             'is_save': false,
@@ -34,7 +35,6 @@ class PersonalPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.state.is_save)
         this.setState({
             'error_message': '',
             'error_message_username': '',
@@ -74,42 +74,53 @@ class PersonalPage extends React.Component {
         this.setState({
             'email': this.state.email.toLowerCase()
         })
+        if (this.state.password !== this.state.start_password) {
+            if (this.props.check_password(this.state.password)) {
+                data['password'] = this.state.password
+                this.setState({
+                    'message_password': '',
+                })
+            }
+            else this.setState({
+                'message_password': 'Пароль не удовлетворяет условиям безопасности',
+            })
+        }
         if (this.state.username !== this.state.start_username) data['username'] = this.state.username
         if (this.state.email !== this.state.start_email) data['email'] = this.state.email
-        if (this.state.password !== this.state.start_password) data['password'] = this.state.password
         if (this.state.first_name !== this.state.start_first_name) data['first_name'] = this.state.first_name
         if (this.state.last_name !== this.state.start_last_name) data['last_name'] = this.state.last_name
-
-        axios.request({
-            url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
-            method: "patch",
-            headers: headers,
-            data: data
-        })
-            .then(response => {
-                this.handleShowIsSave()
-                localStorage.setItem('username', response.data.username)
-                localStorage.setItem('email', response.data.email)
-                localStorage.setItem('token', response.data.token)
-                if (this.state.email !== this.state.start_email)
-                    this.setState({ message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email` });
-                this.componentDidMount()
+        if (!this.isEmpty(data)) {
+            axios.request({
+                url: `http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
+                method: "patch",
+                headers: headers,
+                data: data
             })
-            .catch(error => {
-                this.setState({
-                    'error_message_username': '',
-                    'error_message_email': '',
-                    'error_message': ''
-                });
-                if (!error.response.data)
-                    this.setState({ error_message: error.message });
-                else {
-                    if (error.response.data.email)
-                        this.setState({ error_message_email: error.response.data.email });
-                    if (error.response.data.username)
-                        this.setState({ error_message_username: error.response.data.username });
-                }
-            })
+                .then(response => {
+                    this.handleShowIsSave()
+                    localStorage.setItem('username', response.data.username)
+                    localStorage.setItem('email', response.data.email)
+                    localStorage.setItem('token', response.data.token)
+                    if (this.state.email !== this.state.start_email)
+                        this.setState({ message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email` });
+                    this.componentDidMount()
+                })
+                .catch(error => {
+                    this.setState({
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        'error_message': ''
+                    });
+                    if (!error.response.data)
+                        this.setState({ error_message: error.message });
+                    else {
+                        if (error.response.data.email)
+                            this.setState({ error_message_email: error.response.data.email });
+                        if (error.response.data.username)
+                            this.setState({ error_message_username: error.response.data.username });
+                    }
+                })
+        }
     }
 
     handleCancel(event) {
@@ -170,6 +181,12 @@ class PersonalPage extends React.Component {
             () => this.setState({ 'is_save': false }),
             3000
         );
+    }
+
+    isEmpty(obj) {
+        for (let key in obj)
+            return false
+        return true
     }
 
     render() {
@@ -295,6 +312,7 @@ class PersonalPage extends React.Component {
                                             </table>
                                         </label>
                                     </div>
+                                    <p className='error_p'>{this.state.message_password}</p>
                                 </div>
                             </div>
 

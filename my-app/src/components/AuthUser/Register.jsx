@@ -20,52 +20,59 @@ class RegisterForm extends React.Component {
             'success': false,
             'error_message_username': '',
             'error_message_email': '',
+            'message_password': '',
             'error_message': ''
         }
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        axios
-            .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/`,
-                {
-                    'username': this.state.username,
-                    'email': this.state.email,
-                    'password': this.state.password
-                }
-            )
-            .then(response => {
-                this.email = response.data.email
-                this.id = response.data.id
-                this.username = response.data.username
-                this.password = response.data.password
-                this.setState({
-                    'username': '',
-                    'email': '',
-                    'password': '',
-                    'success': true,
-                    'error_message_username': '',
-                    'error_message_email': '',
-                    'error_message': ''
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    'error_message_username': '',
-                    'error_message_email': '',
-                    'error_message': ''
-                });
-                if (!error.response.data)
-                    this.setState({ error_message: error.message });
-                else {
-                    if (error.response.data.email)
-                        this.setState({ error_message_email: error.response.data.email });
-                    if (error.response.data.username)
-                        this.setState({ error_message_username: error.response.data.username });
-                }
-                ;
-                this.errorRef.current.focus();
-            })
+        console.log(this.props.check_password(this.state.password), this.state.password)
+        if (this.props.check_password(this.state.password)) {
+            this.setState({ message_password: '' })
+            axios
+                .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/`,
+                    {
+                        'username': this.state.username,
+                        'email': this.state.email,
+                        'password': this.state.password
+                    }
+                )
+                .then(response => {
+                    this.email = response.data.email
+                    this.id = response.data.id
+                    this.username = response.data.username
+                    this.password = response.data.password
+                    this.setState({
+                        'username': '',
+                        'email': '',
+                        'password': '',
+                        'success': true,
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        'message_password': '',
+                        'error_message': ''
+                    });
+                })
+                .catch(error => {
+                    this.setState({
+                        'error_message_username': '',
+                        'error_message_email': '',
+                        'error_message': ''
+                    });
+                    if (!error.response.data)
+                        this.setState({ error_message: error.message });
+                    else {
+                        if (error.response.data.email)
+                            this.setState({ error_message_email: error.response.data.email });
+                        if (error.response.data.username)
+                            this.setState({ error_message_username: error.response.data.username });
+                    }
+                    ;
+                    this.errorRef.current.focus();
+                })
+        }
+        else this.setState({ message_password: 'Пароль не удовлетворяет условиям безопасности' });
     }
 
     handleChange(event) {
@@ -156,6 +163,8 @@ class RegisterForm extends React.Component {
                                                     value={this.state.password} />
                                             </label>
                                         </div>
+                                        <p className='error_p'
+                                            ref={this.errorRef}>{this.state.message_password}</p>
                                     </div>
                                     <div className='auth_input_button'>
                                         <button
