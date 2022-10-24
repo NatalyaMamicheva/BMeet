@@ -44,6 +44,12 @@ class App extends React.Component {
         })
     }
 
+    check_password(password) {
+        const pattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s])([^\s]){8,}$/;
+        const isOk = pattern.test(password);
+        return isOk
+    }
+
 
     render() {
         return (
@@ -53,11 +59,11 @@ class App extends React.Component {
                         <Routes>
                             <Route exact path='/' element={<Login />} />
                             <Route path='/board_management' element={<BoardManagement getHeader={() => this.getHeader()} logout={() => this.logout()} />} />
-                            <Route path='/cabinet' element={<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()} />} />
-                            <Route path='/board/:id' element={<Board getHeader={() => this.getHeader()} logout={() => this.logout()}/>} />
+                            <Route path='/cabinet' element={<PersonalPage getHeader={() => this.getHeader()} logout={() => this.logout()} check_password={(password) => this.check_password(password)} />} />
+                            <Route path='/board/:id' element={<Board getHeader={() => this.getHeader()} logout={() => this.logout()} />} />
                             <Route path='/users/:action/:email/:key' element={<FromEmail />} />
                             <Route path='/profile/:old_email/:new_email/:key' element={<ChangeEmail />} />
-                            <Route exact path='/register' element={<RegisterForm />} />
+                            <Route exact path='/register' element={<RegisterForm check_password={(password) => this.check_password(password)} />} />
                             <Route exact path='/recpassword' element={<Password />} />
 
                             <Route path="*" element={<NotFound />} />
