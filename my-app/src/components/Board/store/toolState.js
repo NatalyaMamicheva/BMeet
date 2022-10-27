@@ -29,8 +29,8 @@ class ToolState {
                 }
             } else {
                 if (!this.strokeColor) {
-                    this.tool.strokeColor = this.tool.ctx.strokeColor
-                    this.strokeColor = this.tool.ctx.strokeColor
+                    this.tool.strokeColor = '#000000'
+                    this.strokeColor = '#000000'
                 } else {
                     this.tool.strokeColor = this.strokeColor
                 }
@@ -51,10 +51,8 @@ class ToolState {
         if (event) {
             if (!eraser_active) {
                 this.tool.strokeColor = event.target.value
-                this.strokeColor = event.ctx.strokeColor
-            } else {
-                this.strokeColor = event.target.value
             }
+            this.strokeColor = event.target.value
         }
     }
 
