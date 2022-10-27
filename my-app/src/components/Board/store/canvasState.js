@@ -52,7 +52,6 @@ class CanvasState {
 
     openLine(e) {
         this.line_width = e.target
-        console.log(this.line_width)
         let target = this.line_width.querySelector('#board_line_content')
         document.addEventListener('click', event => {
             if (this.line_width !== event.target) {

@@ -250,7 +250,7 @@ input[type=range]::-moz-range-thumb {
 }
 
 .board_brush_active:hover {
-  background: url("../assets/img/toolbar_brush.svg") no-repeat center;
+  background: url("../assets/img/toolbar_brush_hover.svg") no-repeat center;
 }
 
 .board_brush_active:active {
@@ -264,11 +264,14 @@ input[type=range]::-moz-range-thumb {
 
 .board_eraser:hover {
   background: url("../assets/img/toolbar_eraser_hover.svg") no-repeat center;
-
 }
 
 .board_eraser:active {
   background: url("../assets/img/toolbar_eraser.svg") no-repeat center;
+}
+
+.board_eraser_active {
+  background: url("../assets/img/toolbar_eraser_hover.svg") no-repeat center;
 }
 
 .toolbar_collapse {
