@@ -6,6 +6,7 @@ import Line from './tools/Line';
 import Rect from "./tools/Rect";
 import Circle from "./tools/Circle";
 
+
 class Toolbar extends React.Component {
     constructor(props) {
         super(props);
@@ -52,7 +53,7 @@ class Toolbar extends React.Component {
 
                 <div>
                     <input className="toolbar_buttons board_color_button"
-                           onChange={event => toolState.setStrokeColor(event.target.value)}
+                           onChange={event => toolState.setStrokeColor(event)}
                            id="toolbar_color" type='color' data-tooltip="Цвет">
                     </input>
                     <label htmlFor="toolbar_color"></label>
@@ -85,20 +86,21 @@ class Toolbar extends React.Component {
                     data-tooltip="Фигуры">
                     <div className="board_figures" id='board_figures'>
                         <div className="board_rect"
-                             onClick={() => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket))}></div>
+                             onClick={(e) => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket), e)}></div>
                         <div className="board_circle"
-                             onClick={() => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket))}></div>
+                             onClick={(e) => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket), e)}></div>
                         <div className="board__line"
-                             onClick={() => toolState.setTool(new Line(canvasState.canvas, canvasState.socket))}></div>
+                             onClick={(e) => toolState.setTool(new Line(canvasState.canvas, canvasState.socket), e)}></div>
                     </div>
                 </div>
 
                 <div className="toolbar_buttons board_brush_active"
                      data-tooltip="Карандаш"
-                     onClick={() => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket))}>
+                     onClick={(e) => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket), e)}>
                 </div>
 
                 <div className="toolbar_buttons board_eraser"
+                     onClick={(e) => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket), e)}
                      data-tooltip="Ластик"></div>
 
                 <div className="toolbar_collapse">

@@ -40,6 +40,7 @@ export default class Tool {
         let rect = document.querySelector('.board_rect')
         let line = document.querySelector('.board__line')
         let figure = document.querySelector('.board_figure_content')
+        let eraser = document.querySelector('.board_eraser')
         let figure_class = ['board_figure_content_board_rect', 'board_figure_content_board_circle', 'board_figure_content_board__line']
 
         document.addEventListener('click', event => {
@@ -47,6 +48,8 @@ export default class Tool {
             if (element === brush) {
                 brush.classList.add('board_brush_active')
                 brush.classList.remove('board_brush')
+                eraser.classList.remove('board_eraser_active')
+                eraser.classList.add('board_eraser')
                 this.removeFigureClass(figure_class, figure)
                 figure.classList.add('board_figure_content_board_rect')
             } else if (element === rect || element === line || element === circle) {
@@ -60,6 +63,15 @@ export default class Tool {
                 figure.classList.add(figure_content_add)
                 brush.classList.add('board_brush')
                 brush.classList.remove('board_brush_active')
+                eraser.classList.remove('board_eraser_active')
+                eraser.classList.add('board_eraser')
+            } else if (element === eraser) {
+                eraser.classList.remove('board_eraser')
+                eraser.classList.add('board_eraser_active')
+                brush.classList.add('board_brush')
+                brush.classList.remove('board_brush_active')
+                this.removeFigureClass(figure_class, figure)
+                figure.classList.add('board_figure_content_board_rect')
             }
         })
     }
