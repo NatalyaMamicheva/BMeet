@@ -30,6 +30,9 @@ class Header extends React.Component {
         }
         return (
             <div className='header'>
+                <a href="/">
+                    <div className="header_logo"></div>
+                </a>
                 <div className='header_name_board'>
                     <p>{this.state.board_name}</p>
                 </div>
