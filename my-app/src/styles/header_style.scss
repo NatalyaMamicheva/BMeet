@@ -28,6 +28,19 @@
   margin-top: 16px;
 }
 
+.header_logo {
+  background: url("../assets/img/header_logo.svg") no-repeat;
+  width: 47px;
+  height: 47px;
+  margin-left: 21px;
+}
+
+.header_logo:hover{
+  background: url("../assets/img/header_logo_hover.svg") no-repeat;
+  width: 49px;
+  height: 49px;
+}
+
 .header_name_board {
   text-align: center;
   width: 68%;
