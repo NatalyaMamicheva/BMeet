@@ -18,11 +18,13 @@ class Header extends React.Component {
 
     get_toolbar() {
         return (
-            <div className="board_header_toolbar_brush"
-                 id='board_header_toolbar'
-                 onClick={(e) => toolState.collapse(e)}>
-                <Toolbar/>
-            </div>
+            <a href="#">
+                <div className="board_header_toolbar_brush"
+                     id='board_header_toolbar'
+                     onClick={(e) => toolState.collapse(e)}>
+                    <Toolbar/>
+                </div>
+            </a>
         )
     }
 
