@@ -9,11 +9,9 @@ class Board extends React.Component {
     render() {
         return (
             <div>
-                <Header logout={() => this.props.logout()} getHeader={() => this.props.getHeader()} />
-                <div className='board_content'>
-                    <Toolbar />
-                    <Canvas />
-                </div>
+                <Header logout={() => this.props.logout()}
+                        getHeader={() => this.props.getHeader()}/>
+                <Canvas/>
             </div>
         )
     }
