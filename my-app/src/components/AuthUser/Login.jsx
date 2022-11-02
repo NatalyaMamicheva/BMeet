@@ -16,6 +16,7 @@ class Login extends React.Component {
             'token': '',
             'error_message_user': '',
             'error_message': '',
+            'block_info_timer': '',
             'not_verify': false
         }
     }
@@ -35,11 +36,16 @@ class Login extends React.Component {
             .catch(error => {
                 this.setState({
                     'error_message_user': '',
-                    'error_message': ''
+                    'error_message': '',
+                    'block_info_timer': '',
                 });
                 if (!error.response.data)
                     this.setState({ error_message: error.message });
                 else {
+                    if (error.response.status === 429) {
+                        let unblock_time = error.response.data['time'].split('.')[0]
+                        this.startTimer(unblock_time)
+                    }
                     if (error.response.status === 400) this.setState({ error_message_user: "Неверный Email или пароль" });
                     if (error.response.status === 403) {
                         axios
@@ -59,7 +65,6 @@ class Login extends React.Component {
                         });
                     }
                 }
-                this.errorRef.current.focus();
             })
 
     }
@@ -74,6 +79,23 @@ class Login extends React.Component {
             [event.target.name]: event.target.value
         })
     }
+
+    startTimer = (seconds) => {
+        let p_timer = document.querySelector('#timer');
+        let minute, second
+        for (let i = seconds; i > 0; i--) {
+            this.timer = setTimeout(() => {
+                seconds -= 1
+                minute = Math.floor(seconds / 60)
+                second = seconds % 60
+                this.setState({
+                    'block_info_timer': `Превышен лимит попыток ввода пароля. До разблокировки 00:${[minute.toString().padStart(2, '0'),
+                    second.toString().padStart(2, '0')].join(':')}`
+                });
+            }, (i + 1) * 1000)
+        }
+    }
+
 
     render() {
         if (localStorage.getItem('token')) return <Navigate
@@ -154,6 +176,8 @@ class Login extends React.Component {
                                         <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
                                     {this.state.error_message_user &&
                                         <p className="error_p" ref={this.errorRef}>{this.state.error_message_user}</p>}
+                                    {this.state.block_info_timer &&
+                                        <p className="error_p" id='timer'>{this.state.block_info_timer}</p>}
                                 </form>
                             </div>
 
