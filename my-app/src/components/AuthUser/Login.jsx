@@ -40,6 +40,7 @@ class Login extends React.Component {
                 if (!error.response.data)
                     this.setState({ error_message: error.message });
                 else {
+                    if (error.response.status === 429) this.setState({ error_message_user: error.response.data });
                     if (error.response.status === 400) this.setState({ error_message_user: "Неверный Email или пароль" });
                     if (error.response.status === 403) {
                         axios
