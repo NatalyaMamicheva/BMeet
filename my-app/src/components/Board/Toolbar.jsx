@@ -32,10 +32,11 @@ class Toolbar extends React.Component {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             let figure = document.querySelector('#board_figures')
             let toolbar = document.querySelector('.board_toolbar')
+            let board_header_toolbar = document.querySelector('#board_header_toolbar')
             if (figure) {
                 figure.style['display'] = null
             }
-            if (toolbar) {
+            if (event.target === toolbar || event.target !== board_header_toolbar) {
                 toolbar.style['display'] = null
             }
         }
