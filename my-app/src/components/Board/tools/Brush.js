@@ -18,8 +18,6 @@ export default class Brush extends Tool {
         this.height = 0
         this.width = 0
         this.start_ = false
-        this.up_ = false
-        this.end_ = false
     }
 
     listen() {
@@ -84,31 +82,37 @@ export default class Brush extends Tool {
     };
 
     mouseDownHandler(e) {
-        this.start_ = true
-        this.mouseDown = this.coords.coord.length <= 0;
-        this.touchStart = this.coords.coord.length <= 0;
-        this.ctx.beginPath();
-        let x = null;
-        let y = null;
-        if (e.pageX && e.pageY) {
-            x = e.pageX
-            y = e.pageY
-        } else if (e.touches[0].pageX && e.touches[0].pageY) {
-            x = e.touches[0].pageX
-            y = e.touches[0].pageY
+        if (this.start_) {
+            this.start_ = false
+        } else {
+            this.start_ = true
+            this.mouseDown = this.coords.coord.length <= 0;
+            this.touchStart = this.coords.coord.length <= 0;
+            this.ctx.beginPath();
+            let x = null;
+            let y = null;
+            if (e.pageX && e.pageY) {
+                x = e.pageX
+                y = e.pageY
+            } else if (e.touches[0].pageX && e.touches[0].pageY) {
+                x = e.touches[0].pageX
+                y = e.touches[0].pageY
+            }
+            this.ctx.moveTo(x - e.target.offsetLeft, y - e.target.offsetTop)
         }
-        this.ctx.moveTo(x - e.target.offsetLeft, y - e.target.offsetTop)
     }
 
     mouseMoveHandler(e) {
-        if (this.mouseDown || this.touchStart) {
-            let scaleX = Tool.getScaleX(this.canvas.width)
-            let scaleY = Tool.getScaleY(this.canvas.height)
-            let x = e.pageX - e.target.offsetLeft || e.touches[0].pageX - e.target.offsetLeft
-            let y = e.pageY - e.target.offsetTop || e.touches[0].pageY - e.target.offsetTop
-            this.coords.coord.push([x * scaleX, y * scaleY]);
-            this.ctx.lineTo(x, y);
-            this.ctx.stroke();
+        if (this.start_) {
+            if (this.mouseDown || this.touchStart) {
+                let scaleX = Tool.getScaleX(this.canvas.width)
+                let scaleY = Tool.getScaleY(this.canvas.height)
+                let x = e.pageX - e.target.offsetLeft || e.touches[0].pageX - e.target.offsetLeft
+                let y = e.pageY - e.target.offsetTop || e.touches[0].pageY - e.target.offsetTop
+                this.coords.coord.push([x * scaleX, y * scaleY]);
+                this.ctx.lineTo(x, y);
+                this.ctx.stroke();
+            }
         }
     };
 }
