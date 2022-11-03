@@ -17,7 +17,9 @@ export default class Brush extends Tool {
         };
         this.height = 0
         this.width = 0
-
+        this.start_ = false
+        this.up_ = false
+        this.end_ = false
     }
 
     listen() {
@@ -56,35 +58,47 @@ export default class Brush extends Tool {
     mouseUpHandler() {
         this.mouseDown = false;
         this.touchStart = false;
-        if (!this.mouseDown || !this.touchStart) {
-            Brush.drawLine(this.ctx, this.coords.coord, this.ctx.fillStyle, this.ctx.strokeStyle)
-            if (this.coords.coord.length > 0) {
-                this.coords.stroke_color = this.ctx.strokeStyle
-                this.coords.fill_color = this.ctx.fillStyle
-                this.coords.width = this.ctx.lineWidth
-                this.socket.send(JSON.stringify(this.coords));
-                this.socket.onclose = function (e) {
-                    if (e.wasClean) {
-                        console.log(`[close] Соединение закрыто чисто, код=${e.code} причина=${e.reason}`);
-                    } else {
-                        console.log('[close] Соединение прервано');
-                    }
-                };
-                this.socket.onerror = function (error) {
-                    console.log(`[error] ${error.message}`);
-                };
-                this.coords.coord = [];
-
+        if (this.start_) {
+            if (!this.mouseDown || !this.touchStart) {
+                Brush.drawLine(this.ctx, this.coords.coord, this.ctx.fillStyle, this.ctx.strokeStyle)
+                if (this.coords.coord.length > 0) {
+                    this.coords.stroke_color = this.ctx.strokeStyle
+                    this.coords.fill_color = this.ctx.fillStyle
+                    this.coords.width = this.ctx.lineWidth
+                    this.socket.send(JSON.stringify(this.coords));
+                    this.socket.onclose = function (e) {
+                        if (e.wasClean) {
+                            console.log(`[close] Соединение закрыто чисто, код=${e.code} причина=${e.reason}`);
+                        } else {
+                            console.log('[close] Соединение прервано');
+                        }
+                    };
+                    this.socket.onerror = function (error) {
+                        console.log(`[error] ${error.message}`);
+                    };
+                    this.coords.coord = [];
+                    this.start_ = false
+                }
             }
         }
     };
 
     mouseDownHandler(e) {
+        this.start_ = true
         this.mouseDown = this.coords.coord.length <= 0;
         this.touchStart = this.coords.coord.length <= 0;
         this.ctx.beginPath();
-        this.ctx.moveTo((e.pageX - e.target.offsetLeft, e.pageY - e.target.offsetTop) || e.touches[0].pageX - e.target.offsetLeft, e.touches[0].pageY - e.target.offsetTop);
-    };
+        let x = null;
+        let y = null;
+        if (e.pageX && e.pageY) {
+            x = e.pageX
+            y = e.pageY
+        } else if (e.touches[0].pageX && e.touches[0].pageY) {
+            x = e.touches[0].pageX
+            y = e.touches[0].pageY
+        }
+        this.ctx.moveTo(x - e.target.offsetLeft, y - e.target.offsetTop)
+    }
 
     mouseMoveHandler(e) {
         if (this.mouseDown || this.touchStart) {
