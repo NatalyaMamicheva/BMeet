@@ -91,11 +91,11 @@ class Toolbar extends React.Component {
                     data-tooltip="Фигуры">
                     <div className="board_figures" id='board_figures'>
                         <div className="board_rect"
-                             onClick={(e) => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket), e)}></div>
+                             onClick={(e) => toolState.setTool(new Rect(canvasState.canvas, canvasState.socket), e)} data-tooltip="Прямоугольник"></div>
                         <div className="board_circle"
-                             onClick={(e) => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket), e)}></div>
+                             onClick={(e) => toolState.setTool(new Circle(canvasState.canvas, canvasState.socket), e)}  data-tooltip="Круг"></div>
                         <div className="board__line"
-                             onClick={(e) => toolState.setTool(new Line(canvasState.canvas, canvasState.socket), e)}></div>
+                             onClick={(e) => toolState.setTool(new Line(canvasState.canvas, canvasState.socket), e)}  data-tooltip="Линия"></div>
                     </div>
                 </div>
 
