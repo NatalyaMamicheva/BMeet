@@ -3,14 +3,29 @@ import {Navigate} from 'react-router-dom'
 import '../styles/app_style.scss'
 import '../styles/header_style.scss'
 import axios from "axios";
+import Toolbar from "./Board/Toolbar";
+import toolState from "./Board/store/toolState";
 
 
 class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            board_name: ''
+            board_name: '',
+            toolbar: null
         }
+    }
+
+    get_toolbar() {
+        return (
+            <a href="#">
+                <div className="board_header_toolbar_brush"
+                     id='board_header_toolbar'
+                     onClick={(e) => toolState.collapse(e)}>
+                    <Toolbar/>
+                </div>
+            </a>
+        )
     }
 
     componentDidMount() {
@@ -27,12 +42,16 @@ class Header extends React.Component {
         let pathname = window.location.pathname
         if (pathname.split('/')[1] === 'board' && this.state.board_name === '') {
             this.getBoardName(pathname)
+            this.toolbar = this.get_toolbar()
         }
         return (
             <div className='header'>
                 <a href="/">
                     <div className="header_logo"></div>
                 </a>
+
+                {this.toolbar}
+
                 <div className='header_name_board'>
                     <p>{this.state.board_name}</p>
                 </div>

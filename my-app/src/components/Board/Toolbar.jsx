@@ -31,8 +31,13 @@ class Toolbar extends React.Component {
     handleClickOutside(event) {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             let figure = document.querySelector('#board_figures')
+            let toolbar = document.querySelector('.board_toolbar')
+            let board_header_toolbar = document.querySelector('#board_header_toolbar')
             if (figure) {
                 figure.style['display'] = null
+            }
+            if (event.target === toolbar || event.target !== board_header_toolbar) {
+                toolbar.style['display'] = null
             }
         }
     }
@@ -40,7 +45,7 @@ class Toolbar extends React.Component {
     render() {
         return (
 
-            <div className='board_toolbar'>
+            <div className='board_toolbar' ref={this.setWrapperRef}>
                 <div className="toolbar_buttons board_undo_button"
                      onClick={() => canvasState.undo()}
                      data-tooltip="Отменить">
@@ -102,11 +107,6 @@ class Toolbar extends React.Component {
                 <div className="toolbar_buttons board_eraser"
                      onClick={(e) => toolState.setTool(new Brush(canvasState.canvas, canvasState.socket), e)}
                      data-tooltip="Ластик"></div>
-
-                <div className="toolbar_collapse">
-                    <a href='#'
-                       onClick={() => toolState.collapse()}>Свернуть</a>
-                </div>
             </div>
 
         );

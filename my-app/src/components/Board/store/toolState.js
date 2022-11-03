@@ -60,22 +60,54 @@ class ToolState {
         this.tool.lineWidth = width
     }
 
-    collapse() {
-        let toolbar = document.querySelectorAll('.toolbar_buttons')
-        let collapse = document.querySelector('.toolbar_collapse')
-        toolbar.forEach(function (object) {
-            if (object.style['display'] === 'none') {
-                object.style['display'] = 'block'
+    static remove_class(toolbar) {
+        toolbar.classList.remove('board_header_toolbar_brush')
+        toolbar.classList.remove('board_header_toolbar_eraser')
+        toolbar.classList.remove('board_header_toolbar_circle')
+        toolbar.classList.remove('board_header_toolbar_rect')
+        toolbar.classList.remove('board_header_toolbar_line')
+    }
+
+    collapse(e) {
+        let target = e.target
+        let board_header_toolbar = document.querySelector('#board_header_toolbar')
+        let toolbar = document.querySelectorAll('.board_toolbar')[0]
+
+        let board_rect = document.querySelector('.board_rect')
+        let board_circle = document.querySelector('.board_circle')
+        let board__line = document.querySelector('.board__line')
+        let board_brush = document.querySelector('.board_brush')
+        let board_brush_active = document.querySelector('.board_brush_active')
+        let board_eraser = document.querySelector('.board_eraser')
+        let board_eraser_active = document.querySelector('.board_eraser_active')
+
+        if (target === board_header_toolbar || target === board_rect || target === board_circle
+            || target === board__line || target === board_brush ||
+            target === board_brush_active || target === board_eraser ||
+            target === board_eraser_active) {
+            if (toolbar.style['display'] === 'block') {
+                toolbar.style['display'] = null
+                if (target.classList.value === 'board_rect') {
+                    ToolState.remove_class(board_header_toolbar)
+                    board_header_toolbar.classList.add('board_header_toolbar_rect')
+                } else if (target.classList.value === 'board_circle') {
+                    ToolState.remove_class(board_header_toolbar)
+                    board_header_toolbar.classList.add('board_header_toolbar_circle')
+                } else if (target.classList.value === 'board__line') {
+                    ToolState.remove_class(board_header_toolbar)
+                    board_header_toolbar.classList.add('board_header_toolbar_line')
+                } else if (target.classList.value.split(' ')[1] === 'board_brush' ||
+                    target.classList.value.split(' ')[1] === 'board_brush_active') {
+                    ToolState.remove_class(board_header_toolbar)
+                    board_header_toolbar.classList.add('board_header_toolbar_brush')
+                } else if (target.classList.value.split(' ')[1] === 'board_eraser' ||
+                    target.classList.value.split(' ')[1] === 'board_eraser_active') {
+                    ToolState.remove_class(board_header_toolbar)
+                    board_header_toolbar.classList.add('board_header_toolbar_eraser')
+                }
             } else {
-                object.style['display'] = 'none'
+                toolbar.style['display'] = 'block'
             }
-        })
-        let collapse_text = collapse.childNodes[0].text
-        if (collapse_text === 'Развернуть') {
-            collapse.childNodes[0].text = 'Свернуть'
-            collapse.style['background'] = ''
-        } else {
-            collapse.childNodes[0].text = 'Развернуть'
         }
     }
 
