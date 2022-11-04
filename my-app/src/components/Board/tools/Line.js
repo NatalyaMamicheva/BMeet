@@ -5,6 +5,8 @@ export default class Line extends Tool {
     constructor(canvas, socket) {
         super(canvas, socket);
         this.listen()
+        this.start_ = false
+        this.end_ = true
     }
 
     listen() {
@@ -18,38 +20,52 @@ export default class Line extends Tool {
     }
 
     mouseDownHandler(e) {
-        this.mouseDown = true
-        this.touchStart = true
-        this.ctx.beginPath()
-        this.currentX = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft)
-        this.currentY = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop)
-        
-
+        if (this.start_ && !this.end_) {
+            this.start_ = false
+        } else if (!this.start_ && this.end_) {
+            this.start_ = true
+            this.end_ = false
+            this.mouseDown = true
+            this.touchStart = true
+            this.ctx.beginPath()
+            this.currentX = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft)
+            this.currentY = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop)
+        }
     }
 
     mouseUpHandler(e) {
-        let scaleX = Tool.getScaleX(this.canvas.width)
-        let scaleY = Tool.getScaleY(this.canvas.height)
-        let scale = (scaleX + scaleY) / 2
-        this.mouseDown = false
-        this.touchStart = false
-        this.socket.send(JSON.stringify({
-            "coord": [this.currentX * scale, this.currentY * scale, this.x, this.y],
-            "type": "v",
-            "stroke_color": this.ctx.strokeStyle,
-            "fill_color": this.ctx.fillStyle,
-            "width": this.ctx.lineWidth,
-            "other_data": 'line'
-        }))
-    }
-
-    mouseMoveHandler(e) {
-        if (this.mouseDown || this.touchStart) {
+        if (this.start_ && !this.end_) {
             let scaleX = Tool.getScaleX(this.canvas.width)
             let scaleY = Tool.getScaleY(this.canvas.height)
             let scale = (scaleX + scaleY) / 2
-            this.x = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft) * scale
-            this.y = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop) * scale
+            this.mouseDown = false
+            this.touchStart = false
+            if (this.x > 0 && this.y > 0) {
+                this.socket.send(JSON.stringify({
+                    "coord": [this.currentX * scale, this.currentY * scale, this.x, this.y],
+                    "type": "v",
+                    "stroke_color": this.ctx.strokeStyle,
+                    "fill_color": this.ctx.fillStyle,
+                    "width": this.ctx.lineWidth,
+                    "other_data": 'line'
+                }))
+            }
+        }
+        this.start_ = false
+        this.end_ = true
+        this.x = 0;
+        this.y = 0;
+    }
+
+    mouseMoveHandler(e) {
+        if (this.start_ && !this.end_) {
+            if (this.mouseDown || this.touchStart) {
+                let scaleX = Tool.getScaleX(this.canvas.width)
+                let scaleY = Tool.getScaleY(this.canvas.height)
+                let scale = (scaleX + scaleY) / 2
+                this.x = ((e.pageX - e.target.offsetLeft) || e.touches[0].pageX - e.target.offsetLeft) * scale
+                this.y = ((e.pageY - e.target.offsetTop) || e.touches[0].pageY - e.target.offsetTop) * scale
+            }
         }
     }
 
