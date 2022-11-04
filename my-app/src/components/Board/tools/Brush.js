@@ -18,6 +18,7 @@ export default class Brush extends Tool {
         this.height = 0
         this.width = 0
         this.start_ = false
+        this.end_ = true
     }
 
     listen() {
@@ -42,21 +43,23 @@ export default class Brush extends Tool {
         ctx.strokeStyle = stroke_color
         ctx.lineWidth = line_width
         ctx.beginPath();
-        ctx.moveTo(coord[0][0] / scaleX, coord[0][1] / scaleY);
-        ctx.stroke();
-        coord.forEach(function (e) {
-            ctx.lineTo(e[0] / scaleX, e[1] / scaleY);
+        if (coord.length > 0) {
+            ctx.moveTo(coord[0][0] / scaleX, coord[0][1] / scaleY);
             ctx.stroke();
-        })
-        ctx.strokeStyle = color_stroke_temp
-        ctx.fillStyle = color_fill_temp
-        ctx.lineWidth = line_width_temp
-    };
+            coord.forEach(function (e) {
+                ctx.lineTo(e[0] / scaleX, e[1] / scaleY);
+                ctx.stroke();
+            })
+            ctx.strokeStyle = color_stroke_temp
+            ctx.fillStyle = color_fill_temp
+            ctx.lineWidth = line_width_temp
+        }
+    }
 
     mouseUpHandler() {
         this.mouseDown = false;
         this.touchStart = false;
-        if (this.start_) {
+        if (this.start_ && !this.end_) {
             if (!this.mouseDown || !this.touchStart) {
                 Brush.drawLine(this.ctx, this.coords.coord, this.ctx.fillStyle, this.ctx.strokeStyle)
                 if (this.coords.coord.length > 0) {
@@ -75,17 +78,19 @@ export default class Brush extends Tool {
                         console.log(`[error] ${error.message}`);
                     };
                     this.coords.coord = [];
-                    this.start_ = false
                 }
             }
         }
-    };
+        this.start_ = false
+        this.end_ = true
+    }
 
     mouseDownHandler(e) {
-        if (this.start_) {
+        if (this.start_ && !this.end_) {
             this.start_ = false
-        } else {
+        } else if (!this.start_ && this.end_) {
             this.start_ = true
+            this.end_ = false
             this.mouseDown = this.coords.coord.length <= 0;
             this.touchStart = this.coords.coord.length <= 0;
             this.ctx.beginPath();
@@ -103,7 +108,7 @@ export default class Brush extends Tool {
     }
 
     mouseMoveHandler(e) {
-        if (this.start_) {
+        if (this.start_ && !this.end_) {
             if (this.mouseDown || this.touchStart) {
                 let scaleX = Tool.getScaleX(this.canvas.width)
                 let scaleY = Tool.getScaleY(this.canvas.height)
