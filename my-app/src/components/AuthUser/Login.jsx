@@ -5,6 +5,7 @@ import axios from 'axios'
 import Footer from "../Footer";
 import VerifyEmail from "./VerifyEmail";
 
+
 class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -45,12 +46,13 @@ class Login extends React.Component {
                     if (error.response.status === 429) {
                         let unblock_time = error.response.data['time'].split('.')[0]
                         this.startTimer(unblock_time)
+                        this.clearInputPassword()
                     }
                     if (error.response.status === 400) {
                         this.setState(
                             {error_message_user: "Неверный Email или пароль"}
                         )
-                        // clear input password
+                        this.clearInputPassword()
                     }
                     if (error.response.status === 403) {
                         axios
@@ -72,6 +74,10 @@ class Login extends React.Component {
                 }
             })
 
+    }
+
+    clearInputPassword() {
+        this.state.password = ''
     }
 
     handleSubmit(event) {
