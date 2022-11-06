@@ -58,6 +58,7 @@ class ToolState {
 
     setLineWidth(width) {
         this.tool.lineWidth = width
+        this.lineWidth = width
     }
 
     static remove_class(toolbar) {

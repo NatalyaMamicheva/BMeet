@@ -56,7 +56,7 @@ export default class Brush extends Tool {
         }
     }
 
-    mouseUpHandler() {
+    mouseUpHandler(e) {
         this.mouseDown = false;
         this.touchStart = false;
         if (this.start_ && !this.end_) {
@@ -76,10 +76,37 @@ export default class Brush extends Tool {
                     };
                     this.socket.onerror = function (error) {
                         console.log(`[error] ${error.message}`);
-                    };
-                    this.coords.coord = [];
+                    }
+                } else if (this.coords.coord.length === 0) {
+
+                    // circle
+                    let scaleX = Tool.getScaleX(this.canvas.width)
+                    let scaleY = Tool.getScaleY(this.canvas.height)
+
+                    let x = 0; let y = 0;
+                    if (e.pageX && e.pageY) {
+                        x = e.pageX
+                        y = e.pageY
+                    } else if (e.touches[0] && e.touches[0]) {
+                        x = e.touches[0].pageX
+                        y = e.touches[0].pageY
+                    }
+
+                    let startX = (x - e.target.offsetLeft)
+                    let startY = (y - e.target.offsetTop)
+
+                    this.socket.send(JSON.stringify({
+                        "coord": [startX * scaleX, startY * scaleY, this.ctx.lineWidth * (((scaleX + scaleY) / 2))],
+                        "type": "v",
+                        "stroke_color": this.ctx.strokeStyle,
+                        "fill_color": this.ctx.strokeStyle,
+                        "width": this.ctx.lineWidth,
+                        "other_data": 'circle'
+                    }))
+                    // circle
                 }
             }
+            this.coords.coord = [];
         }
         this.start_ = false
         this.end_ = true
