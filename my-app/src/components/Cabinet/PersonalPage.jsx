@@ -207,7 +207,7 @@ class PersonalPage extends React.Component {
                         <div className='profile_avatar'></div>
                     </div>
                     {this.state.error_message &&
-                        <p className="error_p"
+                        <p className="input_error"
                             ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
@@ -227,7 +227,7 @@ class PersonalPage extends React.Component {
                                             ></input>
                                         </label>
                                     </div>
-                                    <p className='error_p'>{this.state.error_message_username}</p>
+                                    <p className='input_error'>{this.state.error_message_username}</p>
                                 </div>
 
                                 <div className='profile_input'>
@@ -244,8 +244,8 @@ class PersonalPage extends React.Component {
                                                 value={this.state.email} />
                                         </label>
                                     </div>
-                                    <p className='error_p'>{this.state.error_message_email}</p>
-                                    <p className='error_p'>{this.state.message_change_email}</p>
+                                    <p className='input_error'>{this.state.error_message_email}</p>
+                                    <p className='input_error'>{this.state.message_change_email}</p>
                                 </div>
 
                                 <div className='profile_input'>
@@ -312,7 +312,7 @@ class PersonalPage extends React.Component {
                                             </table>
                                         </label>
                                     </div>
-                                    <p className='error_p'>{this.state.message_password}</p>
+                                    <p className='input_error'>{this.state.message_password}</p>
                                 </div>
                             </div>
 

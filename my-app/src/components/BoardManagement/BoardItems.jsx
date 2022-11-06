@@ -91,7 +91,7 @@ class BoardItem extends React.Component {
                 </div>
 
                 {this.state.error_message &&
-                    <p className="error_p"
+                    <p className="input_error"
                        ref={this.errorRef}>{this.state.error_message}</p>}
                 <React.Fragment>
                     {this.state.isOpenUpdate && (
