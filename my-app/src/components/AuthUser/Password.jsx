@@ -103,6 +103,8 @@ class Password extends React.Component {
                                         </label>
                                     </div>
                                 </div>
+                                {this.state.error_message &&
+                                        <p className="input_error" ref={this.errorRef}>{this.state.error_message}</p>}
                                 <div className='auth_input_button'>
                                     <p className='auth_timer'>{this.state.info_timer}</p>
                                     <button type='submit'
@@ -115,8 +117,6 @@ class Password extends React.Component {
                                         <p>Сбросить
                                             пароль</p>
                                     </button>
-                                    {this.state.error_message &&
-                                        <p className="error" ref={this.errorRef}>{this.state.error_message}</p>}
                                 </div>
                             </form>
                         </div>

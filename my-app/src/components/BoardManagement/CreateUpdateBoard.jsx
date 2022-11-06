@@ -154,7 +154,7 @@ class CreateUpdateBoard extends React.Component {
                 <form className='new_board_form'
                     onSubmit={(event) => this.handleCreateUpdateSubmit(event)}>
                     {this.state.error_message &&
-                        <p className="error">{this.state.error_message}</p>}
+                        <p className="input_error">{this.state.error_message}</p>}
                     <div className="new_board_close">
                         <div
                             onClick={(event) => this.props.handleShowCreateUpdateBoard(event)}>
@@ -229,7 +229,7 @@ class CreateUpdateBoard extends React.Component {
 
                         </div>
                         {this.state.email_error &&
-                            <p className="error">{this.state.email_error}</p>}
+                            <p className="input_error">{this.state.email_error}</p>}
                         <div className="new_board_invite_button">
                             <button type="submit" value="submit">{this.props.text_button}
                             </button>

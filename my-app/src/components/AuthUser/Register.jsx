@@ -27,7 +27,6 @@ class RegisterForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.props.check_password(this.state.password), this.state.password)
         if (this.props.check_password(this.state.password)) {
             this.setState({ message_password: '' })
             axios
@@ -105,7 +104,7 @@ class RegisterForm extends React.Component {
                                 <p>Приветствуем!</p>
                                 <span>Зарегистрируйтесь, чтобы начать пользоваться<br />платформой</span>
                             </div>
-                            <p className='error_p'
+                            <p className='input_error'
                                 ref={this.errorRef}>{this.state.error_message}</p>
                             <div className='auth_form'>
                                 <form
@@ -128,7 +127,7 @@ class RegisterForm extends React.Component {
                                                     value={this.state.username}></input>
                                             </label>
                                         </div>
-                                        <p className='error_p'
+                                        <p className='input_error'
                                             ref={this.errorRef}>{this.state.error_message_username}</p>
                                         <div className='auth_title_input'>
                                             <span>Email</span>
@@ -145,7 +144,7 @@ class RegisterForm extends React.Component {
                                                     value={this.state.email} />
                                             </label>
                                         </div>
-                                        <p className='error_p'
+                                        <p className='input_error'
                                             ref={this.errorRef}>{this.state.error_message_email}</p>
                                         <div className='auth_title_input'>
                                             <span>Пароль</span>
@@ -163,7 +162,7 @@ class RegisterForm extends React.Component {
                                                     value={this.state.password} />
                                             </label>
                                         </div>
-                                        <p className='error_p'
+                                        <p className='input_error'
                                             ref={this.errorRef}>{this.state.message_password}</p>
                                     </div>
                                     <div className='auth_input_button'>

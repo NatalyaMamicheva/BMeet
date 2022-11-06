@@ -1,4 +1,4 @@
-import { Link, Navigate } from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import "../../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
@@ -28,7 +28,7 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
-                this.setState({ 'token': response.data.token });
+                this.setState({'token': response.data.token});
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('username', response.data.username)
@@ -40,13 +40,18 @@ class Login extends React.Component {
                     'block_info_timer': '',
                 });
                 if (!error.response.data)
-                    this.setState({ error_message: error.message });
+                    this.setState({error_message: error.message});
                 else {
                     if (error.response.status === 429) {
                         let unblock_time = error.response.data['time'].split('.')[0]
                         this.startTimer(unblock_time)
                     }
-                    if (error.response.status === 400) this.setState({ error_message_user: "Неверный Email или пароль" });
+                    if (error.response.status === 400) {
+                        this.setState(
+                            {error_message_user: "Неверный Email или пароль"}
+                        )
+                        // clear input password
+                    }
                     if (error.response.status === 403) {
                         axios
                             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/${error.response.data.id}/`,
@@ -90,7 +95,7 @@ class Login extends React.Component {
                 second = seconds % 60
                 this.setState({
                     'block_info_timer': `Превышен лимит попыток ввода пароля. До разблокировки 00:${[minute.toString().padStart(2, '0'),
-                    second.toString().padStart(2, '0')].join(':')}`
+                        second.toString().padStart(2, '0')].join(':')}`
                 });
             }, (i + 1) * 1000)
         }
@@ -99,11 +104,11 @@ class Login extends React.Component {
 
     render() {
         if (localStorage.getItem('token')) return <Navigate
-            to="/board_management" />;
+            to="/board_management"/>;
         else if (this.state.not_verify)
             return (<VerifyEmail email={this.state.email} id={this.state.id}
-                username={this.state.username}
-                password={this.state.password} />)
+                                 username={this.state.username}
+                                 password={this.state.password}/>)
         else
             return (
                 <div className='auth'>
@@ -124,6 +129,13 @@ class Login extends React.Component {
                                     onSubmit={(event) => this.handleSubmit(event)}>
 
                                     <div className='auth_input'>
+
+                                        {this.state.error_message &&
+                                            <p className="input_error"
+                                               ref={this.errorRef}>{this.state.error_message}</p>}
+                                        {this.state.error_message_user &&
+                                            <p className="input_error"
+                                               ref={this.errorRef}>{this.state.error_message_user}</p>}
 
                                         <div className='auth_title_input'>
                                             <span>
@@ -156,6 +168,7 @@ class Login extends React.Component {
                                         <div className='auth_input_border'>
                                             <label>
                                                 <input
+                                                    id='password'
                                                     className='auth_input_text'
                                                     placeholder='password'
                                                     type="password"
@@ -169,15 +182,13 @@ class Login extends React.Component {
                                     </div>
                                     <div className='auth_input_button'>
                                         <button type='submit'
-                                            className='auth_button_form'>
+                                                className='auth_button_form'>
                                             <p>Войти</p></button>
                                     </div>
-                                    {this.state.error_message &&
-                                        <p className="error_p" ref={this.errorRef}>{this.state.error_message}</p>}
-                                    {this.state.error_message_user &&
-                                        <p className="error_p" ref={this.errorRef}>{this.state.error_message_user}</p>}
+
                                     {this.state.block_info_timer &&
-                                        <p className="error_p" id='timer'>{this.state.block_info_timer}</p>}
+                                        <p className="input_error"
+                                           id='timer'>{this.state.block_info_timer}</p>}
                                 </form>
                             </div>
 
@@ -186,12 +197,12 @@ class Login extends React.Component {
                                     платформе?
                                 </p>
                                 <Link className='auth_header_a'
-                                    to='/register'>Создать
+                                      to='/register'>Создать
                                     аккаунт</Link>
                             </div>
                         </div>
                     </div>
-                    <Footer />
+                    <Footer/>
                 </div>
             );
     };
