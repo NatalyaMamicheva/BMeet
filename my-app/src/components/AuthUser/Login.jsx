@@ -4,7 +4,7 @@ import React from 'react'
 import axios from 'axios'
 import Footer from "../Footer";
 import VerifyEmail from "./VerifyEmail";
-import password from "./Password";
+
 
 class Login extends React.Component {
     constructor(props) {
