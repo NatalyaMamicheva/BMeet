@@ -70,6 +70,54 @@
   outline: none;
 }
 
+@media only screen and (max-width: 1100px) {
+  .password_input_border {
+    width: 93%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .password_input_border {
+    width: 92%;
+  }
+}
+
+@media only screen and (max-width: 505px) {
+  .password_input_border {
+    width: 88%;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .password_input_border {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .password_input_border {
+    width: 82%;
+  }
+}
+
+@media only screen and (max-width: 465px) {
+  .password_input_border {
+    width: 79%;
+  }
+}
+
+@media only screen and (max-width: 445px) {
+  .password_input_border {
+    width: 74%;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .password_input_border {
+    width: 72%;
+  }
+}
+
 .password_input_border label {
   width: 100%;
 }
