@@ -25,16 +25,14 @@ export default class Rect extends Tool {
             let scaleY = Tool.getScaleY(this.canvas.height)
             this.mouseDown = false
             this.touchStart = false
-            if (this.width > 0 && this.height > 0) {
-                this.socket.send(JSON.stringify({
-                    "coord": [this.startX * scaleX, this.startY * scaleY, this.width * scaleX, this.height * scaleY],
-                    "type": "v",
-                    "stroke_color": this.ctx.strokeStyle,
-                    "fill_color": this.ctx.fillStyle,
-                    "width": this.ctx.lineWidth,
-                    "other_data": 'rect'
-                }))
-            }
+            this.socket.send(JSON.stringify({
+                "coord": [this.startX * scaleX, this.startY * scaleY, this.width * scaleX, this.height * scaleY],
+                "type": "v",
+                "stroke_color": this.ctx.strokeStyle,
+                "fill_color": this.ctx.fillStyle,
+                "width": this.ctx.lineWidth,
+                "other_data": 'rect'
+            }))
         }
         this.start_ = false
         this.end_ = true
