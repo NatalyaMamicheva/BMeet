@@ -68,6 +68,7 @@ class Password extends React.Component {
             to="/board_management" />
         return (
             <div className='auth'>
+                <div className='grow'>
                 <div className='auth_form_table'>
                     <div className='auth_logo'>
                         <span className='auth_yellow'>B</span>
@@ -125,6 +126,7 @@ class Password extends React.Component {
                                 to='/'> &lt; Авторизоваться </Link>
                         </div>
                     </div>
+                </div>
                 </div>
                 <Footer />
             </div>

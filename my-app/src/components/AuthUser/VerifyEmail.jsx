@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import '../../styles/auth_style.scss';
 import Footer from "../Footer";
+import { Link } from "react-router-dom";
 
 
 class VerifyEmail extends React.Component {
@@ -58,6 +59,7 @@ class VerifyEmail extends React.Component {
     render() {
         return (
             <div className='auth'>
+                <div className='grow'>
                 <div className='auth_form_table'>
                     <div className='auth_logo'>
                         <span className='auth_yellow'>B</span>
@@ -82,13 +84,15 @@ class VerifyEmail extends React.Component {
                         <div className='auth_header'>
                             <p className='auth_header_p'>
                                 Не пришло письмо?</p>
-                            <a href="#" className='auth_header_a'
-                                id='again' onClick={(event) => {
+                            <Link to={'#'} className='auth_header_a' id='again'
+                                    onClick={(event) => {
                                     this.handleClick(event);
                                     this.startTimer();
-                                }}> Отправить снова </a>
+                                }}> Отправить снова
+                            </Link>
                         </div>
                     </div>
+                </div>
                 </div>
                 <Footer />
             </div>

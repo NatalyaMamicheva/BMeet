@@ -5,6 +5,7 @@ import '../styles/header_style.scss'
 import axios from "axios";
 import Toolbar from "./Board/Toolbar";
 import toolState from "./Board/store/toolState";
+import { Link } from "react-router-dom";
 
 
 class Header extends React.Component {
@@ -41,12 +42,13 @@ class Header extends React.Component {
         if (pathname.split('/')[1] === 'board' && this.state.board_name === '') {
             this.getBoardName(pathname)
             this.toolbar = this.get_toolbar()
+            
         }
         return (
             <div className='header'>
-                <a href="/">
+                <Link to={'/'}>
                     <div className="header_logo"></div>
-                </a>
+                </Link>
 
                 {this.toolbar}
 
@@ -62,18 +64,17 @@ class Header extends React.Component {
                     </div>
                     <div className='header_menu'>
                         <div className='header_links'>
-                            <a className='header_link'
-                               href="/board_management">
-                                <p className='header_link_p'>Главная</p>
-                            </a>
-                            <a className='header_link' href='/cabinet'>
-                                <p className='header_link_p'>Профиль</p>
-                            </a>
-                            <a className='header_link' href="#"
-                               onClick={(event) => this.props.logout()}>
+                        <Link to={'/board_management'} className='header_link'>
+                        <p className='header_link_p'>Главная</p>
+                        </Link>
+                        <Link to={'/cabinet'} className='header_link'>
+                        <p className='header_link_p'>Профиль</p>
+                        </Link>
+                        <Link to={'#'} className='header_link'
+                        onClick={(event) => this.props.logout()}>
                                 <p className='header_link_p'>Выход из
                                     аккаунта</p>
-                            </a>
+                        </Link>
                         </div>
                     </div>
                 </div>

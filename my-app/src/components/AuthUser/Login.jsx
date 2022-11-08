@@ -118,6 +118,7 @@ class Login extends React.Component {
         else
             return (
                 <div className='auth'>
+                    <div className='grow'>
                     <div className='auth_form_table'>
                         <div className='auth_logo'>
                             <span className='auth_yellow'>B</span>
@@ -207,6 +208,7 @@ class Login extends React.Component {
                                     аккаунт</Link>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <Footer/>
                 </div>
