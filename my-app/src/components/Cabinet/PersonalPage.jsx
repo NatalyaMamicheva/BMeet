@@ -368,9 +368,8 @@ class PersonalPage extends React.Component {
                                         onClick={(event) => this.handleCancel(event)}>Отменить
                                 </button>
                             </div>
-                            <div className="profile_delete"
-                                 onClick={() => PersonalPage.deleteUserModal()}>
-                                <p>Удалить аккаунт</p>
+                            <div className="profile_delete">
+                                <p onClick={() => PersonalPage.deleteUserModal()}>Удалить аккаунт</p>
                             </div>
                         </form>
                     </div>
