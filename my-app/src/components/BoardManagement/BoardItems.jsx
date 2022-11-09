@@ -21,9 +21,7 @@ class BoardItem extends React.Component {
     }
 
     static DeleteModal(event) {
-        console.log(`#${event.target.id}`)
         let modal = document.querySelector(`#${event.target.id}`)
-        console.log(modal.style['display'])
         if (modal.style['display'] === '') {
             modal.style['display'] = 'flex'
         } else {

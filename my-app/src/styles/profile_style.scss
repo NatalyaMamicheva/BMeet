@@ -186,7 +186,6 @@
 
 .profile_buttons {
   margin-top: 52.35px;
-  padding-bottom: 23.53px;
   display: flex;
 }
 
@@ -256,4 +255,24 @@
   font-size: 16px;
   line-height: 21px;
   color: #6E6B7B;
+}
+
+.profile_delete {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 18px;
+}
+
+.profile_delete p {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #D8D6DE;
+}
+
+.profile_delete p:hover {
+  color: #E7B460;
 }
