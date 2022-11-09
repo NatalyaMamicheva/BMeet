@@ -175,7 +175,7 @@ class CreateUpdateBoard extends React.Component {
                         <div className="new_board_input_border">
                             <label>
                                 <input className='new_board_input_text'
-                                    maxLength='25'
+                                    maxLength='35'
                                     name="name" type="text" required
                                     placeholder='Введите название доски'
                                     onChange={(event) => this.handleChange(event)}
