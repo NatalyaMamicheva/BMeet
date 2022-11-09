@@ -218,11 +218,10 @@ class PersonalPage extends React.Component {
                         </div>
                         <div className="boards_delete_text">
                             <div className="boards_delete_title">
-                                <p>Удаление профиля</p>
+                                <p>Удаление аккаунта</p>
                             </div>
                             <div className="boards_delete_quest">
-                                <p>Вы уверены, что хотите удалить свой
-                                    профиль?</p>
+                                <p>Вы уверены, что хотите удалить аккаунт?</p>
                             </div>
                         </div>
                         <div className="boards_delete_buttons">
