@@ -92,6 +92,7 @@ class RegisterForm extends React.Component {
         } else {
             return (
                 <div className='auth'>
+                    <div className="auth_grow">
                     <div className='auth_form_table'>
                         <div className='auth_logo'>
                             <span className='auth_yellow'>B</span>
@@ -181,6 +182,7 @@ class RegisterForm extends React.Component {
                                     в аккаунт</Link>
                             </div>
                         </div>
+                    </div>
                     </div>
                     <Footer />
                 </div>

@@ -58,6 +58,7 @@ class VerifyEmail extends React.Component {
     render() {
         return (
             <div className='auth'>
+                <div className="auth_grow">
                 <div className='auth_form_table'>
                     <div className='auth_logo'>
                         <span className='auth_yellow'>B</span>
@@ -89,6 +90,7 @@ class VerifyEmail extends React.Component {
                                 }}> Отправить снова </div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <Footer />
             </div>

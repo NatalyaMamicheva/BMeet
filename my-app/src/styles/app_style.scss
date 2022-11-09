@@ -6,19 +6,18 @@
   font-family: 'Nunito', serif;
 }
 
+html, body, #root, .app, .content {
+  height: 100%;
+}
+
 .content {
   min-height: 100%;
 }
 
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1;
+  color: #6e6b7b;
   display: flex;
   justify-content: center;
-  color: #6E6B7B;
   margin-bottom: 10px;
 }
 
