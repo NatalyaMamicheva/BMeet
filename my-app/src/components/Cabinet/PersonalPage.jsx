@@ -43,7 +43,7 @@ class PersonalPage extends React.Component {
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
-                { headers })
+                {headers})
             .then(response => {
                 document.querySelector('html').style['overflow'] = null
                 this.setState({
@@ -59,7 +59,7 @@ class PersonalPage extends React.Component {
 
             })
             .catch(error => {
-                this.setState({ 'error_message': error.message })
+                this.setState({'error_message': error.message})
                 if (error.response.status === 401) {
                     this.props.logout()
                 }
@@ -80,8 +80,7 @@ class PersonalPage extends React.Component {
                 this.setState({
                     'message_password': '',
                 })
-            }
-            else this.setState({
+            } else this.setState({
                 'message_password': 'Пароль не удовлетворяет условиям безопасности',
             })
         }
@@ -102,7 +101,7 @@ class PersonalPage extends React.Component {
                     localStorage.setItem('email', response.data.email)
                     localStorage.setItem('token', response.data.token)
                     if (this.state.email !== this.state.start_email)
-                        this.setState({ message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email` });
+                        this.setState({message_change_email: `На почту ${this.state.email} отправлено письмо с инструкцией по смене email`});
                     this.componentDidMount()
                 })
                 .catch(error => {
@@ -112,12 +111,12 @@ class PersonalPage extends React.Component {
                         'error_message': ''
                     });
                     if (!error.response.data)
-                        this.setState({ error_message: error.message });
+                        this.setState({error_message: error.message});
                     else {
                         if (error.response.data.email)
-                            this.setState({ error_message_email: error.response.data.email });
+                            this.setState({error_message_email: error.response.data.email});
                         if (error.response.data.username)
-                            this.setState({ error_message_username: error.response.data.username });
+                            this.setState({error_message_username: error.response.data.username});
                     }
                 })
         }
@@ -145,21 +144,21 @@ class PersonalPage extends React.Component {
         })
 
         if (event.target.value !== this.state['start_' + event.target.name])
-            this.setState({ 'disabled_btn': false })
+            this.setState({'disabled_btn': false})
         else
-            this.setState({ 'disabled_btn': true })
+            this.setState({'disabled_btn': true})
     }
 
     state_close(event) {
         event.preventDefault()
         this.b_open = document.querySelector('#one');
-        this.setState({ 'readOnly': false, 'class_open': 'profile_open_pass' })
+        this.setState({'readOnly': false, 'class_open': 'profile_open_pass'})
     }
 
     state_open(event) {
         event.preventDefault()
         this.b_open = document.querySelector('#one');
-        this.setState({ 'readOnly': true, 'class_open': 'profile_close_pass' })
+        this.setState({'readOnly': true, 'class_open': 'profile_close_pass'})
     }
 
     _click(event) {
@@ -178,7 +177,7 @@ class PersonalPage extends React.Component {
             this.state.is_save = true
         }
         setTimeout(
-            () => this.setState({ 'is_save': false }),
+            () => this.setState({'is_save': false}),
             3000
         );
     }
@@ -189,17 +188,54 @@ class PersonalPage extends React.Component {
         return true
     }
 
+    static deleteUserModal() {
+        let modal = document.querySelector('.boards_delete_display')
+        if (modal.style['display'] === '') {
+            modal.style['display'] = 'flex'
+        } else {
+            modal.style['display'] = null
+        }
+    }
+
     render() {
         return (
 
             <div className='profile'>
-                <Header logout={() => this.props.logout()} />
+                <Header logout={() => this.props.logout()}/>
 
                 <React.Fragment>
                     {this.state.is_save && (
                         <IsSaveInfo
-                            handleShowIsSave={() => this.handleShowIsSave()} />)}
+                            handleShowIsSave={() => this.handleShowIsSave()}/>)}
                 </React.Fragment>
+
+                <div className="boards_delete_content boards_delete_display">
+                    <div className="boards_delete_window">
+                        <div className="boards_delete_close">
+                            <div className="boards_delete_close_button"
+                                 onClick={() => PersonalPage.deleteUserModal()}>
+                            </div>
+                        </div>
+                        <div className="boards_delete_text">
+                            <div className="boards_delete_title">
+                                <p>Удаление профиля</p>
+                            </div>
+                            <div className="boards_delete_quest">
+                                <p>Вы уверены, что хотите удалить свой
+                                    профиль?</p>
+                            </div>
+                        </div>
+                        <div className="boards_delete_buttons">
+                            <button className='profile_save'>
+                                Удалить
+                            </button>
+                            <button className='boards_delete_button_cancel'
+                                    onClick={() => PersonalPage.deleteUserModal()}>
+                                Отменить
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div className='profile_card'>
                     <div className='profile_title'>
@@ -208,7 +244,7 @@ class PersonalPage extends React.Component {
                     </div>
                     {this.state.error_message &&
                         <p className="input_error"
-                            ref={this.errorRef}>{this.state.error_message}</p>}
+                           ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='profile_form'>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
                             <div className='profile_title_input'>
@@ -219,11 +255,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input name='username'
-                                                className='profile_input_text'
-                                                type="text"
-                                                placeholder="bmeet"
-                                                value={this.state.username}
-                                                onChange={(event) => this.handleChange(event)}
+                                                   className='profile_input_text'
+                                                   type="text"
+                                                   placeholder="bmeet"
+                                                   value={this.state.username}
+                                                   onChange={(event) => this.handleChange(event)}
                                             ></input>
                                         </label>
                                     </div>
@@ -237,11 +273,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="email"
-                                                className='profile_input_text'
-                                                name="email"
-                                                placeholder="bmeet@gmail.com"
-                                                onChange={(event) => this.handleChange(event)}
-                                                value={this.state.email} />
+                                                   className='profile_input_text'
+                                                   name="email"
+                                                   placeholder="bmeet@gmail.com"
+                                                   onChange={(event) => this.handleChange(event)}
+                                                   value={this.state.email}/>
                                         </label>
                                     </div>
                                     <p className='input_error'>{this.state.error_message_email}</p>
@@ -255,11 +291,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="text"
-                                                name="last_name"
-                                                className="profile_input_text"
-                                                placeholder="Введите фамилию"
-                                                onChange={(event) => this.handleChange(event)}
-                                                value={this.state.last_name} />
+                                                   name="last_name"
+                                                   className="profile_input_text"
+                                                   placeholder="Введите фамилию"
+                                                   onChange={(event) => this.handleChange(event)}
+                                                   value={this.state.last_name}/>
                                         </label>
                                     </div>
                                 </div>
@@ -271,11 +307,11 @@ class PersonalPage extends React.Component {
                                     <div className='profile_input_border'>
                                         <label>
                                             <input type="text"
-                                                name="first_name"
-                                                className="profile_input_text"
-                                                placeholder="Введите имя"
-                                                onChange={(event) => this.handleChange(event)}
-                                                value={this.state.first_name} />
+                                                   name="first_name"
+                                                   className="profile_input_text"
+                                                   placeholder="Введите имя"
+                                                   onChange={(event) => this.handleChange(event)}
+                                                   value={this.state.first_name}/>
                                         </label>
                                     </div>
                                 </div>
@@ -292,12 +328,12 @@ class PersonalPage extends React.Component {
                                                 <tr>
                                                     <th>
                                                         <input type="password"
-                                                            name="password"
-                                                            readOnly={this.state['readOnly']}
-                                                            className='profile_input_text password_input_text'
-                                                            placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                                                            onChange={(event) => this.handleChange(event)}
-                                                            value={this.state.password} />
+                                                               name="password"
+                                                               readOnly={this.state['readOnly']}
+                                                               className='profile_input_text password_input_text'
+                                                               placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                                                               onChange={(event) => this.handleChange(event)}
+                                                               value={this.state.password}/>
                                                     </th>
                                                     <th>
                                                         <div
@@ -318,14 +354,18 @@ class PersonalPage extends React.Component {
 
                             <div className='profile_buttons'>
                                 <button className='profile_save' type="submit"
-                                    disabled={this.state.disabled_btn}
-                                    value="submit" id="save"> Сохранить
+                                        disabled={this.state.disabled_btn}
+                                        value="submit" id="save"> Сохранить
                                 </button>
                                 <button className='profile_cancel'
-                                    disabled={this.state.disabled_btn}
-                                    id="cancel"
-                                    onClick={(event) => this.handleCancel(event)}>Отменить
+                                        disabled={this.state.disabled_btn}
+                                        id="cancel"
+                                        onClick={(event) => this.handleCancel(event)}>Отменить
                                 </button>
+                            </div>
+                            <div className="profile_delete"
+                                 onClick={() => PersonalPage.deleteUserModal()}>
+                                <p>Удалить аккаунт</p>
                             </div>
                         </form>
                     </div>
