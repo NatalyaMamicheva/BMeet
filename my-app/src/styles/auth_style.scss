@@ -13,7 +13,7 @@
   width: 407px;
   background: #FFFFFF;
   border-radius: 10px;
-  box-shadow: 4px 1px 24px 4px rgba(24, 41, 47, 0.1);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   color: #6E6B7B;
 }
 
@@ -91,7 +91,7 @@
   width: 95%;
   border-color: #B9B9C3;
   border-style: solid;
-  border-width: 1.5px;
+  border-width: 1px;
   border-radius: 5px;
   outline: none;
 }
@@ -142,6 +142,7 @@ label input[type="email"] {
   border-width: 1.5px;
   border-radius: 5px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .auth_button_form:hover {
@@ -176,6 +177,7 @@ label input[type="email"] {
 
 .auth_header_a:hover {
   color: #B9B9C3;
+  cursor: pointer;
 }
 
 ::placeholder {

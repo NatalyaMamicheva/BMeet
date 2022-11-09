@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom'
 import { Navigate } from 'react-router-dom'
 import { observer } from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";

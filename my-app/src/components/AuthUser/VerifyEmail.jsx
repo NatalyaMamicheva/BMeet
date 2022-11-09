@@ -82,11 +82,11 @@ class VerifyEmail extends React.Component {
                         <div className='auth_header'>
                             <p className='auth_header_p'>
                                 Не пришло письмо?</p>
-                            <a href="#" className='auth_header_a'
+                            <div className='auth_header_a'
                                 id='again' onClick={(event) => {
                                     this.handleClick(event);
                                     this.startTimer();
-                                }}> Отправить снова </a>
+                                }}> Отправить снова </div>
                         </div>
                     </div>
                 </div>

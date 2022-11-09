@@ -35,12 +35,6 @@
   margin-left: 21px;
 }
 
-.header_logo:hover{
-  background: url("../assets/img/header_logo_hover.svg") no-repeat;
-  width: 49px;
-  height: 49px;
-}
-
 .header_name_board {
   text-align: center;
   width: 68%;
@@ -110,7 +104,7 @@
   background: #FFFFFF;
   border: #FFFFFF 0 solid;
   border-radius: 6px;
-  box-shadow: 11px 0 12px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   z-index: 1;
   margin-top: 5px;
   margin-right: 29px;
@@ -139,6 +133,7 @@
 
 .header_link:hover {
   background: #FCF6EC;
+  cursor: pointer;
 }
 
 .header_dropdown:hover .header_menu {

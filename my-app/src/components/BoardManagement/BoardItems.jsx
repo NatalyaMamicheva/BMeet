@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import axios from 'axios'
 import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
@@ -109,35 +110,31 @@ class BoardItem extends React.Component {
                     <div className="boards_text">
                         <p
                             className='boards_title'>
-                            <a href={board_open}>
+                            <Link to={board_open}>
                                 {this.props.item.name}
-                            </a>
+                            </Link>
                         </p>
                         <p className='boards_description'>{this.props.item.description}</p>
                     </div>
                 </div>
                 <div className="boards_buttons">
                     <div className="boards_open">
-                        <a href={board_open}>
+                        <Link to={board_open}>
                             <div className="boards_buttons_open"></div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="boards_button_update_and_delete">
 
                         {update ? (
-                            <a className='boards_button_a' href='#'>
-                                <div className="boards_buttons_update"
-                                     onClick={(event) => this.handleShowUpdateBoard(event)}></div>
-                            </a>
+                            <div className="boards_buttons_update"
+                                 onClick={(event) => this.handleShowUpdateBoard(event)}></div>
                         ) : (
                             <div></div>
                         )}
 
-                        <a className='boards_button_a' href='#'>
-                            <div className="boards_buttons_delete"
-                                 id={`board_${this.props.item.id}`}
-                                 onClick={(event) => BoardItem.DeleteModal(event)}></div>
-                        </a>
+                        <div className="boards_buttons_delete"
+                             id={`board_${this.props.item.id}`}
+                             onClick={(event) => BoardItem.DeleteModal(event)}></div>
                     </div>
                 </div>
             </div>
@@ -175,16 +172,14 @@ class BoardItems extends React.Component {
                                        isReload={() => this.props.isReload()}
                             />
                         ))}
-                        <a className='boards_button_a' href='#'>
-                            <div className="boards_board boards_new_board">
-                                <div className="boards_board_size">
-                                    <p className='boards_not_invitations_p'
-                                       onClick={(event) => this.handleShowCreateBoard(event)}>
-                                        Создать новую доску
-                                    </p>
-                                </div>
+                        <div className="boards_board boards_new_board">
+                            <div className="boards_board_size">
+                                <p className='boards_not_invitations_p'
+                                   onClick={(event) => this.handleShowCreateBoard(event)}>
+                                    Создать новую доску
+                                </p>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
