@@ -18,11 +18,11 @@ class Header extends React.Component {
 
     get_toolbar() {
         return (
-                <div className="board_header_toolbar_brush"
-                     id='board_header_toolbar'
-                     onClick={(e) => toolState.collapse(e)}>
-                    <Toolbar/>
-                </div>
+            <div className="board_header_toolbar_brush"
+                 id='board_header_toolbar'
+                 onClick={(e) => toolState.collapse(e)}>
+                <Toolbar/>
+            </div>
         )
     }
 
@@ -63,14 +63,14 @@ class Header extends React.Component {
                     <div className='header_menu'>
                         <div className='header_links'>
                             <Link className='header_link'
-                               to="/board_management">
+                                  to="/board_management">
                                 <p className='header_link_p'>Главная</p>
                             </Link>
                             <Link className='header_link' to='/cabinet'>
                                 <p className='header_link_p'>Профиль</p>
                             </Link>
                             <div className='header_link'
-                               onClick={(event) => this.props.logout()}>
+                                 onClick={(event) => this.props.logout()}>
                                 <p className='header_link_p'>Выход из
                                     аккаунта</p>
                             </div>

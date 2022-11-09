@@ -3,7 +3,6 @@ import axios from 'axios'
 import Header from '../Header.jsx'
 import BoardItems from './BoardItems.jsx'
 import '../../styles/boards_style.scss'
-import Footer from "../Footer";
 
 
 class BoardManagement extends React.Component {
@@ -20,25 +19,25 @@ class BoardManagement extends React.Component {
     }
 
     isReload() {
-        this.setState({ is_load: false })
+        this.setState({is_load: false})
         let my_boards = []
         let other_boards = []
         let headers = this.props.getHeader()
         axios
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/board/`,
-                { headers })
+                {headers})
             .then(response => response.data)
             .then((result) => {
-                for (let board of result) {
-                    if (board.author.username === localStorage.getItem('username')) my_boards.push(board)
-                    else other_boards.push(board)
-                }
-                this.setState({
-                    my_boards: my_boards,
-                    other_boards: other_boards,
-                    is_load: true
-                });
-            },
+                    for (let board of result) {
+                        if (board.author.username === localStorage.getItem('username')) my_boards.push(board)
+                        else other_boards.push(board)
+                    }
+                    this.setState({
+                        my_boards: my_boards,
+                        other_boards: other_boards,
+                        is_load: true
+                    });
+                },
             )
             .catch(error => {
                 this.setState({
@@ -56,23 +55,20 @@ class BoardManagement extends React.Component {
         this.isReload()
     }
 
-
-
-
     render() {
         if (!this.state.is_load) return <div>Загрузка...</div>;
 
         return (
             <div>
-                <Header logout={() => this.props.logout()} />
+                <Header logout={() => this.props.logout()}/>
                 {this.state.error_message &&
-                    <p className="input_error" ref={this.errorRef}>{this.state.error_message}</p>}
+                    <p className="input_error"
+                       ref={this.errorRef}>{this.state.error_message}</p>}
                 <BoardItems my_boards={this.state.my_boards}
-                    other_boards={this.state.other_boards}
-                    getHeader={() => this.props.getHeader()}
-                    isReload={() => this.isReload()}
+                            other_boards={this.state.other_boards}
+                            getHeader={() => this.props.getHeader()}
+                            isReload={() => this.isReload()}
                 />
-                <Footer />
             </div>
         )
     }

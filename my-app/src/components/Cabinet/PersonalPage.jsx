@@ -4,7 +4,6 @@ import Header from '../Header.jsx'
 import IsSaveInfo from './IsSaveInfo.jsx'
 import '../../styles/profile_style.scss'
 import '../../styles/auth_style.scss'
-import Footer from "../Footer";
 
 
 class PersonalPage extends React.Component {
@@ -330,7 +329,6 @@ class PersonalPage extends React.Component {
                         </form>
                     </div>
                 </div>
-                <Footer />
             </div>
         )
     }

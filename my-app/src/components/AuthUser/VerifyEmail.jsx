@@ -24,9 +24,9 @@ class VerifyEmail extends React.Component {
         for (let i = 60; i > 0; i--) {
             this.timer = setTimeout(() => {
                 second -= 1
-                this.setState({ 'info_timer': `Повторная отправка возможна через ${second} сек.` });
+                this.setState({'info_timer': `Повторная отправка возможна через ${second} сек.`});
                 if (second === 0) {
-                    this.setState({ 'info_timer': '' });
+                    this.setState({'info_timer': ''});
                     p_again.style["pointer-events"] = "auto";
                     p_again.style["color"] = "#E7B460";
                 }
@@ -50,7 +50,7 @@ class VerifyEmail extends React.Component {
                 console.log(response)
             })
             .catch(error => {
-                this.setState({ 'error_message': error.message });
+                this.setState({'error_message': error.message});
                 this.errorRef.current.focus();
             })
     }
@@ -58,7 +58,6 @@ class VerifyEmail extends React.Component {
     render() {
         return (
             <div className='auth'>
-                <div className="auth_grow">
                 <div className='auth_form_table'>
                     <div className='auth_logo'>
                         <span className='auth_yellow'>B</span>
@@ -67,7 +66,8 @@ class VerifyEmail extends React.Component {
                         <span className='auth_blue'>t</span>
                     </div>
                     {this.state.error_message &&
-                        <p className="input_error" ref={this.errorRef}>{this.state.error_message}</p>}
+                        <p className="input_error"
+                           ref={this.errorRef}>{this.state.error_message}</p>}
                     <div className='auth_content'>
                         <div className='auth_title'>
                             <p>Необходимо подтвердить вашу почту!</p>
@@ -84,17 +84,15 @@ class VerifyEmail extends React.Component {
                             <p className='auth_header_p'>
                                 Не пришло письмо?</p>
                             <div className='auth_header_a'
-                                id='again' onClick={(event) => {
-                                    this.handleClick(event);
-                                    this.startTimer();
-                                }}> Отправить снова </div>
+                                 id='again' onClick={(event) => {
+                                this.handleClick(event);
+                                this.startTimer();
+                            }}> Отправить снова
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                <Footer />
             </div>
-
         )
     }
 }
