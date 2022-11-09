@@ -3,6 +3,7 @@ import axios from 'axios'
 import Header from '../Header.jsx'
 import BoardItems from './BoardItems.jsx'
 import '../../styles/boards_style.scss'
+import Footer from "../Footer";
 
 
 class BoardManagement extends React.Component {
@@ -70,6 +71,7 @@ class BoardManagement extends React.Component {
                             getHeader={() => this.props.getHeader()}
                             isReload={() => this.isReload()}
                 />
+                <Footer />
             </div>
         )
     }

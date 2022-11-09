@@ -3,6 +3,7 @@ import "../../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
+import Footer from "../Footer";
 
 
 class Login extends React.Component {
@@ -206,6 +207,7 @@ class Login extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <Footer />
                 </div>
             );
     };

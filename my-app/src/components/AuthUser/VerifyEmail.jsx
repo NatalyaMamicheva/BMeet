@@ -92,6 +92,7 @@ class VerifyEmail extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }
