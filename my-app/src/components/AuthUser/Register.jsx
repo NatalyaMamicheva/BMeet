@@ -19,7 +19,6 @@ class RegisterForm extends React.Component {
             'success': false,
             'error_message_username': '',
             'error_message_email': '',
-            'message_password': '',
             'error_message': ''
         }
     }
@@ -27,7 +26,6 @@ class RegisterForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.props.check_password(this.state.password)) {
-            this.setState({message_password: ''})
             axios
                 .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/`,
                     {
@@ -48,7 +46,6 @@ class RegisterForm extends React.Component {
                         'success': true,
                         'error_message_username': '',
                         'error_message_email': '',
-                        'message_password': '',
                         'error_message': ''
                     });
                 })
@@ -66,10 +63,12 @@ class RegisterForm extends React.Component {
                         if (error.response.data.username)
                             this.setState({error_message_username: error.response.data.username});
                     }
-                    ;
                     this.errorRef.current.focus();
                 })
-        } else this.setState({message_password: 'Пароль не удовлетворяет условиям безопасности'});
+        } else {
+            let err_psw = document.querySelector('.input_error_psw')
+            err_psw.style.display = 'block'
+        }
     }
 
     handleChange(event) {
@@ -160,8 +159,27 @@ class RegisterForm extends React.Component {
                                                     value={this.state.password}/>
                                             </label>
                                         </div>
-                                        <p className='input_error'
-                                           ref={this.errorRef}>{this.state.message_password}</p>
+
+                                        <p className='input_error_psw'>
+                                            <p>Пароль не удовлетворяет условиям
+                                                безопасности. Требуемые
+                                                условия:</p>
+                                            <ul>
+                                                <li>Не менее 8 знаков</li>
+                                                <li>Одна буква верхнего
+                                                    регистра
+                                                    (A-Z)
+                                                </li>
+                                                <li>Одна буква нижнего регистра
+                                                    (a-z)
+                                                </li>
+                                                <li>Одна цифра (0-9)</li>
+                                                <li>Один специальный знак
+                                                    (~!@#$%^...)“
+                                                </li>
+                                            </ul>
+                                        </p>
+
                                     </div>
                                     <div className='auth_input_button'>
                                         <button
