@@ -197,6 +197,11 @@ class PersonalPage extends React.Component {
         }
     }
 
+    deleteUser() {
+        let headers = this.props.getHeader()
+        let username = document.querySelector('.header_username').innerHTML
+    }
+
     render() {
         return (
 
@@ -225,7 +230,8 @@ class PersonalPage extends React.Component {
                             </div>
                         </div>
                         <div className="boards_delete_buttons">
-                            <button className='profile_save'>
+                            <button className='profile_save'
+                                    onClick={() => this.deleteUser()}>
                                 Удалить
                             </button>
                             <button className='boards_delete_button_cancel'
