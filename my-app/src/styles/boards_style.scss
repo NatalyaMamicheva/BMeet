@@ -132,6 +132,9 @@
   height: 24px;
   -webkit-backdrop-filter: blur(100%);
 }
+.boards_buttons_open:hover {
+  background: url("../assets/img/board_open_hover.svg") no-repeat center center;
+}
 
 
 .boards_buttons_update {
@@ -141,12 +144,19 @@
   -webkit-backdrop-filter: blur(100%);
 }
 
+.boards_buttons_update:hover {
+  background: url("../assets/img/board_update_hover.svg") no-repeat center center;
+}
 
 .boards_buttons_delete {
   background: url("../assets/img/board_delete.svg") no-repeat center;
   width: 24px;
   height: 24px;
   -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_delete:hover {
+  background: url("../assets/img/board_delete_hover.svg") no-repeat center center;
 }
 
 
