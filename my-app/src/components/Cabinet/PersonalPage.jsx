@@ -4,7 +4,6 @@ import Header from '../Header.jsx'
 import IsSaveInfo from './IsSaveInfo.jsx'
 import '../../styles/profile_style.scss'
 import '../../styles/auth_style.scss'
-import Footer from "../Footer";
 
 
 class PersonalPage extends React.Component {
@@ -46,6 +45,7 @@ class PersonalPage extends React.Component {
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
                 { headers })
             .then(response => {
+                document.querySelector('html').style['overflow'] = null
                 this.setState({
                     'username': response.data.username,
                     'start_username': response.data.username,
@@ -330,7 +330,6 @@ class PersonalPage extends React.Component {
                         </form>
                     </div>
                 </div>
-                <Footer />
             </div>
         )
     }

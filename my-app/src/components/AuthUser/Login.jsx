@@ -2,7 +2,6 @@ import {Link, Navigate} from 'react-router-dom';
 import "../../styles/auth_style.scss";
 import React from 'react'
 import axios from 'axios'
-import Footer from "../Footer";
 import VerifyEmail from "./VerifyEmail";
 
 
@@ -107,7 +106,6 @@ class Login extends React.Component {
         }
     }
 
-
     render() {
         if (localStorage.getItem('token')) return <Navigate
             to="/board_management"/>;
@@ -208,7 +206,6 @@ class Login extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Footer/>
                 </div>
             );
     };

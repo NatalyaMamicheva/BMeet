@@ -1,6 +1,6 @@
 .boards_content {
-  height: 100%;
-  margin-bottom: 20%;
+  height: 90%;
+  //margin-bottom: 20%;
 }
 
 .boards_content h2 {
@@ -23,7 +23,7 @@
   width: 325px;
   height: 152px;
   margin: 31px 25px 0 0;
-  box-shadow: 4px 1px 24px 4px rgba(24, 41, 47, 0.1);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
   overflow: hidden;
 }
 
@@ -38,13 +38,26 @@
 }
 
 .boards_new_board {
-  background: #F8F8F8;
-  border: #E7B460 2px dashed;
+  box-shadow: none;
+  border: 1px dashed #B9B9C3;
+  color: #B9B9C3;
+  transition: border 0.3s ease-in-out;
+}
+
+.boards_board.boards_new_board:hover {
+  border: 1px dashed #E7B460;
+}
+
+.boards_new_board:hover .boards_not_invitations_p {
+  color: #E7B460;
+  cursor: pointer;
 }
 
 .boards_new_board p {
-  color: #E7B460;
+  color: #B9B9C3;
+  transition: color 0.3s ease-in-out;
 }
+
 
 .boards_not_invitations_p {
   font-weight: 500;
@@ -134,6 +147,7 @@
 
 .boards_buttons_update:hover {
   background: url("../assets/img/board_update_hover.svg") no-repeat center center;
+  cursor: pointer;
 }
 
 .boards_buttons_delete {
@@ -145,6 +159,7 @@
 
 .boards_buttons_delete:hover {
   background: url("../assets/img/board_delete_hover.svg") no-repeat center center;
+  cursor: pointer;
 }
 
 .new_board, .boards_delete_content {
@@ -187,6 +202,7 @@
 
 .new_board_close_button:hover {
   background: url("../assets/img/board_close_hover.svg") no-repeat center;
+  cursor: pointer;
 }
 
 .new_board_title {
@@ -297,6 +313,7 @@
   background: url("../assets/img/board_email_close.svg") no-repeat center;
   width: 12px;
   height: 12px;
+  cursor: pointer;
 }
 
 //invite emails
@@ -345,6 +362,7 @@
 
 .new_board_invite_button button:hover {
   color: #6E6B7B;
+  cursor: pointer;
 }
 
 .boards_delete_display {
@@ -372,6 +390,7 @@
 
 .boards_delete_close_button:hover {
   background: url("../assets/img/board_close_hover.svg");
+  cursor: pointer;
 }
 
 .boards_delete_text {
@@ -416,8 +435,5 @@
   background: #D8D6DE;
   color: #FFFFFF;
   border: #D8D6DE 1px solid;
-}
-
-.boards_button_a {
-  text-decoration: none;
+  cursor: pointer;
 }

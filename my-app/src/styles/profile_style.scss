@@ -177,6 +177,7 @@
   outline: none;
   z-index: 1;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .profile_open_pass {
@@ -206,6 +207,7 @@
 .profile_save:hover,
 .profile_cancel:hover {
   color: #82868B;
+  cursor: pointer;
 }
 
 .profile_save:disabled,

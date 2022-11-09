@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navigate} from 'react-router-dom'
+import {Navigate, Link} from 'react-router-dom'
 import '../styles/app_style.scss'
 import '../styles/header_style.scss'
 import axios from "axios";
@@ -18,11 +18,11 @@ class Header extends React.Component {
 
     get_toolbar() {
         return (
-                <div className="board_header_toolbar_brush"
-                     id='board_header_toolbar'
-                     onClick={(e) => toolState.collapse(e)}>
-                    <Toolbar/>
-                </div>
+            <div className="board_header_toolbar_brush"
+                 id='board_header_toolbar'
+                 onClick={(e) => toolState.collapse(e)}>
+                <Toolbar/>
+            </div>
         )
     }
 
@@ -44,9 +44,9 @@ class Header extends React.Component {
         }
         return (
             <div className='header'>
-                <a href="/">
+                <Link to="/">
                     <div className="header_logo"></div>
-                </a>
+                </Link>
 
                 {this.toolbar}
 
@@ -62,18 +62,18 @@ class Header extends React.Component {
                     </div>
                     <div className='header_menu'>
                         <div className='header_links'>
-                            <a className='header_link'
-                               href="/board_management">
+                            <Link className='header_link'
+                                  to="/board_management">
                                 <p className='header_link_p'>Главная</p>
-                            </a>
-                            <a className='header_link' href='/cabinet'>
+                            </Link>
+                            <Link className='header_link' to='/cabinet'>
                                 <p className='header_link_p'>Профиль</p>
-                            </a>
-                            <a className='header_link' href="#"
-                               onClick={(event) => this.props.logout()}>
+                            </Link>
+                            <div className='header_link'
+                                 onClick={(event) => this.props.logout()}>
                                 <p className='header_link_p'>Выход из
                                     аккаунта</p>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>

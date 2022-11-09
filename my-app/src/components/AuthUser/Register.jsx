@@ -1,9 +1,8 @@
-import { Link, Navigate } from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
 import "../../styles/auth_style.scss";
-import Footer from "../Footer";
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -28,7 +27,7 @@ class RegisterForm extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.props.check_password(this.state.password)) {
-            this.setState({ message_password: '' })
+            this.setState({message_password: ''})
             axios
                 .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/register/`,
                     {
@@ -60,18 +59,17 @@ class RegisterForm extends React.Component {
                         'error_message': ''
                     });
                     if (!error.response.data)
-                        this.setState({ error_message: error.message });
+                        this.setState({error_message: error.message});
                     else {
                         if (error.response.data.email)
-                            this.setState({ error_message_email: error.response.data.email });
+                            this.setState({error_message_email: error.response.data.email});
                         if (error.response.data.username)
-                            this.setState({ error_message_username: error.response.data.username });
+                            this.setState({error_message_username: error.response.data.username});
                     }
                     ;
                     this.errorRef.current.focus();
                 })
-        }
-        else this.setState({ message_password: 'Пароль не удовлетворяет условиям безопасности' });
+        } else this.setState({message_password: 'Пароль не удовлетворяет условиям безопасности'});
     }
 
     handleChange(event) {
@@ -82,12 +80,12 @@ class RegisterForm extends React.Component {
 
     render() {
         if (localStorage.getItem('token')) return <Navigate
-            to="/board_management" />
+            to="/board_management"/>
         if (this.state.success) {
             return (
                 <VerifyEmail email={this.email} id={this.id}
-                    username={this.username}
-                    password={this.password} />
+                             username={this.username}
+                             password={this.password}/>
             )
         } else {
             return (
@@ -102,10 +100,10 @@ class RegisterForm extends React.Component {
                         <div className='auth_content'>
                             <div className='auth_title'>
                                 <p>Приветствуем!</p>
-                                <span>Зарегистрируйтесь, чтобы начать пользоваться<br />платформой</span>
+                                <span>Зарегистрируйтесь, чтобы начать пользоваться<br/>платформой</span>
                             </div>
                             <p className='input_error'
-                                ref={this.errorRef}>{this.state.error_message}</p>
+                               ref={this.errorRef}>{this.state.error_message}</p>
                             <div className='auth_form'>
                                 <form
                                     onSubmit={(event) => this.handleSubmit(event)}>
@@ -128,7 +126,7 @@ class RegisterForm extends React.Component {
                                             </label>
                                         </div>
                                         <p className='input_error'
-                                            ref={this.errorRef}>{this.state.error_message_username}</p>
+                                           ref={this.errorRef}>{this.state.error_message_username}</p>
                                         <div className='auth_title_input'>
                                             <span>Email</span>
                                         </div>
@@ -141,11 +139,11 @@ class RegisterForm extends React.Component {
                                                     placeholder="bmeet@gmail.com"
                                                     required
                                                     onChange={(event) => this.handleChange(event)}
-                                                    value={this.state.email} />
+                                                    value={this.state.email}/>
                                             </label>
                                         </div>
                                         <p className='input_error'
-                                            ref={this.errorRef}>{this.state.error_message_email}</p>
+                                           ref={this.errorRef}>{this.state.error_message_email}</p>
                                         <div className='auth_title_input'>
                                             <span>Пароль</span>
                                         </div>
@@ -159,11 +157,11 @@ class RegisterForm extends React.Component {
                                                     placeholder="************"
                                                     required
                                                     onChange={(event) => this.handleChange(event)}
-                                                    value={this.state.password} />
+                                                    value={this.state.password}/>
                                             </label>
                                         </div>
                                         <p className='input_error'
-                                            ref={this.errorRef}>{this.state.message_password}</p>
+                                           ref={this.errorRef}>{this.state.message_password}</p>
                                     </div>
                                     <div className='auth_input_button'>
                                         <button
@@ -182,7 +180,6 @@ class RegisterForm extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Footer />
                 </div>
             )
         }

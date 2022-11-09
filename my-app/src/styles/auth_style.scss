@@ -13,7 +13,7 @@
   width: 407px;
   background: #FFFFFF;
   border-radius: 10px;
-  box-shadow: 4px 1px 24px 4px rgba(24, 41, 47, 0.1);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
   color: #6E6B7B;
 }
 
@@ -34,12 +34,10 @@
   color: #B9B9C3;
 }
 
-
 .auth_content {
   margin-left: 35px;
   margin-right: 35px;
 }
-
 
 .auth_title {
   margin-top: 33px;
@@ -63,7 +61,6 @@
 .auth_input {
 }
 
-
 .auth_title_input {
   margin-top: 20px;
   font-weight: 400;
@@ -84,14 +81,13 @@
 .auth_input_border {
 }
 
-
 .auth_input_text {
   bottom: 237px;
   height: 38px;
   width: 95%;
   border-color: #B9B9C3;
   border-style: solid;
-  border-width: 1.5px;
+  border-width: 1px;
   border-radius: 5px;
   outline: none;
 }
@@ -142,12 +138,12 @@ label input[type="email"] {
   border-width: 1.5px;
   border-radius: 5px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .auth_button_form:hover {
   background: #B9B9C3;
 }
-
 
 .auth_header {
   display: flex;
@@ -156,14 +152,12 @@ label input[type="email"] {
   margin-bottom: 31px;
 }
 
-
 .auth_header_p {
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
   margin-right: 2.5px;
 }
-
 
 .auth_header_a {
   font-weight: 400;
@@ -176,6 +170,7 @@ label input[type="email"] {
 
 .auth_header_a:hover {
   color: #B9B9C3;
+  cursor: pointer;
 }
 
 ::placeholder {
