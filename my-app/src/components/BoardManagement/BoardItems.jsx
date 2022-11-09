@@ -196,8 +196,7 @@ class BoardItems extends React.Component {
                             handleShowCreateUpdateBoard={() => this.handleShowCreateBoard()}
                             title='Создание доски'
                             text_button='Создать'
-                            text_p='Введите адреса электронной почты ваших коллег и пригласите их присоединиться к вашей доске в
-                            BMeet'/>)
+                            text_p='Создайте новую доску в BMeet и предложите своим коллегам присоединиться к Вам'/>)
                     }
                 </React.Fragment>
 
