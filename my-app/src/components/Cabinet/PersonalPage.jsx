@@ -45,6 +45,7 @@ class PersonalPage extends React.Component {
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
                 { headers })
             .then(response => {
+                document.querySelector('html').style['overflow'] = null
                 this.setState({
                     'username': response.data.username,
                     'start_username': response.data.username,

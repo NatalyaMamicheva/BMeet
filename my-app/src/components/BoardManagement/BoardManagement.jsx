@@ -28,6 +28,7 @@ class BoardManagement extends React.Component {
                 {headers})
             .then(response => response.data)
             .then((result) => {
+                    document.querySelector('html').style['overflow'] = null
                     for (let board of result) {
                         if (board.author.username === localStorage.getItem('username')) my_boards.push(board)
                         else other_boards.push(board)
