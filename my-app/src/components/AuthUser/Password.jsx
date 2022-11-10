@@ -46,6 +46,7 @@ class Password extends React.Component {
             )
             .then(response => {
                 console.log(response)
+                this.startTimer()
             })
             .catch(error => {
                 if (error.response.status === 400) {
@@ -83,7 +84,6 @@ class Password extends React.Component {
                         <div className='auth_form'>
                             <form onSubmit={(event) => {
                                 this.handleSubmit(event);
-                                this.startTimer();
                             }}>
                                 <div className='auth_input'>
 
@@ -113,7 +113,6 @@ class Password extends React.Component {
                                             id='again'
                                             onClick={(event) => {
                                                 this.handleClick(event);
-                                                this.startTimer();
                                             }}>
                                         <p>Сбросить
                                             пароль</p>

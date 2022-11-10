@@ -27,7 +27,6 @@ class PersonalPage extends React.Component {
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
-            'message_password': '',
             'message_change_email': '',
             'disabled_btn': true,
             'is_save': false,
@@ -40,6 +39,9 @@ class PersonalPage extends React.Component {
             'error_message_username': '',
             'error_message_email': '',
             'disabled_btn': true,
+            'readOnly': true,
+            'class_open': 'profile_close_pass',
+            'password': ''
         })
         let headers = this.props.getHeader()
         axios
@@ -76,14 +78,13 @@ class PersonalPage extends React.Component {
             'email': this.state.email.toLowerCase()
         })
         if (this.state.password !== this.state.start_password) {
+            let psw_error = document.querySelector('.input_error_psw')
             if (this.props.check_password(this.state.password)) {
                 data['password'] = this.state.password
-                this.setState({
-                    'message_password': '',
-                })
-            } else this.setState({
-                'message_password': 'Пароль не удовлетворяет условиям безопасности',
-            })
+                psw_error.style.display = 'none'
+            } else {
+                psw_error.style.display = 'block'
+            }
         }
         if (this.state.username !== this.state.start_username) data['username'] = this.state.username
         if (this.state.email !== this.state.start_email) data['email'] = this.state.email
@@ -135,8 +136,11 @@ class PersonalPage extends React.Component {
             'last_name': this.state.start_last_name,
             'password': '',
             'disabled_btn': true,
-
+            'class_open': 'profile_close_pass',
+            'readOnly': true
         });
+        let error_psw = document.querySelector('.input_error_psw')
+        error_psw.style.display = 'none'
     }
 
     handleChange(event) {
@@ -152,14 +156,21 @@ class PersonalPage extends React.Component {
 
     state_close(event) {
         event.preventDefault()
-        this.b_open = document.querySelector('#one');
-        this.setState({'readOnly': false, 'class_open': 'profile_open_pass'})
+        let open = document.querySelector('#one');
+        this.setState({
+            'readOnly': false,
+            'class_open': 'profile_open_pass'
+        })
     }
 
     state_open(event) {
         event.preventDefault()
-        this.b_open = document.querySelector('#one');
-        this.setState({'readOnly': true, 'class_open': 'profile_close_pass'})
+        this.setState({
+            'readOnly': true,
+            'class_open': 'profile_close_pass',
+            'password': '',
+            'disabled_btn': true
+        })
     }
 
     _click(event) {
@@ -354,10 +365,28 @@ class PersonalPage extends React.Component {
                                             </table>
                                         </label>
                                     </div>
-                                    <p className='input_error'>{this.state.message_password}</p>
+
+                                    <p className='input_error_psw'>
+                                        <p>Пароль не удовлетворяет условиям
+                                            безопасности. Требуемые
+                                            условия:</p>
+                                        <ul>
+                                            <li>Не менее 8 знаков</li>
+                                            <li>Одна буква верхнего регистра
+                                                (A-Z)
+                                            </li>
+                                            <li>Одна буква нижнего регистра
+                                                (a-z)
+                                            </li>
+                                            <li>Одна цифра (0-9)</li>
+                                            <li>Один специальный знак
+                                                (~!@#$%^...)“
+                                            </li>
+                                        </ul>
+                                    </p>
+
                                 </div>
                             </div>
-
                             <div className='profile_buttons'>
                                 <button className='profile_save' type="submit"
                                         disabled={this.state.disabled_btn}
