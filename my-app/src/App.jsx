@@ -9,7 +9,6 @@ import PersonalPage from './components/Cabinet/PersonalPage.jsx'
 import Password from './components/AuthUser/Password.jsx'
 import ChangeEmail from './components/Cabinet/ChangeEmail.jsx';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
-import Footer from "./components/Footer";
 
 
 const NotFound = () => {
@@ -71,7 +70,6 @@ class App extends React.Component {
                         </Routes>
                     </BrowserRouter>
                 </div>
-                <Footer />
             </div>
         );
     };

@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
 import "../../styles/auth_style.scss";
+import Footer from "../Footer";
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -180,6 +181,7 @@ class RegisterForm extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <Footer />
                 </div>
             )
         }

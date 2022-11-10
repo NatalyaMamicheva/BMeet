@@ -2,6 +2,7 @@ import {Link, Navigate} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "../../styles/auth_style.scss";
+import Footer from "../Footer";
 
 
 class Password extends React.Component {
@@ -126,6 +127,7 @@ class Password extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

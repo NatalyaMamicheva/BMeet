@@ -4,6 +4,7 @@ import Header from '../Header.jsx'
 import IsSaveInfo from './IsSaveInfo.jsx'
 import '../../styles/profile_style.scss'
 import '../../styles/auth_style.scss'
+import Footer from "../Footer";
 
 
 class PersonalPage extends React.Component {
@@ -368,13 +369,13 @@ class PersonalPage extends React.Component {
                                         onClick={(event) => this.handleCancel(event)}>Отменить
                                 </button>
                             </div>
-                            <div className="profile_delete"
-                                 onClick={() => PersonalPage.deleteUserModal()}>
-                                <p>Удалить аккаунт</p>
+                            <div className="profile_delete">
+                                <p onClick={() => PersonalPage.deleteUserModal()}>Удалить аккаунт</p>
                             </div>
                         </form>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }
