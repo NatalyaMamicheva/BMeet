@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Navigate } from 'react-router-dom'
-import { observer } from "mobx-react-lite";
+import React, {useEffect, useRef, useState} from 'react';
+import {Navigate} from 'react-router-dom'
+import {observer} from "mobx-react-lite";
 import canvasState from "./store/canvasState.js";
 import toolState from "./store/toolState";
 import Brush from "./tools/Brush";
@@ -14,9 +14,13 @@ const Canvas = observer(() => {
     const [userAccess, setUserAccess] = useState(true);
 
     useEffect(() => {
+        let pathname = window.location.pathname
+        if (pathname[pathname.length - 1] === '/') {
+            pathname = pathname.substring(0, pathname.length - 1)
+        }
         let username = localStorage.getItem('username')
         canvasState.setCanvas(canvasRef.current)
-        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${window.location.pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
+        let url = `ws://${process.env.REACT_APP_BACKEND_HOST}/api${pathname}/?token=${localStorage.getItem('token').split(' ')[1]}`;
         let socket = new WebSocket(url);
         canvasState.setSocket(socket)
         toolState.setTool(new Brush(canvasRef.current, socket))
@@ -80,11 +84,12 @@ const Canvas = observer(() => {
     }
 
     if (!userAccess)
-        return <Navigate to="/board_management" />
+        return <Navigate to="/board_management"/>
     return (
         <div className="board_canvas">
-            <canvas id="canvas" ref={canvasRef} width={Tool.getWidthHeight()[0]}
-                height={Tool.getWidthHeight()[1]} />
+            <canvas id="canvas" ref={canvasRef}
+                    width={Tool.getWidthHeight()[0]}
+                    height={Tool.getWidthHeight()[1]}/>
         </div>
     );
 });
