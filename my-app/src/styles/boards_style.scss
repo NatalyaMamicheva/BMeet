@@ -1,0 +1,439 @@
+.boards_content {
+  height: 90%;
+  //margin-bottom: 20%;
+}
+
+.boards_content h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+  color: #5E5873;
+  margin: 43px 28px 0 28px;
+}
+
+.boards_my_boards {
+  display: inline-flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+  margin-left: 28px;
+}
+
+.boards_board {
+  border-radius: 15px;
+  width: 325px;
+  height: 152px;
+  margin: 31px 25px 0 0;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
+  overflow: hidden;
+}
+
+.boards_board_size {
+  width: 100%;
+  height: 86px;
+}
+
+.boards_not_invitations {
+  background: #F8F8F8;
+  border: #B9B9C3 2px solid;
+}
+
+.boards_new_board {
+  box-shadow: none;
+  border: 1px dashed #B9B9C3;
+  color: #B9B9C3;
+  transition: border 0.3s ease-in-out;
+}
+
+.boards_board.boards_new_board:hover {
+  border: 1px dashed #E7B460;
+}
+
+.boards_new_board:hover .boards_not_invitations_p {
+  color: #E7B460;
+  cursor: pointer;
+}
+
+.boards_new_board p {
+  color: #B9B9C3;
+  transition: color 0.3s ease-in-out;
+}
+
+
+.boards_not_invitations_p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #B9B9C3;
+  padding: 20% 0 0 0;
+  height: 100%;
+}
+
+.boards_text p {
+}
+
+.boards_text a {
+  text-decoration: none;
+}
+
+.boards_title {
+  margin: 21px 20px 0 20px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #5E5873;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boards_title a {
+  color: #5E5873;
+}
+
+.boards_title a:hover {
+  color: #E7B460;
+
+}
+
+.boards_description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  margin: 5px 20px 0 20px;
+  color: #6E6B7B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.boards_description:hover {
+  white-space: normal;
+  overflow: clip;
+  font-size: 13px;
+}
+
+.boards_buttons {
+  white-space: nowrap;
+  margin: 0 21px 21px 22px;
+}
+
+.boards_buttons div {
+  display: inline-block;
+}
+
+.boards_button_update_and_delete {
+  float: right;
+}
+
+.boards_buttons_open {
+  background: url("../assets/img/board_open.svg") no-repeat center center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_open:hover {
+  background: url("../assets/img/board_open_hover.svg") no-repeat center center;
+}
+
+.boards_buttons_update {
+  background: url("../assets/img/board_update.svg") no-repeat center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_update:hover {
+  background: url("../assets/img/board_update_hover.svg") no-repeat center center;
+  cursor: pointer;
+}
+
+.boards_buttons_delete {
+  background: url("../assets/img/board_delete.svg") no-repeat center;
+  width: 24px;
+  height: 24px;
+  -webkit-backdrop-filter: blur(100%);
+}
+
+.boards_buttons_delete:hover {
+  background: url("../assets/img/board_delete_hover.svg") no-repeat center center;
+  cursor: pointer;
+}
+
+.new_board, .boards_delete_content {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  padding: 400px 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.new_board_form {
+  background: #FFFFFF;
+  width: 706px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.new_board_close {
+  display: flex;
+  justify-content: end;
+}
+
+.new_board_close_button {
+  background: url("../assets/img/board_close.svg") no-repeat center;
+  width: 20px;
+  height: 20px;
+  -webkit-backdrop-filter: blur(100%);
+  margin: 24.36px 23px 0 0;
+}
+
+.new_board_close_button:hover {
+  background: url("../assets/img/board_close_hover.svg") no-repeat center;
+  cursor: pointer;
+}
+
+.new_board_title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 38px;
+  color: #5E5873;
+  margin-top: 11.49px;
+}
+
+.new_board_text {
+  text-align: center;
+  margin: 13px 112px 0 112px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
+
+.new_board_input {
+  margin: 28px 63px 0 63px;
+}
+
+.new_board_input_title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5E5873;
+}
+
+.new_board_input_border {
+  margin-top: 4px;
+  margin-bottom: 19px;
+}
+
+.new_board_input_border label input[type='text'] {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #5E5873;
+}
+
+.new_board_input_border label textarea {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #5E5873;
+}
+
+.new_board_input_text {
+  bottom: 237px;
+  height: 38px;
+  width: 94%;
+  border-color: #B9B9C3;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 14px 0 14px;
+}
+
+//invite emails
+
+.new_board_input_email {
+  margin-top: 4px;
+  margin-bottom: 19px;
+  border: #B9B9C3 1.2px solid;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-flow: wrap;
+  width: 98.5%;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+.new_board_input_email input {
+  outline: none;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #C18D36;
+}
+
+.new_board_input_text_email {
+  margin: 10px 10px;
+  border-style: none;
+}
+
+.boards_tag_item {
+  margin: 8px 10px 6px;
+  background: rgba(231, 180, 96, 0.2);
+  border-radius: 5px;
+  padding: 3px 0 3px 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #C18D36;
+  display: flex;
+}
+
+.boards_tag_item p {
+  margin-top: 3px;
+}
+
+.boards_email_close {
+  margin: 6px 6px 0 23px;
+  background: url("../assets/img/board_email_close.svg") no-repeat center;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+//invite emails
+
+.new_board_input_text_area {
+  max-width: 94%;
+  min-width: 94%;
+  min-height: 132px;
+  max-height: 132px;
+  padding: 8px 14px;
+  resize: none;
+}
+
+.new_board_invite_title {
+  margin: 6px 0 0 61px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: #5E5873;
+}
+
+.new_board_invite_text {
+  margin: 11px 61px 0 61px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #6E6B7B;
+}
+
+.new_board_invite_button {
+  margin: 6px 0 55px 0;
+  display: flex;
+  justify-content: end;
+}
+
+.new_board_invite_button button {
+  background: #E7B460;
+  border-radius: 5px;
+  border-style: none;
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  padding: 10px 23px 10px 23px;
+}
+
+.new_board_invite_button button:hover {
+  color: #6E6B7B;
+  cursor: pointer;
+}
+
+.boards_delete_display {
+  display: none;
+}
+
+.boards_delete_window {
+  background: #FFFFFF;
+  width: 489px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.boards_delete_close {
+  display: flex;
+  justify-content: end;
+  margin: 25px 23px 0 0;
+}
+
+.boards_delete_close_button {
+  background: url("../assets/img/board_close.svg");
+  width: 20px;
+  height: 22.38px;
+}
+
+.boards_delete_close_button:hover {
+  background: url("../assets/img/board_close_hover.svg");
+  cursor: pointer;
+}
+
+.boards_delete_text {
+  text-align: center;
+  margin-top: 10.62px;
+}
+
+.boards_delete_title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 33px;
+  color: #5E5873;
+}
+
+.boards_delete_quest {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 21px;
+  color: #6E6B7B;
+  margin-top: 17px;
+}
+
+.boards_delete_buttons {
+  text-align: end;
+  margin: 45px 45px 33px 0;
+}
+
+.boards_delete_button_cancel {
+  border-radius: 5px;
+  width: 119px;
+  height: 37.07px;
+  border: #82868B 1px solid;
+  background: #FFFFFF;
+  color: #82868B;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  margin-left: 22px;
+}
+
+.boards_delete_button_cancel:hover {
+  background: #D8D6DE;
+  color: #FFFFFF;
+  border: #D8D6DE 1px solid;
+  cursor: pointer;
+}
