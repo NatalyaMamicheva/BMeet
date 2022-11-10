@@ -11,6 +11,21 @@
   margin: 43px 28px 0 28px;
 }
 
+.boards_welcome_text {
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 21px;
+  color: #B9B9C3;
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+.boards_text_first {
+  display: flex;
+  justify-content: center;
+}
+
 .boards_my_boards {
   display: inline-flex;
   flex-flow: wrap;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from 'axios'
 import CreateUpdateBoard from './CreateUpdateBoard.jsx'
 import '../../styles/boards_style.scss'
@@ -161,6 +161,21 @@ class BoardItems extends React.Component {
         }
         return (
             <div className='boards_content'>
+                <div className="boards_welcome_text">
+                    <div className="boards_text_first">
+                        <p>Добро пожаловать в&nbsp;</p>
+                        <p className='footer_bmeet'>
+                            <span class='auth_yellow'>B</span>
+                            <span class='auth_blue'>M</span>
+                            <span class='auth_yellow'>ee</span>
+                            <span class='auth_blue'>t</span>
+                        </p>
+                    </div>
+                    <p>Ниже ваше пространство для работы, где Вы можете создать
+                        доску самостоятельно или принять приглашение от ваших
+                        коллег
+                    </p>
+                </div>
                 <h2> Мои доски </h2>
                 <div className="boards_me_boards_content">
                     <div className="boards_my_boards">
