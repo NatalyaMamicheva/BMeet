@@ -2,41 +2,25 @@ import React from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios'
 
-
 const GoogleLoginButton = () => {
 
-    const signIn = useGoogleLogin({
-    conSuccess: tokenResponse => {
-        console.log(tokenResponse);
-        axios
-            .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/social/google-oauth2/`,
-            {
-                'access_token': tokenResponse.access_token
-            })
-            .then(response => {
-                console.log(response);
-            }),
-        onError: errorResponse => console.log(errorResponse),
-        flow: 'implicit'
-    });
+  const signIn = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const userInfo = await axios
+        .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/social/google/`,
+          {
+            'access_token': tokenResponse.access_token
+          })
+      localStorage.setItem('token', userInfo.data.token)
+      localStorage.setItem('email', userInfo.data.email)
+      localStorage.setItem('username', userInfo.data.username)
+    },
+  });
 
-    return (
-        <button onClick={signIn}>Login with Google</button>
-    );
+
+  return (
+    <button className='auth_button_form' onClick={signIn}> <p> Войти с Google </p> </button>
+  );
 };
-
-
-const googleLogin = useGoogleLogin({
-  onSuccess: async (tokenResponse) => {
-    console.log(tokenResponse);
-    const userInfo = await axios.get(
-      'https://www.googleapis.com/oauth2/v3/userinfo',
-      { headers: { Authorization: 'Bearer <tokenResponse.access_token>' } },
-    );
-
-    console.log(userInfo);
-  },
-  onError: errorResponse => console.log(errorResponse),
-});
 
 export default GoogleLoginButton;

@@ -1,5 +1,4 @@
 import { Link, Navigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "../../styles/auth_style.scss";
 import React from 'react'
@@ -7,8 +6,6 @@ import axios from 'axios'
 import VerifyEmail from "./VerifyEmail";
 import Footer from "../Footer";
 import GoogleLoginButton from "./GoogleLogin";
-
-
 
 class Login extends React.Component {
     constructor(props) {
@@ -24,6 +21,7 @@ class Login extends React.Component {
             'block_info_timer': '',
             'not_verify': false
         }
+        this.CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH2_KEY
     }
 
     getToken() {
@@ -33,10 +31,10 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
-                this.setState({ 'token': response.data.token });
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('username', response.data.username)
+                this.set_state_token(localStorage.getItem('token'));
             })
             .catch(error => {
                 this.setState({
@@ -80,6 +78,10 @@ class Login extends React.Component {
 
     }
 
+    set_state_token(token) {
+        this.setState({ 'token': token });
+    }
+
     handleSubmit(event) {
         this.getToken(this.state.email, this.state.password)
         event.preventDefault()
@@ -120,7 +122,7 @@ class Login extends React.Component {
                 password={this.state.password} />)
         else
             return (
-                <GoogleOAuthProvider clientId="859537304153-2gdvdmq2coqo6bvr5v9s5p7ed56ligi7.apps.googleusercontent.com">
+                <GoogleOAuthProvider clientId={this.CLIENT_ID}>
                     <div className='auth'>
                         <div className='auth_form_table'>
                             <div className='auth_logo'>
@@ -194,21 +196,11 @@ class Login extends React.Component {
                                                 className='auth_button_form'>
                                                 <p>Войти</p>
                                             </button>
-
-                                            <GoogleOAuthProvider clientId="859537304153-2gdvdmq2coqo6bvr5v9s5p7ed56ligi7.apps.googleusercontent.com">
-                                                {/* <GoogleLogin
-                                                    onSuccess={response => {
-                                                        this.googleLogin(response)
-                                                    }}
-                                                    onError={() => {
-                                                        console.log('Login Failed')
-                                                    }}
-                                                /> */}
-                                                <GoogleLoginButton />
-                                            </GoogleOAuthProvider>
-
                                         </div>
 
+                                        <div className='auth_input_button_google'>
+                                            <GoogleLoginButton setToken={this.set_state_token()} />
+                                        </div>
 
                                         {this.state.block_info_timer &&
                                             <p className="input_error"
