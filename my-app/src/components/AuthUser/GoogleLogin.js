@@ -9,14 +9,15 @@ const GoogleLoginButton = () => {
     conSuccess: tokenResponse => {
         console.log(tokenResponse);
         axios
-            .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/social/google-oauth2/`, {
-                'access_token': tokenResponse.access_token,
+            .post(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/social/google-oauth2/`,
+            {
+                'access_token': tokenResponse.access_token
             })
             .then(response => {
                 console.log(response);
-            })
+            }),
         onError: errorResponse => console.log(errorResponse),
-        flow: 'implicit',
+        flow: 'implicit'
     });
 
     return (
