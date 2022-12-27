@@ -147,6 +147,30 @@ label input[type="email"] {
   background: #B9B9C3;
 }
 
+.auth_social {
+  width: 100%;
+}
+
+.auth_button_social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E7B460;
+  border-style: none;
+  bottom: 237px;
+  height: 38px;
+  width: 100%;
+  border-color: #B9B9C3;
+  border-width: 1.5px;
+  border-radius: 5px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.auth_button_social:hover {
+  background: #B9B9C3;
+}
+
 .auth_header {
   display: flex;
   justify-content: center;
