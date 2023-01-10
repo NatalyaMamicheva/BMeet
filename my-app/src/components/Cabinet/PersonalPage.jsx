@@ -22,11 +22,14 @@ class PersonalPage extends React.Component {
             'start_first_name': '',
             'last_name': '',
             'start_last_name': '',
+            'phone': '',
+            'start_phone': '',
             'readOnly': true,
             'class_open': 'profile_close_pass',
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
+            'error_message_phone': '',
             'message_change_email': '',
             'disabled_btn': true,
             'is_save': false,
@@ -38,6 +41,7 @@ class PersonalPage extends React.Component {
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
+            'error_message_phone': '',
             'disabled_btn': true,
             'readOnly': true,
             'class_open': 'profile_close_pass',
@@ -48,6 +52,7 @@ class PersonalPage extends React.Component {
             .get(`http://${process.env.REACT_APP_BACKEND_HOST}/api/profile/${localStorage.getItem('username')}/`,
                 { headers })
             .then(response => {
+                console.log(response)
                 document.querySelector('html').style['overflow'] = null
                 this.setState({
                     'username': response.data.username,
@@ -57,7 +62,9 @@ class PersonalPage extends React.Component {
                     'first_name': response.data.first_name,
                     'start_first_name': response.data.first_name,
                     'last_name': response.data.last_name,
-                    'start_last_name': response.data.last_name
+                    'start_last_name': response.data.last_name,
+                    'start_phone': response.data.phone,
+                    'phone': response.data.phone
                 })
 
             })
@@ -77,6 +84,13 @@ class PersonalPage extends React.Component {
         this.setState({
             'email': this.state.email.toLowerCase()
         })
+        if (this.state.phone !== this.state.start_phone) {
+            if (this.check_phone(this.state.phone)) {
+                data['phone'] = this.state.phone
+            } else {
+                this.setState({ error_message_phone: 'Неверно введен номер телефона' });
+            }
+        }
         if (this.state.password !== this.state.start_password) {
             let psw_error = document.querySelector('.input_error_psw')
             if (this.props.check_password(this.state.password)) {
@@ -119,6 +133,8 @@ class PersonalPage extends React.Component {
                             this.setState({ error_message_email: error.response.data.email });
                         if (error.response.data.username)
                             this.setState({ error_message_username: error.response.data.username });
+                        if (error.response.data.phone)
+                            this.setState({ error_message_phone: error.response.data.phone });
                     }
                 })
         }
@@ -130,10 +146,12 @@ class PersonalPage extends React.Component {
             'error_message': '',
             'error_message_username': '',
             'error_message_email': '',
+            'error_message_phone': '',
             'username': this.state.start_username,
             'email': this.state.start_email,
             'first_name': this.state.start_first_name,
             'last_name': this.state.start_last_name,
+            'phone': this.state.start_phone,
             'password': '',
             'disabled_btn': true,
             'class_open': 'profile_close_pass',
@@ -224,6 +242,12 @@ class PersonalPage extends React.Component {
                 }
                 this.errorRef.current.focus();
             })
+    }
+
+    check_phone(phone) {
+        const pattern = /^\+?\d{10,12}$/;
+        const isOk = pattern.test(phone);
+        return isOk
     }
 
     render() {
@@ -327,6 +351,23 @@ class PersonalPage extends React.Component {
                                                 value={this.state.last_name} />
                                         </label>
                                     </div>
+                                </div>
+
+                                <div className='profile_input'>
+                                    <div className='profile_title_input_name'>
+                                        <span>Номер телефона</span>
+                                    </div>
+                                    <div className='profile_input_border'>
+                                        <label>
+                                            <input type="text"
+                                                name="phone"
+                                                className="profile_input_text"
+                                                placeholder="+79039001111"
+                                                onChange={(event) => this.handleChange(event)}
+                                                value={this.state.phone} />
+                                        </label>
+                                    </div>
+                                    <p className='input_error'>{this.state.error_message_phone}</p>
                                 </div>
 
                                 <div className='profile_input'>

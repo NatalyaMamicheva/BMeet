@@ -31,12 +31,14 @@ class Login extends React.Component {
                 'password': this.state.password
             })
             .then(response => {
+                console.log(response)
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('email', response.data.email)
                 localStorage.setItem('username', response.data.username)
                 this.set_state_token(localStorage.getItem('token'));
             })
             .catch(error => {
+                console.log(error)
                 this.setState({
                     'error_message_user': '',
                     'error_message': '',
@@ -83,8 +85,12 @@ class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        this.getToken(this.state.email, this.state.password)
+        this.getToken()
         event.preventDefault()
+    }
+
+    clearInputPassword() {
+        this.setState({ 'password': '' })
     }
 
     handleChange(event) {
@@ -122,107 +128,110 @@ class Login extends React.Component {
                 password={this.state.password} />)
         else
             return (
-                <GoogleOAuthProvider clientId={this.CLIENT_ID}>
-                    <div className='auth'>
-                        <div className='auth_form_table'>
-                            <div className='auth_logo'>
-                                <span className='auth_yellow'>B</span>
-                                <span className='auth_blue'>M</span>
-                                <span className='auth_yellow'>ee</span>
-                                <span className='auth_blue'>t</span>
+                <div className='auth'>
+                    <div className='auth_form_table'>
+                        <div className='auth_logo'>
+                            <span className='auth_yellow'>B</span>
+                            <span className='auth_blue'>M</span>
+                            <span className='auth_yellow'>ee</span>
+                            <span className='auth_blue'>t</span>
+                        </div>
+                        <div className='auth_content'>
+                            <div className='auth_title'>
+                                <p>Добро пожаловать!</p>
+                                <span>Пожалуйста, войдите в Ваш аккаунт</span>
                             </div>
-                            <div className='auth_content'>
-                                <div className='auth_title'>
-                                    <p>Добро пожаловать!</p>
-                                    <span>Пожалуйста, войдите в Ваш аккаунт</span>
-                                </div>
-                                <div className='auth_form'>
-                                    <form
-                                        onSubmit={(event) => this.handleSubmit(event)}>
+                            <div className='auth_form'>
+                                <form
+                                    onSubmit={(event) => this.handleSubmit(event)}>
 
-                                        <div className='auth_input'>
-                                            {this.state.error_message &&
-                                                <p className="input_error"
-                                                    ref={this.errorRef}>{this.state.error_message}</p>}
-                                            {this.state.error_message_user &&
-                                                <p className="input_error"
-                                                    ref={this.errorRef}>{this.state.error_message_user}</p>}
+                                    <div className='auth_input'>
+                                        {this.state.error_message &&
+                                            <p className="input_error"
+                                                ref={this.errorRef}>{this.state.error_message}</p>}
+                                        {this.state.error_message_user &&
+                                            <p className="input_error"
+                                                ref={this.errorRef}>{this.state.error_message_user}</p>}
 
-                                            <div className='auth_title_input'>
-                                                <span>
-                                                    Email / Username
-                                                </span>
-                                            </div>
-                                            <div className='auth_input_border'>
-                                                <label>
-                                                    <input
-                                                        className='auth_input_text'
-                                                        placeholder='user@example.com'
-                                                        type="text"
-                                                        name="email"
-                                                        required
-                                                        onChange={(event) => this.handleChange(event)}
-                                                        value={this.state.email}>
-                                                    </input>
-                                                </label>
-                                            </div>
-
-
-                                            <div className='auth_title_input'>
-                                                <span>
-                                                    Пароль
-                                                </span>
-                                                <Link to='/recpassword'>Забыли
-                                                    пароль?</Link>
-                                            </div>
-
-                                            <div className='auth_input_border'>
-                                                <label>
-                                                    <input
-                                                        id='password'
-                                                        className='auth_input_text'
-                                                        placeholder='password'
-                                                        type="password"
-                                                        name="password"
-                                                        required
-                                                        onChange={(event) => this.handleChange(event)}
-                                                        value={this.state.password}>
-                                                    </input>
-                                                </label>
-                                            </div>
+                                        <div className='auth_title_input'>
+                                            <span>
+                                                Email / Username / Phone
+                                            </span>
                                         </div>
-                                        <div className='auth_input_button'>
-                                            <button type='submit'
-                                                className='auth_button_form'>
-                                                <p>Войти</p>
-                                            </button>
+                                        <div className='auth_input_border'>
+                                            <label>
+                                                <input
+                                                    className='auth_input_text'
+                                                    placeholder='user@example.com'
+                                                    type="text"
+                                                    name="email"
+                                                    required
+                                                    onChange={(event) => this.handleChange(event)}
+                                                    value={this.state.email}>
+                                                </input>
+                                            </label>
                                         </div>
 
+
+                                        <div className='auth_title_input'>
+                                            <span>
+                                                Пароль
+                                            </span>
+                                            <Link to='/recpassword'>Забыли
+                                                пароль?</Link>
+                                        </div>
+
+                                        <div className='auth_input_border'>
+                                            <label>
+                                                <input
+                                                    id='password'
+                                                    className='auth_input_text'
+                                                    placeholder='password'
+                                                    type="password"
+                                                    name="password"
+                                                    required
+                                                    onChange={(event) => this.handleChange(event)}
+                                                    value={this.state.password}>
+                                                </input>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className='auth_input_button'>
+                                        <button type='submit'
+                                            className='auth_button_form'>
+                                            <p>Войти</p>
+                                        </button>
+                                    </div>
+                                    {/* <GoogleOAuthProvider clientId={this.CLIENT_ID}>
                                         <div className='auth_input_button_google'>
                                             <GoogleLoginButton setToken={this.set_state_token()} />
                                         </div>
+                                    </GoogleOAuthProvider> */}
 
-                                        {this.state.block_info_timer &&
-                                            <p className="input_error"
-                                                id='timer'>{this.state.block_info_timer}</p>}
-                                    </form>
-                                </div>
+                                    {/* <div className='auth_input_button_google'>
+                                        <GoogleLoginButton setToken={this.set_state_token()} />
+                                    </div> */}
 
-
-
-                                <div className='auth_header'>
-                                    <p className='auth_header_p'>Впервые на
-                                        платформе?
-                                    </p>
-                                    <Link className='auth_header_a'
-                                        to='/register'>Создать
-                                        аккаунт</Link>
-                                </div>
+                                    {this.state.block_info_timer &&
+                                        <p className="input_error"
+                                            id='timer'>{this.state.block_info_timer}</p>}
+                                </form>
                             </div>
-                        </div >
-                        <Footer />
+
+
+
+                            <div className='auth_header'>
+                                <p className='auth_header_p'>Впервые на
+                                    платформе?
+                                </p>
+                                <Link className='auth_header_a'
+                                    to='/register'>Создать
+                                    аккаунт</Link>
+                            </div>
+                        </div>
                     </div >
-                </GoogleOAuthProvider>
+                    <Footer />
+                </div >
             );
     };
 }

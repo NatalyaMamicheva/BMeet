@@ -1,4 +1,4 @@
-import {Link, Navigate} from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "../../styles/auth_style.scss";
@@ -27,9 +27,9 @@ class Password extends React.Component {
         for (let i = 60; i > 0; i--) {
             this.timer = setTimeout(() => {
                 second -= 1
-                this.setState({'info_timer': `Повторный запрос возможен через ${second} сек.`});
+                this.setState({ 'info_timer': `Повторный запрос возможен через ${second} сек.` });
                 if (second === 0) {
-                    this.setState({'info_timer': ''});
+                    this.setState({ 'info_timer': '' });
                     p_again.style["pointer-events"] = "auto";
                     p_again.style["color"] = "#FFFFFF";
                     p_again.style["background"] = "#E7B460";
@@ -42,7 +42,7 @@ class Password extends React.Component {
     handleSubmit(event) {
         axios
             .patch(`http://${process.env.REACT_APP_BACKEND_HOST}/api/users/recovery/${this.state.email}/`,
-                {'email': this.props.email}
+                { 'email': this.props.email }
             )
             .then(response => {
                 console.log(response)
@@ -50,9 +50,9 @@ class Password extends React.Component {
             })
             .catch(error => {
                 if (error.response.status === 400) {
-                    this.setState({'error_message': error.response.data["Invalid"]});
+                    this.setState({ 'error_message': error.response.data["Invalid"] });
                 } else
-                    this.setState({'error_message': error.message});
+                    this.setState({ 'error_message': error.message });
                 this.errorRef.current.focus();
             })
         event.preventDefault();
@@ -66,7 +66,7 @@ class Password extends React.Component {
 
     render() {
         if (localStorage.getItem('token')) return <Navigate
-            to="/board_management"/>
+            to="/board_management" />
         return (
             <div className='auth'>
                 <div className='auth_form_table'>
@@ -105,15 +105,15 @@ class Password extends React.Component {
                                 </div>
                                 {this.state.error_message &&
                                     <p className="input_error"
-                                       ref={this.errorRef}>{this.state.error_message}</p>}
+                                        ref={this.errorRef}>{this.state.error_message}</p>}
                                 <div className='auth_input_button'>
                                     <p className='auth_timer'>{this.state.info_timer}</p>
                                     <button type='submit'
-                                            className='auth_button_form'
-                                            id='again'
-                                            onClick={(event) => {
-                                                this.handleClick(event);
-                                            }}>
+                                        className='auth_button_form'
+                                        id='again'
+                                        onClick={(event) => {
+                                            this.handleSubmit(event);
+                                        }}>
                                         <p>Сбросить
                                             пароль</p>
                                     </button>
@@ -122,7 +122,7 @@ class Password extends React.Component {
                         </div>
                         <div className='auth_header'>
                             <Link className='auth_header_a'
-                                  to='/'> &lt; Авторизоваться </Link>
+                                to='/'> &lt; Авторизоваться </Link>
                         </div>
                     </div>
                 </div>
