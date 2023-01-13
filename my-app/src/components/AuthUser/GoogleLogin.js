@@ -19,7 +19,9 @@ const GoogleLoginButton = () => {
 
 
   return (
-    <button className='auth_button_form' onClick={signIn}> <p> Войти с Google </p> </button>
+    <div>
+      <button className='auth_button_form' onClick={signIn}> <p> Войти с Google </p> </button>
+    </div>
   );
 };
 
