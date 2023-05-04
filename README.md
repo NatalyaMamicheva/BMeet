@@ -1,4 +1,4 @@
-# BMeet(Frontend)
+# BMeet
 
 Web-сервис "BMeet"
 Drawing board
