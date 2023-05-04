@@ -1,7 +1,7 @@
 # BMeet
 
 Web-сервис "BMeet"
-Drawing board
+Drawing board.
 
 Описание проблемы
 
