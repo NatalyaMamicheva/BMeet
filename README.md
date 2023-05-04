@@ -154,5 +154,7 @@ docker-compose up -d --build
 Тесты
 
 docker-compose exec web python backend/manage.py test users
+
 docker-compose exec web python backend/manage.py test cabinet
+
 docker-compose exec web python backend/manage.py test board
