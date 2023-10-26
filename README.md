@@ -74,6 +74,7 @@ Back
 * Redis
 * Docker
 * Docker Compose
+* Celery
 
 Установка и запуск
 
