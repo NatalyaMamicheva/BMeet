@@ -68,7 +68,6 @@ Front
 * React
 * JavaScript
 * Canvas
-* Nginx
 
 
 Back
