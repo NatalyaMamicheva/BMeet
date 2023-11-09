@@ -68,7 +68,8 @@ Front
 * React
 * JavaScript
 * Canvas
-* Figma
+* Nginx
+
 
 Back
 * Python
@@ -76,13 +77,15 @@ Back
 * Django REST Framework 
 * PostgreSQL
 * Redis
+* Celery
 * Docker
 * Docker Compose
-* Celery
-* JSON
-* Postman
-  
+
+Оформление дизайна осуществлялось с помощью Figma
+
 Работа в команде проводилась в Jira и Miro
+
+Проверка запросов осуществлялась в Postman
 
 Установка и запуск
 
